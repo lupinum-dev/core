@@ -1,7 +1,7 @@
 {
   "name": "core",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev -o -p 4000",
@@ -20,8 +20,6 @@
     "@nuxtjs/plausible": "^1.0.2",
     "@nuxtjs/robots": "^4.1.7",
     "@nuxtjs/sitemap": "^5.3.5",
-    "nuxt": "^3.13.2",
-    "nuxt-og-image": "^3.0.2",
     "@vee-validate/nuxt": "^4.13.2",
     "@vee-validate/zod": "^4.13.2",
     "@vueuse/math": "^11.1.0",
@@ -30,6 +28,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "meilisearch": "0.40.0",
+    "nuxt": "^3.13.2",
+    "nuxt-og-image": "^3.0.2",
     "playwright": "^1.47.2",
     "radix-vue": "^1.9.6",
     "shadcn-nuxt": "^0.10.4",
