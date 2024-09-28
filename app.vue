@@ -1,19 +1,13 @@
 <template>
-  <UiHeader variant="default" >
-    <UiHeaderAd variant="full">
-      Opening Deal
-    </UiHeaderAd>
-    <template #logo>
-
+  <UiHeader variant="transparent" >
+    <template #ad>
+      This should be written in the slot
     </template>
-    <template #center>
-
+    <template #left>
+      Leeft
     </template>
     <template #right>
-
-    </template>
-    <template #mobile>
-
+      <UiButton>Right</UiButton>
     </template>
   </UiHeader>
 </template>
