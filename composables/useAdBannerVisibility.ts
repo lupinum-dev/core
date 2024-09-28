@@ -1,30 +1,37 @@
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useScroll } from '@vueuse/core'
 
 const useSharedAdBannerVisible = () => useState('adBannerVisible', () => true)
+const useSharedHideOnScroll = () => useState('hideOnScroll', () => true)
+const useSharedCookieKey = () => useState('adBannerCookieKey', () => 'ad-banner')
 
-export function useAdBannerVisibility(hideOnScroll = true, cookieKey = 'ad-banner') {
-  console.log('hideOnScroll', hideOnScroll)
+export function useAdBannerVisibility() {
   const isAdBannerVisible = useSharedAdBannerVisible()
-  const { y: scrollY } = useScroll(window)
-  const threshold = 50
+  const hideOnScroll = useSharedHideOnScroll()
+  const cookieKey = useSharedCookieKey()
 
-  const instances = new Map<string, { hideOnScroll: boolean, cookieKey: string }>()
-
-  if (!instances.has(cookieKey)) {
-    instances.set(cookieKey, { hideOnScroll, cookieKey })
-  }
-
-  const adDismissed = useCookie<boolean>(cookieKey, {
-    maxAge: 60 * 60 * 24 * 30,
+  // Use a computed for scrollY to ensure it's only accessed on the client-side
+  const scrollY = computed(() => {
+    if (process.client) {
+      const { y } = useScroll(window)
+      return y.value
+    }
+    return 0
   })
 
+  const threshold = 50
+
+  // Use a computed to create the cookie with the current cookieKey
+  const adDismissed = computed(() => useCookie<boolean>(cookieKey.value, {
+    maxAge: 60 * 60 * 24 * 30,
+  }))
+
   const isVisible = computed(() => {
-    if (adDismissed.value) {
+    if (adDismissed.value.value) {
       isAdBannerVisible.value = false
       return false
     }
-    if (hideOnScroll) {
+    if (hideOnScroll.value) {
       return isAdBannerVisible.value && scrollY.value <= threshold
     }
     return isAdBannerVisible.value
@@ -33,12 +40,22 @@ export function useAdBannerVisibility(hideOnScroll = true, cookieKey = 'ad-banne
   const setAdBannerVisibility = (value: boolean) => {
     isAdBannerVisible.value = value
     if (!value) {
-      adDismissed.value = true
+      adDismissed.value.value = true
     }
+  }
+
+  const setHideOnScroll = (value: boolean) => {
+    hideOnScroll.value = value
+  }
+
+  const setCookieKey = (value: string) => {
+    cookieKey.value = value
   }
 
   return {
     isVisible,
     setAdBannerVisibility,
+    setHideOnScroll,
+    setCookieKey,
   }
 }

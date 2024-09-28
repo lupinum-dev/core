@@ -17,7 +17,11 @@ const props = withDefaults(defineProps<Props>(), {
   cookieKey: 'header-ad',
 })
 
-const { isVisible, setAdBannerVisibility } = useAdBannerVisibility(props.hideOnScroll, props.cookieKey)
+const { isVisible, setAdBannerVisibility, setHideOnScroll, setCookieKey } = useAdBannerVisibility()
+
+// Set the initial values based on props
+setHideOnScroll(props.hideOnScroll)
+setCookieKey(props.cookieKey)
 
 function closeAdBanner() {
   setAdBannerVisibility(false)
@@ -51,12 +55,12 @@ function closeAdBanner() {
 
 <style scoped>
 .ad-banner {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .ad-banner-enter-active,
 .ad-banner-leave-active {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .ad-banner-enter-from,
