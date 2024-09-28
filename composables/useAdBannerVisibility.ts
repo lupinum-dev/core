@@ -1,16 +1,22 @@
 import { computed, ref } from 'vue'
 import { useScroll } from '@vueuse/core'
 
-const isAdBannerVisible = ref(true)
-const { y: scrollY } = useScroll(window)
-const threshold = 50 // Adjust this value to change when the banner hides
+const useSharedAdBannerVisible = () => useState('adBannerVisible', () => true)
 
 export function useAdBannerVisibility(hideOnScroll = true, cookieKey = 'ad-banner') {
-  console.log('useAdBannerVisibility', cookieKey)
+  console.log('hideOnScroll', hideOnScroll)
+  const isAdBannerVisible = useSharedAdBannerVisible()
+  const { y: scrollY } = useScroll(window)
+  const threshold = 50
+
+  const instances = new Map<string, { hideOnScroll: boolean, cookieKey: string }>()
+
+  if (!instances.has(cookieKey)) {
+    instances.set(cookieKey, { hideOnScroll, cookieKey })
+  }
 
   const adDismissed = useCookie<boolean>(cookieKey, {
-    watch: true,
-    maxAge: 60 * 60 * 24 * 30, // 30 days
+    maxAge: 60 * 60 * 24 * 30,
   })
 
   const isVisible = computed(() => {
