@@ -1,13 +1,29 @@
 <template>
-  <UiHeader variant="transparent" >
-    <template #ad>
-      This should be written in the slot
-    </template>
+  <UiHeader variant="transparent">
+    <UiHeaderAd>
+
+      <div class="flex items-center justify-center w-full h-full bg-accent-foreground text-background">
+      Agency Opening Deal:
+      <NuxtLink to="/waitlist" class="ml-2 text-prime-b-0">
+        Get 30% off until end of year for your next project
+      </NuxtLink>
+    </div>
+
+    </UiHeaderAd>
+    <UiHeaderBar>
     <template #left>
-      Leeft
+      Left
+    </template>
+    <template #center>
+      Center
     </template>
     <template #right>
-      <UiButton>Right</UiButton>
+      <div class="flex items-center gap-2">
+      <UiButton>1</UiButton>
+      <UiButton>2</UiButton>
+      <UiButton>3</UiButton>
+    </div>
     </template>
+  </UiHeaderBar>
   </UiHeader>
 </template>
