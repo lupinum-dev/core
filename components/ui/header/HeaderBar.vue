@@ -34,6 +34,7 @@ const { isVisible } = useAdBannerVisibility()
 
       <div class="hidden lg:block">
         <slot name="center" />
+        {{ isVisible }}
       </div>
 
       <slot name="right" />
@@ -54,6 +55,7 @@ const { isVisible } = useAdBannerVisibility()
 
           <div class="hidden lg:block">
             <slot name="center" />
+            {{ isVisible }}
           </div>
 
           <slot name="right" />
