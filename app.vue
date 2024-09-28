@@ -1,7 +1,7 @@
 <template>
   <div>
-    <UButton variant="outline">Click me</UButton>
-    <UButton variant="outline">Click me</UButton>
+    <UiButton variant="outline">Click me</UiButton>
+    <UiButton variant="outline">Click me</UiButton>
     <Test />
   </div>
 </template>

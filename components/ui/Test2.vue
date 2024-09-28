@@ -1,3 +1,3 @@
 <template>
-  <UButton variant="outline">Core Button me</UButton>
+  <UiButton variant="outline">Core Button me</UiButton>
 </template>
