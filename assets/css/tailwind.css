@@ -34,6 +34,11 @@
     --ring: 0 0% 3.9%;
  
     --radius: 0.5rem;
+
+    /* HEADER */
+    --header-ad-height: 32px;
+    --header-height: 64px;
+
   }
  
   .dark {

@@ -2,19 +2,18 @@
 import { watch } from 'vue'
 import { useAdBannerVisibility } from '@/composables/useAdBannerVisibility'
 
-type Size = 'sm' | 'base' | 'lg' | 'xl' | '2xl'
-
 interface Props {
   adKey?: string
-  size?: Size
+
   letClose?: boolean
+  closingIcon?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   adKey: 'banner',
-  size: 'base',
+
   letClose: true,
-  closing,
+  closingIcon: 'heroicons:x-mark-20-solid',
 })
 
 const adDismissed = useCookie(`banner-${props.adKey}`, {
@@ -33,22 +32,13 @@ function closeAdBanner() {
   setAdBannerVisibility(false)
   adDismissed.value = true
 }
-
-const sizeClasses: Record<Size, string> = {
-  'sm': 'h-8',
-  'base': 'h-10',
-  'lg': 'h-12',
-  'xl': 'h-14',
-  '2xl': 'h-16',
-}
 </script>
 
 <template>
   <Transition name="fade">
     <div
       v-if="isAdBannerVisible"
-      class="relative flex w-full items-center justify-between bg-accent px-6"
-      :class="[sizeClasses[props.size]]"
+      class="fixed top-0 isolate z-30 flex h-[var(--header-ad-height)] w-full items-center justify-between bg-accent px-6"
     >
       <div class="flex w-full justify-center text-center">
         <slot />
@@ -61,10 +51,14 @@ const sizeClasses: Record<Size, string> = {
             aria-label="Close banner"
             @click="closeAdBanner"
           >
-            <Icon name="heroicons:x-mark-20-solid" class="size-5" />
+            <Icon :name="props.closingIcon" class="size-5" />
           </button>
         </slot>
       </div>
     </div>
   </Transition>
 </template>
+
+<style global>
+
+</style>

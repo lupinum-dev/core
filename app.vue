@@ -1,33 +1,8 @@
 <template>
-  <!-- Default Header -->
-  <UiHeader variant="transparent">
-    <UiHeaderAd size="sm" class="bg-accent-foreground text-background">
-      <div class="flex flex-row gap-7">
-        <div>
-          +43 664 8373842
-        </div>
-        <div>
-          georg@gloesmann-bau.at
-        </div>
-      </div>
-    </UiHeaderAd>
-    <UiHeaderBar style="alternative">
-      <template #left>
-        Left
-      </template>
-      <template #center>
-        Center
-      </template>
-      <template #right>
-        <div class="flex items-center gap-2">
-          <UiButton>1</UiButton>
-          <UiButton>2</UiButton>
-          <UiButton>3</UiButton>
-        </div>
-      </template>
-    </UiHeaderBar>
-  </UiHeader>
-
-  <!-- Alternative Header -->
-  <AlternativeHeader />
+  <div class="h-screen w-screen bg-gray-100">
+    <SectionsHeader />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
