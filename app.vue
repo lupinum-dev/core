@@ -1,4 +1,5 @@
 <template>
+  <!-- Default Header -->
   <UiHeader variant="transparent">
     <UiHeaderAd size="sm" class="bg-accent-foreground text-background">
       <div class="flex flex-row gap-7">
@@ -10,7 +11,7 @@
         </div>
       </div>
     </UiHeaderAd>
-    <UiHeaderBar>
+    <UiHeaderBar style="alternative">
       <template #left>
         Left
       </template>
@@ -26,4 +27,7 @@
       </template>
     </UiHeaderBar>
   </UiHeader>
+
+  <!-- Alternative Header -->
+  <AlternativeHeader />
 </template>
