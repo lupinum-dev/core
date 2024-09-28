@@ -1,7 +1,7 @@
 <template>
   <!-- Default Header -->
   <UiHeader>
-    <UiHeaderAd cookie-key="header-ad" :hide-on-scroll="false" class="bg-accent-foreground text-background">
+    <UiHeaderAd cookie-key="header-ad2" :hide-on-scroll="false" class="bg-accent-foreground text-background">
       <div class="flex flex-row gap-7">
         <div>
           +43 664 8373842

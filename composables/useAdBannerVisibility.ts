@@ -5,27 +5,24 @@ const isAdBannerVisible = ref(true)
 const { y: scrollY } = useScroll(window)
 const threshold = 50 // Adjust this value to change when the banner hides
 
-export function useAdBannerVisibility(hideOnScroll = false, cookieKey = 'ad-banner') {
-  const adDismissed = cookieKey
-    ? useCookie(cookieKey, {
-      default: () => false,
-      watch: true,
-      maxAge: 60 * 60 * 24 * 30, // 30 days
-    })
-    : ref(false)
+export function useAdBannerVisibility(hideOnScroll = true, cookieKey = 'ad-banner') {
+  console.log('useAdBannerVisibility', cookieKey)
 
-  let isVisible = ref(true)
+  const adDismissed = useCookie<boolean>(cookieKey, {
+    watch: true,
+    maxAge: 60 * 60 * 24 * 30, // 30 days
+  })
 
-  if (hideOnScroll) {
-    isVisible = computed(() => {
-      return isAdBannerVisible.value && !adDismissed.value && scrollY.value <= threshold
-    })
-  }
-  else {
-    isVisible = computed(() => {
-      return isAdBannerVisible.value && !adDismissed.value
-    })
-  }
+  const isVisible = computed(() => {
+    if (adDismissed.value) {
+      isAdBannerVisible.value = false
+      return false
+    }
+    if (hideOnScroll) {
+      return isAdBannerVisible.value && scrollY.value <= threshold
+    }
+    return isAdBannerVisible.value
+  })
 
   const setAdBannerVisibility = (value: boolean) => {
     isAdBannerVisible.value = value
