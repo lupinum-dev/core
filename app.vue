@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useScrollLock } from '@vueuse/core'
-import { onMounted, ref } from 'vue'
+import { onMounted, provide, ref, watch } from 'vue'
+
+const headerState = ref(false)
+provide('headerState', headerState)
 
 let lockScroll: ReturnType<typeof useScrollLock>
 
@@ -9,9 +12,6 @@ onMounted(() => {
   lockScroll.value = false
 })
 
-const headerState = ref(false)
-provide('headerState', headerState)
-
 watch(headerState, (newState) => {
   lockScroll.value = newState
 })
@@ -19,9 +19,18 @@ watch(headerState, (newState) => {
 
 <template>
   <SectionsHeader />
-  <div class="bg-gray-500 ">
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </div>
+  <Transition
+    enter-active-class="transition-opacity duration-300 ease-in-out"
+    leave-active-class="transition-opacity duration-300 ease-in-out"
+    enter-from-class="opacity-0"
+    leave-to-class="opacity-0"
+  >
+    <div
+      v-if="headerState"
+      class="fixed inset-0 bg-black bg-opacity-50 z-20"
+    />
+  </Transition>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
