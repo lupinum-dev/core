@@ -10,7 +10,7 @@ import { ref } from 'vue'
     >
       <!-- Spacer for the header -->
       <UiHeaderSpacer />
-      <
+
       <div />
     </div>
 
