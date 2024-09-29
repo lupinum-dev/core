@@ -15,7 +15,7 @@
         </div>
       </div>
     </UiHeaderAd>
-    <UiHeaderBar variant="default">
+    <UiHeaderBar variant="bar">
       <template #left>
         <img src="/ginko_light.svg" alt="Ginko" class="h-9">
       </template>

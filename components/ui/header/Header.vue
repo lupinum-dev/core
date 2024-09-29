@@ -1,6 +1,5 @@
-
 <template>
-  <div>
+  <div class="bg-background">
     <slot />
   </div>
 </template>
