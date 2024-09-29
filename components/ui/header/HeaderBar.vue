@@ -77,14 +77,21 @@ const topStyle = computed(() => ({
             <div class="hidden lg:block">
               <slot name="right" />
             </div>
+
             <UiButton variant="ghost" class="flex lg:hidden">
               <Icon name="heroicons:magnifying-glass-16-solid" class="size-5" />
-              <span class="ml-2 text-xs text-gray-400 lg:inline-block">Search ..</span>
+              <span class="ml-2  hidden text-xs text-gray-400 sm:inline-block">Search ..</span>
+            </UiButton>
+            <UiButton variant="link" class="hidden sm:block">
+              <Icon name="heroicons:sun-20-solid" class="size-5" />
+            </UiButton>
+            <UiButton variant="link" class="hidden sm:block">
+              <Icon name="heroicons:language-20-solid" class="size-5" />
             </UiButton>
             <UiButton variant="ghost" size="icon" class="lg:hidden" @click="toggleHeaderHeight">
               <Icon
                 :name="isExpanded ? 'heroicons:x-mark-20-solid' : 'heroicons:bars-3-bottom-right-20-solid'"
-                class="size-7"
+                class="size-5"
               />
             </UiButton>
           </div>

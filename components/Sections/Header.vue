@@ -17,10 +17,19 @@
     </UiHeaderAd>
     <UiHeaderBar variant="bar">
       <template #left>
-        <img src="/ginko_light.svg" alt="Ginko" class="ml-2 h-9">
+        <img src="/ginko_light.svg" alt="Ginko" class="ml-2 hidden h-9 sm:block">
+        <div
+          class=" inline-flex size-full items-center gap-2 text-nowrap p-2 text-left text-xs text-gray-t-2 sm:ml-4 md:px-3"
+          aria-label="Table of Contents"
+        >
+          <Icon name="lucide:text" class="size-4 shrink-0" />
+
+          <span class="font-heading-med truncate text-xs"> Which frameworks are supported? </span>
+        </div>
+        <div />
       </template>
       <template #center>
-        <SectionsNav />
+        <!-- <SectionsNav /> -->
       </template>
       <template #right>
         <div class="flex items-center ">
