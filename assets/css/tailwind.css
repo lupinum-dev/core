@@ -37,7 +37,38 @@
 
     /* HEADER */
     --header-ad-height: 32px;
-    --header-height: 64px;
+    --header-height: 50px;
+
+    /* Ginko */
+    --primary-0: #fdffff;
+    --primary-1: #f6fbff;
+    --primary-2: #f1f8ff;
+    --primary-3: #eaf2ff;
+    --primary-4: #e1e9ff;
+    --primary-5: #d2deff;
+    --primary-6: #c1d0ff;
+    --primary-7: #abbdf9;
+    --primary-8: #8da4ef;
+    --primary-9: #4a73f2;
+    --primary-10: #486ae0;
+    --primary-11: #263c7f;
+    --primary-12: #1e2c5b;
+    --primary-13: #0a1023;
+    
+    --gray-0: #fffffc;
+    --gray-1: #f8f6f0;
+    --gray-2: #f0ebdf;
+    --gray-3: #f4efe4;
+    --gray-4: #ede7db;
+    --gray-5: #e4dfd3;
+    --gray-6: #dedad0;
+    --gray-7: #c3bfb8;
+    --gray-8: #acaaa5;
+    --gray-9: #d3c6ae;
+    --gray-10: #b3a284;
+    --gray-11: #454038;
+    --gray-12: #2e2a26;
+    --gray-13: #171513;
 
   }
  

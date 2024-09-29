@@ -1,8 +1,12 @@
+<script setup lang="ts">
+// No need for any script setup now
+</script>
+
 <template>
   <!-- Default Header -->
   <UiHeader>
-    <UiHeaderAd cookie-key="header-you-dontX" :hide-on-scroll="true" class="bg-accent-foreground text-background">
-      <div class="flex flex-row gap-7">
+    <UiHeaderAd :scroll-hide="true" class="bg-accent-foreground text-background">
+      <div class="flex flex-row gap-4 text-xs sm:gap-7 sm:text-base">
         <div>
           +43 664 8373842
         </div>
@@ -11,9 +15,9 @@
         </div>
       </div>
     </UiHeaderAd>
-    <UiHeaderBar>
+    <UiHeaderBar variant="alternative">
       <template #left>
-        Left
+        <img src="/ginko_light.svg" alt="Ginko" class="h-9">
       </template>
       <template #center>
         Center
@@ -23,6 +27,10 @@
           <UiButton>1</UiButton>
           <UiButton>2</UiButton>
           <UiButton>3</UiButton>
+        </div>
+        <div class="flex lg:hidden">
+          <!-- Search Input -->
+          <div class="relative" x-data="{ searchOpen: false }" />
         </div>
       </template>
     </UiHeaderBar>

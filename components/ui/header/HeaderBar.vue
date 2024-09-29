@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
+import { computed, ref } from 'vue'
 import { type HeaderVariants, headerVariants } from './variants'
 import { cn } from '@/lib/utils'
 
 interface Props {
-
   class?: HTMLAttributes['class']
   showAdBanner?: boolean
   adKey?: string
@@ -15,10 +15,23 @@ const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
   showAdBanner: true,
   adKey: 'banner',
-
 })
 
 const { isVisible } = useAdBannerVisibility()
+
+const isExpanded = ref(false)
+const headerAdHeight = 32 // This should match the --header-ad-height in your CSS
+
+const headerHeight = computed(() => {
+  if (isExpanded.value) {
+    return `calc(95vh - ${headerAdHeight}px)`
+  }
+  return '50px'
+})
+
+function toggleHeaderHeight() {
+  isExpanded.value = !isExpanded.value
+}
 </script>
 
 <template>
@@ -34,7 +47,6 @@ const { isVisible } = useAdBannerVisibility()
 
       <div class="hidden lg:block">
         <slot name="center" />
-        {{ isVisible }}
       </div>
 
       <slot name="right" />
@@ -47,18 +59,62 @@ const { isVisible } = useAdBannerVisibility()
     :style="{ top: isVisible ? 'var(--header-ad-height)' : '0' }"
   >
     <div class="mx-auto mt-2 max-w-6xl px-3 md:mt-3 lg:px-6">
-      <div class="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-white/90 px-3 shadow-lg shadow-black/[0.03] backdrop-blur-sm before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(theme(colors.gray.100),theme(colors.gray.200))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]">
-        <div class="container flex h-[var(--header-height)] items-center justify-between">
-          <div class="flex items-center">
-            <slot name="left" />
+      <div
+        class="relative flex flex-col justify-between gap-3 rounded-2xl bg-white/90 px-2 shadow-lg backdrop-blur-sm"
+        :style="{
+          '--header-height': headerHeight,
+          'height': headerHeight,
+          'transition': 'height 0.3s ease-in-out',
+        }"
+      >
+        <div class=" flex h-full flex-col">
+          <div class="flex items-start justify-between py-1">
+            <div class="flex items-center">
+              <slot name="left" />
+            </div>
+
+            <div class="hidden lg:block">
+              <slot name="center" />
+            </div>
+
+            <div class="flex items-center">
+              <div class="hidden lg:block">
+                <slot name="right" />
+              </div>
+              <UiButton variant="ghost">
+                <Icon name="heroicons:magnifying-glass-16-solid" class="size-5" />
+                <span class="ml-2 text-xs text-gray-400 lg:inline-block">Search ..</span>
+              </UiButton>
+              <UiButton v-if="props.variant === 'alternative'" variant="ghost" size="icon" class="lg:hidden" @click="toggleHeaderHeight">
+                <Icon
+                  :name="isExpanded ? 'heroicons:x-mark-20-solid' : 'heroicons:bars-3-bottom-right-20-solid'"
+                  class="size-7"
+                />
+              </UiButton>
+            </div>
           </div>
 
-          <div class="hidden lg:block">
-            <slot name="center" />
-            {{ isVisible }}
-          </div>
+          <Transition
+            enter-active-class="transition ease-out duration-200"
+            enter-from-class="opacity-0 -translate-y-1"
+            enter-to-class="opacity-100 translate-y-0"
+            leave-active-class="transition ease-in duration-150"
+            leave-from-class="opacity-100 translate-y-0"
+            leave-to-class="opacity-0 -translate-y-1"
+          >
+            <!-- DIVIDER -->
 
-          <slot name="right" />
+            <nav v-if="isExpanded" class="flex-grow overflow-y-auto">
+              <div class="h-px w-full bg-gray-o-1" />
+              <ul class="mt-6 space-y-4 px-3 [&>*]:py-2 [&>*]:text-5xl">
+                <li><a href="#" class="hover:text-primary-600 block  ">Home</a></li>
+                <li><a href="#" class="hover:text-primary-600 block  ">About</a></li>
+                <li><a href="#" class="hover:text-primary-600 block  ">Services</a></li>
+                <li><a href="#" class="hover:text-primary-600 block  ">Contact</a></li>
+                <li><a href="#" class="hover:text-primary-600 block  ">Home</a></li>
+              </ul>
+            </nav>
+          </Transition>
         </div>
       </div>
     </div>
