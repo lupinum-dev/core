@@ -15,10 +15,9 @@ onMounted(() => {
 })
 
 watch(headerState, (newState) => {
+  console.log('headerState', newState)
   lockScroll.value = newState
 })
-
-//
 </script>
 
 <template>

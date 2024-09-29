@@ -23,7 +23,7 @@ watch(isScrolled, (newValue) => {
   if (newValue) {
     setTimeout(() => {
       delayedIsScrolled.value = true
-    }, 25)
+    }, 100)
   }
   else {
     delayedIsScrolled.value = false
@@ -37,7 +37,7 @@ watch(delayedIsScrolled, (newValue) => {
   else {
     setTimeout(() => {
       maxWidth.value = '16ch'
-    }, 50)
+    }, 200)
   }
 }, { immediate: true })
 </script>
@@ -45,9 +45,8 @@ watch(delayedIsScrolled, (newValue) => {
 <template>
   <UiButton
     variant="ghost"
-    class="inline-flex size-full items-center gap-2 text-nowrap p-2 text-left text-xs transition-all duration-300 sm:ml-4 md:px-3"
+    class="inline-flex size-full items-center gap-2 text-nowrap p-2 text-left text-xs transition-all duration-300 md:px-3"
     aria-label="Table of Contents"
-    :class="{ 'sm:ml-0': isScrolled }"
   >
     <Icon name="lucide:text" class="size-4 shrink-0" />
     <span

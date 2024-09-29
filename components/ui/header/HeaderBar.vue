@@ -34,11 +34,6 @@ const headerHeight = computed(() =>
 
 const headerState = inject('headerState', false)
 
-function toggleHeaderHeight() {
-  isExpanded.value = !isExpanded.value
-  headerState.value = !headerState.value
-}
-
 const headerStyle = computed(() => ({
   '--header-height': headerHeight.value,
   'height': headerHeight.value,
@@ -51,6 +46,7 @@ const topStyle = computed(() => ({
 
 function toggleHeaderExpansion() {
   isExpanded.value = !isExpanded.value
+  headerState.value = !headerState.value
 }
 
 provide('toggleHeaderExpansion', toggleHeaderExpansion)

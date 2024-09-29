@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-
-interface NavLink {
-  label: string
-  href: string
-  icon: string
-}
-
-
+import { useRoute } from 'vue-router'
 
 const socials = [
   { icon: 'mdi:github', href: 'https://github.com', label: 'GitHub' },
@@ -24,18 +17,35 @@ const languages = [
   { code: 'fr', label: 'Français' },
 ]
 
+const route = useRoute()
+const isWikiPage = computed(() => route.path.startsWith('/wiki'))
+const showMainNav = ref(!isWikiPage.value)
+
 function toggleDarkMode() {
   isDarkMode.value = !isDarkMode.value
   document.documentElement.classList.toggle('dark', isDarkMode.value)
 }
 
-
+function toggleNav() {
+  showMainNav.value = !showMainNav.value
+}
 </script>
 
 <template>
   <nav class="flex h-[98%] flex-col transition-colors duration-300">
+    <UiDivider class="mb-4" />
+    <div class="mb-4 flex items-center justify-between px-6">
+      <h2 class="text-lg font-semibold">
+        {{ showMainNav ? 'Main Navigation' : 'Wiki Navigation' }}
+      </h2>
+      <UiButton v-if="isWikiPage" @click="toggleNav" variant="outline" size="sm">
+        <Icon :name="showMainNav ? 'mdi:book-open' : 'mdi:home'" class="mr-2 size-4" />
+        {{ showMainNav ? 'Wiki Nav' : 'Main Nav' }}
+      </UiButton>
+    </div>
     <UiScrollArea>
-      <SectionsMainNav />
+      <SectionsMainNav v-if="showMainNav" />
+      <SectionsWikiNav v-else />
     </UiScrollArea>
 
     <footer class="mt-auto space-y-6 border-t border-border p-6">
