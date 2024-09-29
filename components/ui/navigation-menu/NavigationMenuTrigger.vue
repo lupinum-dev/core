@@ -5,7 +5,6 @@ import {
   type NavigationMenuTriggerProps,
   useForwardProps,
 } from 'radix-vue'
-import { ChevronDown } from 'lucide-vue-next'
 import { navigationMenuTriggerStyle } from './variants'
 import { cn } from '@/lib/utils'
 
@@ -26,8 +25,9 @@ const forwardedProps = useForwardProps(delegatedProps)
     :class="cn(navigationMenuTriggerStyle(), 'group', props.class)"
   >
     <slot />
-    <Icon name="heroicons:chevron-down-20-solid"
-      class="relative top-px ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
+    <Icon
+      name="heroicons:chevron-down-20-solid"
+      class="relative top-px ml-1 size-3 transition duration-200 group-data-[state=open]:rotate-180"
       aria-hidden="true"
     />
   </NavigationMenuTrigger>
