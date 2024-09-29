@@ -1,5 +1,29 @@
 <script setup lang="ts">
-// No need for any script setup now
+import { useDebounceFn, useScroll } from '@vueuse/core'
+
+const { y } = useScroll(window)
+const isScrolled = ref(false)
+const previousScrollPosition = ref(0)
+
+function updateIsScrolled() {
+  const currentPosition = y.value
+  const isScrollingUp = currentPosition < previousScrollPosition.value
+
+  if (isScrollingUp && currentPosition === 0) {
+    // Delay the logo reappearance when scrolling to the top
+    setTimeout(() => {
+      isScrolled.value = false
+    }, 50)
+  }
+  else {
+    // Immediately update when scrolling down
+    isScrolled.value = currentPosition > 0
+  }
+
+  previousScrollPosition.value = currentPosition
+}
+
+watch(y, updateIsScrolled, { immediate: true })
 </script>
 
 <template>
@@ -17,20 +41,25 @@
     </UiHeaderAd>
     <UiHeaderBar variant="bar">
       <template #left>
-        <img src="/ginko_light.svg" alt="Ginko" class="ml-2 hidden h-9 sm:block">
-        <div
-          class=" inline-flex size-full items-center gap-2 text-nowrap p-2 text-left text-xs text-gray-t-2 sm:ml-4 md:px-3"
-          aria-label="Table of Contents"
-        >
-          <Icon name="lucide:text" class="size-4 shrink-0" />
+        <div class="relative flex items-center gap-4">
+          <Transition name="fade-slide">
+            <NuxtImg
+              v-if="!isScrolled"
+              src="/ginko_light.svg"
+              alt="Ginko"
+              class=" left-2 h-8 transition-transform duration-300 "
+            />
+          </Transition>
 
-          <span class="font-heading-med truncate text-xs"> Which frameworks are supported? </span>
+          <div
+            :class="{ 'left-0': isScrolled, 'left-20': !isScrolled }"
+            class="absolute transition-all duration-300"
+          >
+            <UiContentMobileToc />
+          </div>
         </div>
-        <div />
       </template>
-      <template #center>
-        <!-- <SectionsNav /> -->
-      </template>
+      <template #center />
       <template #right>
         <div class="flex items-center ">
           <UiButton variant="ghost" class="flex">
@@ -54,3 +83,16 @@
 
   <!-- Alternative Header -->
 </template>
+
+<style scoped>
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+</style>

@@ -82,10 +82,10 @@ const topStyle = computed(() => ({
               <Icon name="heroicons:magnifying-glass-16-solid" class="size-5" />
               <span class="ml-2  hidden text-xs text-gray-400 sm:inline-block">Search ..</span>
             </UiButton>
-            <UiButton variant="link" class="hidden sm:block">
+            <UiButton variant="link" class="hidden xl:block">
               <Icon name="heroicons:sun-20-solid" class="size-5" />
             </UiButton>
-            <UiButton variant="link" class="hidden sm:block">
+            <UiButton variant="link" class="hidden xl:block">
               <Icon name="heroicons:language-20-solid" class="size-5" />
             </UiButton>
             <UiButton variant="ghost" size="icon" class="lg:hidden" @click="toggleHeaderHeight">
