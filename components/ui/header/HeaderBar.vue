@@ -48,6 +48,12 @@ const headerStyle = computed(() => ({
 const topStyle = computed(() => ({
   top: isVisible.value ? 'var(--header-ad-height)' : '0',
 }))
+
+function toggleHeaderExpansion() {
+  isExpanded.value = !isExpanded.value
+}
+
+provide('toggleHeaderExpansion', toggleHeaderExpansion)
 </script>
 
 <template>
@@ -98,7 +104,7 @@ const topStyle = computed(() => ({
               <Icon name="heroicons:language-20-solid" class="size-5" />
             </UiButton>
 
-            <UiButton variant="ghost" size="icon" class="lg:hidden" @click="toggleHeaderHeight">
+            <UiButton variant="ghost" size="icon" class="lg:hidden" @click="toggleHeaderExpansion">
               <Icon
                 :name="isExpanded ? 'heroicons:x-mark-20-solid' : 'heroicons:bars-3-bottom-right-20-solid'"
                 class="size-5"

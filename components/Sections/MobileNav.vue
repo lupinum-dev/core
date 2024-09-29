@@ -7,24 +7,7 @@ interface NavLink {
   icon: string
 }
 
-const navLinks = ref<NavLink[]>([
-  { label: 'Home', href: '/', icon: 'home' },
-  { label: 'Documentation', href: '/docs', icon: 'book-open' },
-  { label: 'Templates', href: '/templates', icon: 'layout-template' },
-  { label: 'Guides', href: '/guides', icon: 'graduation-cap' },
-  { label: 'Pricing', href: '/pricing', icon: 'dollar-sign' },
-  { label: 'Home', href: '/', icon: 'home' },
-  { label: 'Documentation', href: '/docs', icon: 'book-open' },
-  { label: 'Templates', href: '/templates', icon: 'layout-template' },
-  { label: 'Guides', href: '/guides', icon: 'graduation-cap' },
-  { label: 'Pricing', href: '/pricing', icon: 'dollar-sign' },
-  { label: 'Home', href: '/', icon: 'home' },
-  { label: 'Documentation', href: '/docs', icon: 'book-open' },
-  { label: 'Templates', href: '/templates', icon: 'layout-template' },
-  { label: 'Guides', href: '/guides', icon: 'graduation-cap' },
-  { label: 'Pricing', href: '/pricing', icon: 'dollar-sign' },
 
-])
 
 const socials = [
   { icon: 'mdi:github', href: 'https://github.com', label: 'GitHub' },
@@ -46,29 +29,13 @@ function toggleDarkMode() {
   document.documentElement.classList.toggle('dark', isDarkMode.value)
 }
 
-const activeRoute = computed(() => '/') // Replace with actual active route logic
+
 </script>
 
 <template>
-  <nav class="flex h-[98%] flex-col bg-background transition-colors duration-300">
+  <nav class="flex h-[98%] flex-col transition-colors duration-300">
     <UiScrollArea>
-      <ul class="space-y-2 py-6">
-        <li v-for="link in navLinks" :key="link.href">
-          <a
-            :href="link.href"
-            class="flex items-center rounded-lg px-6 py-4 text-lg font-medium transition-colors duration-200"
-            :class="[
-              activeRoute === link.href
-                ? 'bg-accent text-accent-foreground'
-                : 'text-foreground hover:bg-accent hover:text-accent-foreground',
-            ]"
-          >
-            <Icon :name="link.icon" class="mr-4 size-6" />
-            {{ link.label }}
-            <Icon name="chevron-right" class="ml-auto size-5" />
-          </a>
-        </li>
-      </ul>
+      <SectionsMainNav />
     </UiScrollArea>
 
     <footer class="mt-auto space-y-6 border-t border-border p-6">

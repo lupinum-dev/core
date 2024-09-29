@@ -2,6 +2,8 @@
 import { useScrollLock } from '@vueuse/core'
 import { onMounted, provide, ref, watch } from 'vue'
 
+// SCROLL LOCK
+// TODO Scroll lock causes layout shift, when scroll bar is hiding
 const headerState = ref(false)
 provide('headerState', headerState)
 
@@ -15,6 +17,8 @@ onMounted(() => {
 watch(headerState, (newState) => {
   lockScroll.value = newState
 })
+
+//
 </script>
 
 <template>
@@ -27,7 +31,7 @@ watch(headerState, (newState) => {
   >
     <div
       v-if="headerState"
-      class="fixed inset-0 bg-black bg-opacity-50 z-20"
+      class="fixed inset-0 z-20 bg-black bg-opacity-50"
     />
   </Transition>
   <NuxtLayout>
