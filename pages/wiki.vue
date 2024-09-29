@@ -9,6 +9,12 @@ definePageMeta({
     <UiHeaderSpacer />
     <div class="h-screen bg-red-500" />
     <div class="h-screen bg-blue-500" />
+    <div class="h-screen bg-red-500" />
+    <div class="h-screen bg-blue-500" />
+    <div class="h-screen bg-red-500" />
+    <div class="h-screen bg-blue-500" />
+    <div class="h-screen bg-red-500" />
+    <div class="h-screen bg-blue-500" />
   </div>
 
   <!-- TOC visibility is now controlled by isSidebarOpen -->

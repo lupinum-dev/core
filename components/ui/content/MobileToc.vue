@@ -7,6 +7,18 @@ const isScrolled = computed(() => y.value > 0)
 const delayedIsScrolled = ref(false)
 const maxWidth = ref('16ch')
 
+const currentText = computed(() => {
+  if (y.value === 0)
+    return 'On this page'
+  if (y.value >= 300 && y.value < 2000)
+    return 'Why not packaged as a dependency?'
+  if (y.value >= 2000 && y.value < 4000)
+    return 'Which frameworks are supported?'
+  if (y.value >= 4000)
+    return 'Can I use this in my project?'
+  return 'On this page'
+})
+
 watch(isScrolled, (newValue) => {
   if (newValue) {
     setTimeout(() => {
@@ -25,7 +37,7 @@ watch(delayedIsScrolled, (newValue) => {
   else {
     setTimeout(() => {
       maxWidth.value = '16ch'
-    }, 100)
+    }, 50)
   }
 }, { immediate: true })
 </script>
@@ -33,7 +45,7 @@ watch(delayedIsScrolled, (newValue) => {
 <template>
   <UiButton
     variant="ghost"
-    class="inline-flex size-full items-center gap-2 text-nowrap p-2 text-left text-xs  transition-all duration-300 sm:ml-4 md:px-3"
+    class="inline-flex size-full items-center gap-2 text-nowrap p-2 text-left text-xs transition-all duration-300 sm:ml-4 md:px-3"
     aria-label="Table of Contents"
     :class="{ 'sm:ml-0': isScrolled }"
   >
@@ -42,7 +54,7 @@ watch(delayedIsScrolled, (newValue) => {
       class="font-heading-med overflow-hidden truncate text-xs transition-all duration-300"
       :style="{ maxWidth }"
     >
-      On this page
+      {{ currentText }}
     </span>
   </UiButton>
 </template>
