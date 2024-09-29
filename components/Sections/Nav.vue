@@ -125,6 +125,11 @@ const components: { title: string, href: string, description: string }[] = [
           </ul>
         </UiNavigationMenuContent>
       </UiNavigationMenuItem>
+      <UiNavigationMenuItem>
+        <UiNavigationMenuLink class="">
+          Company
+        </UiNavigationMenuLink>
+      </UiNavigationMenuItem>
     </UiNavigationMenuList>
   </UiNavigationMenu>
 </template>

@@ -22,6 +22,7 @@ const updateIsScrolled = useDebounceFn(() => {
 }, 10)
 
 const isMobileScreen = useMediaQuery('(max-width: 639px)')
+const isTabletScreen = useMediaQuery('(max-width: 1023px)')
 
 watch(y, updateIsScrolled, { immediate: true })
 </script>
@@ -55,12 +56,17 @@ watch(y, updateIsScrolled, { immediate: true })
             :class="{ 'left-0': isScrolled && isMobileScreen, 'left-20': !(isScrolled && isMobileScreen) }"
             class="absolute transition-all duration-300"
           >
-            <UiContentMobileToc v-if="isMobileScreen" />
+            <UiContentMobileToc v-if="isTabletScreen" />
           </div>
         </div>
       </template>
-      <template #center />
+      <template #center>
+        <SectionsNav />
+      </template>
       <template #right />
+      <template #mobile>
+        <SectionsMobileNav />
+      </template>
     </UiHeaderBar>
   </UiHeaderWrapper>
 </template>

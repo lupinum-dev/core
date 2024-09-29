@@ -80,7 +80,7 @@ const topStyle = computed(() => ({
 
             <UiButton variant="ghost" class="flex ">
               <Icon name="heroicons:magnifying-glass-16-solid" class="size-5" />
-              <span class="ml-2  text-xs text-gray-400 lg:hidden">Search ..</span>
+              <span class="ml-2 hidden text-xs text-gray-400 sm:block lg:hidden">Search ..</span>
               <span class="ml-2 hidden text-xs text-gray-400 lg:inline-block">Search Site  ⌘ + K</span>
             </UiButton>
             <UiButton variant="link" class="hidden xl:block">
@@ -109,11 +109,7 @@ const topStyle = computed(() => ({
         >
           <nav v-if="isExpanded" class="flex-grow overflow-y-auto">
             <div class="h-px w-full bg-gray-o-1" />
-            <ul class="mt-6 space-y-4 px-3 [&>*]:py-2 [&>*]:text-5xl">
-              <li v-for="item in ['Home', 'About', 'Services', 'Contact']" :key="item">
-                <a :href="`#${item.toLowerCase()}`" class="hover:text-primary-600 block">{{ item }}</a>
-              </li>
-            </ul>
+            <slot name="mobile" />
           </nav>
         </Transition>
       </div>

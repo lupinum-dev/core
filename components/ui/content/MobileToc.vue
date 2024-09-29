@@ -54,7 +54,11 @@ watch(delayedIsScrolled, (newValue) => {
       class="font-heading-med overflow-hidden truncate text-xs transition-all duration-300"
       :style="{ maxWidth }"
     >
-      {{ currentText }}
+
+      <div class="flex flex-1 items-center gap-2">
+        <!-- <div class="  rounded-lg bg-gray-900 p-1 px-2 text-gray-400">1</div>  -->
+        {{ currentText }}
+      </div>
     </span>
   </UiButton>
 </template>
