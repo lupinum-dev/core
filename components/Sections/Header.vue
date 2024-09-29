@@ -40,7 +40,7 @@ watch(y, updateIsScrolled, { immediate: true })
         </div>
       </div>
     </UiHeaderAd>
-    <UiHeaderBar variant="bar">
+    <UiHeaderBar variant="default">
       <template #left>
         <!-- TODO: Make SSR compatible, currently hydration error -->
         <ClientOnly>

@@ -15,7 +15,6 @@ onMounted(() => {
 })
 
 watch(headerState, (newState) => {
-  console.log('headerState', newState)
   lockScroll.value = newState
 })
 </script>
@@ -30,7 +29,7 @@ watch(headerState, (newState) => {
   >
     <div
       v-if="headerState"
-      class="fixed inset-0 z-20 bg-black bg-opacity-50"
+      class="fixed inset-0 z-20 bg-foreground/30 "
     />
   </Transition>
   <NuxtLayout>
