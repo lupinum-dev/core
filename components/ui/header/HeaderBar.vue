@@ -60,7 +60,7 @@ const topStyle = computed(() => ({
     >
       <div
         class="flex size-full flex-col" :class="[
-          { 'relative rounded-2xl bg-white/90 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' },
+          { 'relative rounded-2xl border border-border bg-white/90 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' },
         ]"
         :style="headerStyle"
       >
@@ -77,7 +77,7 @@ const topStyle = computed(() => ({
             <div class="hidden lg:block">
               <slot name="right" />
             </div>
-            <UiButton variant="ghost">
+            <UiButton variant="ghost" class="flex lg:hidden">
               <Icon name="heroicons:magnifying-glass-16-solid" class="size-5" />
               <span class="ml-2 text-xs text-gray-400 lg:inline-block">Search ..</span>
             </UiButton>

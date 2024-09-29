@@ -17,16 +17,23 @@
     </UiHeaderAd>
     <UiHeaderBar variant="bar">
       <template #left>
-        <img src="/ginko_light.svg" alt="Ginko" class="h-9">
+        <img src="/ginko_light.svg" alt="Ginko" class="ml-2 h-9">
       </template>
       <template #center>
-        Center
+        <SectionsNav />
       </template>
       <template #right>
-        <div class="flex items-center gap-2">
-          <UiButton>1</UiButton>
-          <UiButton>2</UiButton>
-          <UiButton>3</UiButton>
+        <div class="flex items-center ">
+          <UiButton variant="ghost" class="flex">
+            <Icon name="heroicons:magnifying-glass-16-solid" class="size-5" />
+            <span class="ml-2 text-xs text-gray-400 lg:inline-block">Search Site  ⌘ + K</span>
+          </UiButton>
+          <UiButton variant="link">
+            <Icon name="heroicons:sun-20-solid" class="size-5" />
+          </UiButton>
+          <UiButton variant="link">
+            <Icon name="heroicons:language-20-solid" class="size-5" />
+          </UiButton>
         </div>
         <div class="flex lg:hidden">
           <!-- Search Input -->
