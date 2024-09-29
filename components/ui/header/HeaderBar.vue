@@ -1,8 +1,20 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, inject, ref } from 'vue'
 import type { HTMLAttributes } from 'vue'
+import { useScrollLock } from '@vueuse/core' // unlock
 
 import { cn } from '@/lib/utils'
+
+const props = withDefaults(defineProps<Props>(), {
+  variant: 'default',
+  showAdBanner: true,
+  adKey: 'banner',
+})
+const el = ref<HTMLElement | null>(null)
+const isLocked = useScrollLock(el)
+
+isLocked.value = true // lock
+isLocked.value = false
 
 interface Props {
   class?: HTMLAttributes['class']
@@ -10,12 +22,6 @@ interface Props {
   adKey?: string
   variant?: 'default' | 'bar'
 }
-
-const props = withDefaults(defineProps<Props>(), {
-  variant: 'default',
-  showAdBanner: true,
-  adKey: 'banner',
-})
 
 const { isVisible } = useAdBannerVisibility()
 
@@ -26,8 +32,11 @@ const headerHeight = computed(() =>
   isExpanded.value ? `calc(95vh - ${headerAdHeight}px)` : '50px',
 )
 
+const headerState = inject('headerState', false)
+
 function toggleHeaderHeight() {
   isExpanded.value = !isExpanded.value
+  headerState.value = !headerState.value
 }
 
 const headerStyle = computed(() => ({
@@ -43,10 +52,9 @@ const topStyle = computed(() => ({
 
 <template>
   <header
-
     :class="[
       props.variant === 'default'
-        ? cn('bg-white isolate fixed z-50 w-full border-b border-gray-o-1 transition-all duration-300', props.class)
+        ? cn('bg-background isolate fixed z-50 w-full border-b transition-all duration-300', props.class)
         : 'fixed isolate z-30 w-full transition-all duration-300',
     ]"
     :style="topStyle"
@@ -60,7 +68,7 @@ const topStyle = computed(() => ({
     >
       <div
         class="flex size-full flex-col" :class="[
-          { 'relative rounded-2xl border border-border bg-white/90 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' },
+          { 'relative rounded-2xl border bg-background/90 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' },
         ]"
         :style="headerStyle"
       >
@@ -108,7 +116,7 @@ const topStyle = computed(() => ({
           leave-to-class="opacity-0 -translate-y-1"
         >
           <nav v-if="isExpanded" class="flex-grow overflow-y-auto">
-            <div class="h-px w-full bg-gray-o-1" />
+            <div class="h-px w-full bg-border" />
             <slot name="mobile" />
           </nav>
         </Transition>

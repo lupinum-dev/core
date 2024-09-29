@@ -13,6 +13,17 @@ const navLinks = ref<NavLink[]>([
   { label: 'Templates', href: '/templates', icon: 'layout-template' },
   { label: 'Guides', href: '/guides', icon: 'graduation-cap' },
   { label: 'Pricing', href: '/pricing', icon: 'dollar-sign' },
+  { label: 'Home', href: '/', icon: 'home' },
+  { label: 'Documentation', href: '/docs', icon: 'book-open' },
+  { label: 'Templates', href: '/templates', icon: 'layout-template' },
+  { label: 'Guides', href: '/guides', icon: 'graduation-cap' },
+  { label: 'Pricing', href: '/pricing', icon: 'dollar-sign' },
+  { label: 'Home', href: '/', icon: 'home' },
+  { label: 'Documentation', href: '/docs', icon: 'book-open' },
+  { label: 'Templates', href: '/templates', icon: 'layout-template' },
+  { label: 'Guides', href: '/guides', icon: 'graduation-cap' },
+  { label: 'Pricing', href: '/pricing', icon: 'dollar-sign' },
+
 ])
 
 const socials = [
@@ -39,16 +50,17 @@ const activeRoute = computed(() => '/') // Replace with actual active route logi
 </script>
 
 <template>
-  <nav class="flex h-full flex-col bg-white transition-colors duration-300 dark:bg-gray-900">
-    <UiScrollArea class="flex-grow">
+  <nav class="flex h-[98%] flex-col bg-background transition-colors duration-300">
+    <UiScrollArea>
       <ul class="space-y-2 py-6">
         <li v-for="link in navLinks" :key="link.href">
           <a
             :href="link.href"
-            class="flex items-center rounded-lg px-6 py-4 text-lg font-medium transition-colors duration-200" :class="[
+            class="flex items-center rounded-lg px-6 py-4 text-lg font-medium transition-colors duration-200"
+            :class="[
               activeRoute === link.href
-                ? 'dark:text-primary-light bg-gray-100 text-primary dark:bg-gray-800'
-                : 'text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800',
+                ? 'bg-accent text-accent-foreground'
+                : 'text-foreground hover:bg-accent hover:text-accent-foreground',
             ]"
           >
             <Icon :name="link.icon" class="mr-4 size-6" />
@@ -59,14 +71,14 @@ const activeRoute = computed(() => '/') // Replace with actual active route logi
       </ul>
     </UiScrollArea>
 
-    <footer class="mt-auto space-y-6 border-t border-gray-200 p-6 dark:border-gray-700">
+    <footer class="mt-auto space-y-6 border-t border-border p-6">
       <div class="flex justify-center space-x-6">
         <a
           v-for="social in socials"
           :key="social.icon"
           :href="social.href"
           :aria-label="social.label"
-          class="text-gray-600 transition-colors duration-200 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+          class="text-muted-foreground transition-colors duration-200 hover:text-foreground"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -76,7 +88,7 @@ const activeRoute = computed(() => '/') // Replace with actual active route logi
 
       <div class="flex items-center justify-between">
         <UiButton
-          class="rounded-full bg-gray-200 p-2 text-gray-700 transition-colors duration-200 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+          class="rounded-full bg-secondary p-2 text-secondary-foreground transition-colors duration-200 hover:bg-secondary/80"
           :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleDarkMode"
         >
@@ -85,7 +97,7 @@ const activeRoute = computed(() => '/') // Replace with actual active route logi
 
         <select
           v-model="selectedLanguage"
-          class="dark:focus:ring-primary-light rounded-md bg-gray-200 px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:text-gray-200"
+          class="rounded-md bg-secondary px-3 py-2 text-secondary-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
           aria-label="Select language"
         >
           <option v-for="lang in languages" :key="lang.code" :value="lang.code">
@@ -100,7 +112,7 @@ const activeRoute = computed(() => '/') // Replace with actual active route logi
 <style scoped>
 .overflow-y-auto {
   scrollbar-width: thin;
-  scrollbar-color: theme('colors.gray.400') theme('colors.gray.200');
+  scrollbar-color: hsl(var(--muted)) hsl(var(--muted-foreground));
 }
 
 .overflow-y-auto::-webkit-scrollbar {
@@ -108,23 +120,11 @@ const activeRoute = computed(() => '/') // Replace with actual active route logi
 }
 
 .overflow-y-auto::-webkit-scrollbar-track {
-  background: theme('colors.gray.200');
+  background: hsl(var(--muted));
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb {
-  background-color: theme('colors.gray.400');
+  background-color: hsl(var(--muted-foreground));
   border-radius: 4px;
-}
-
-.dark .overflow-y-auto {
-  scrollbar-color: theme('colors.gray.600') theme('colors.gray.800');
-}
-
-.dark .overflow-y-auto::-webkit-scrollbar-track {
-  background: theme('colors.gray.800');
-}
-
-.dark .overflow-y-auto::-webkit-scrollbar-thumb {
-  background-color: theme('colors.gray.600');
 }
 </style>

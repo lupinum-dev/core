@@ -42,23 +42,26 @@ watch(y, updateIsScrolled, { immediate: true })
     </UiHeaderAd>
     <UiHeaderBar variant="bar">
       <template #left>
-        <div class="relative flex items-center gap-4">
-          <Transition name="fade-slide">
-            <NuxtImg
-              v-if="!(isScrolled && isMobileScreen)"
-              src="/ginko_light.svg"
-              alt="Ginko"
-              class="left-2 h-8 transition-transform duration-300"
-            />
-          </Transition>
+        <!-- TODO: Make SSR compatible, currently hydration error -->
+        <ClientOnly>
+          <div class="relative flex items-center gap-4">
+            <Transition name="fade-slide">
+              <NuxtImg
+                v-if="!(isScrolled && isMobileScreen)"
+                src="/ginko_light.svg"
+                alt="Ginko"
+                class="left-2 h-8 transition-transform duration-300"
+              />
+            </Transition>
 
-          <div
-            :class="{ 'left-0': isScrolled && isMobileScreen, 'left-20': !(isScrolled && isMobileScreen) }"
-            class="absolute transition-all duration-300"
-          >
-            <UiContentMobileToc v-if="isTabletScreen" />
+            <div
+              :class="{ 'left-0': isScrolled && isMobileScreen, 'left-20': !(isScrolled && isMobileScreen) }"
+              class="absolute transition-all duration-300"
+            >
+              <UiContentMobileToc v-if="isTabletScreen" />
+            </div>
           </div>
-        </div>
+        </ClientOnly>
       </template>
       <template #center>
         <SectionsNav />
