@@ -41,7 +41,7 @@ function toggleHeaderHeight() {
     :style="{ top: isVisible ? 'var(--header-ad-height)' : '0' }"
   >
     <div class="container flex h-[var(--header-height)] items-center justify-between">
-      <div class="flex items-center">
+      <div class="flex h-full items-center">
         <slot name="left" />
       </div>
 
@@ -69,15 +69,15 @@ function toggleHeaderHeight() {
       >
         <div class=" flex h-full flex-col">
           <div class="flex items-start justify-between py-1">
-            <div class="flex items-center">
+            <div class="flex h-full items-center">
               <slot name="left" />
             </div>
 
-            <div class="hidden lg:block">
+            <div class="hidden h-full items-center lg:flex">
               <slot name="center" />
             </div>
 
-            <div class="flex items-center">
+            <div class="flex h-full items-center">
               <div class="hidden lg:block">
                 <slot name="right" />
               </div>
