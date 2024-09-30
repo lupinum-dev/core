@@ -37,7 +37,7 @@ function closeAdBanner() {
       <div class="flex w-full justify-center text-center">
         <slot />
       </div>
-      <div class="right-0 top-0 justify-end">
+      <!-- <div class="right-0 top-0 justify-end">
         <slot name="icon">
           <button
             v-if="props.letClose"
@@ -48,7 +48,7 @@ function closeAdBanner() {
             <Icon :name="props.closingIcon" class="size-5" />
           </button>
         </slot>
-      </div>
+      </div> -->
     </div>
   </Transition>
 </template>
