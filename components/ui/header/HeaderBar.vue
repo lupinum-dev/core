@@ -25,8 +25,8 @@ const isExpanded = ref(false)
 const headerHeight = computed(() =>
   isExpanded.value
     ? props.variant === 'default'
-      ? `calc(100vh)`
-      : `calc(100vh - 16px)`
+      ? `calc(100dvh)`
+      : `calc(100dvh - 16px)`
     : '50px',
 )
 
