@@ -32,12 +32,12 @@ function closeAdBanner() {
   <Transition name="ad-banner">
     <div
       v-if="isVisible"
-      class="top-0 z-40 flex h-[var(--header-ad-height)] w-full items-center justify-between bg-blue-500 px-6"
+      class=" fixed left-0 top-0 z-30 flex h-[var(--header-ad-height)] w-screen items-center justify-between bg-accent px-6"
     >
-      <!-- <div class="flex w-full justify-center text-center">
+      <div class="flex w-full justify-center text-center">
         <slot />
-      </div> -->
-      <!-- <div class="right-0 top-0 justify-end">
+      </div>
+      <div class="right-0 top-0 justify-end">
         <slot name="icon">
           <button
             v-if="props.letClose"
@@ -48,7 +48,7 @@ function closeAdBanner() {
             <Icon :name="props.closingIcon" class="size-5" />
           </button>
         </slot>
-      </div> -->
+      </div>
     </div>
   </Transition>
 </template>
