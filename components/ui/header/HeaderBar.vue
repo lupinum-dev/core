@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue'
 import type { HTMLAttributes } from 'vue'
-import { useScrollLock } from '@vueuse/core' // unlock
-
 import { cn } from '@/lib/utils'
 
 const props = withDefaults(defineProps<Props>(), {
@@ -10,11 +8,6 @@ const props = withDefaults(defineProps<Props>(), {
   showAdBanner: true,
   adKey: 'banner',
 })
-const el = ref<HTMLElement | null>(null)
-const isLocked = useScrollLock(el)
-
-isLocked.value = true // lock
-isLocked.value = false
 
 interface Props {
   class?: HTMLAttributes['class']
@@ -26,10 +19,15 @@ interface Props {
 const { isVisible } = useAdBannerVisibility()
 
 const isExpanded = ref(false)
-const headerAdHeight = 32
 
+// TODO Make Header Variable in CSS and Nuxt Config
+// When using the var(--header-height), the opening animation is croggy
 const headerHeight = computed(() =>
-  isExpanded.value ? `calc(95vh - ${headerAdHeight}px)` : '50px',
+  isExpanded.value
+    ? props.variant === 'default'
+      ? `calc(100vh)`
+      : `calc(100vh - 16px)`
+    : '50px',
 )
 
 const headerState = inject('headerState', false)
@@ -54,27 +52,26 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
 
 <template>
   <header
-    :class="[
-      props.variant === 'default'
-        ? cn('bg-background isolate fixed z-50 w-full border-b transition-all duration-300', props.class)
-        : 'fixed isolate z-30 w-full transition-all duration-300',
-    ]"
+    :class="cn(
+      'isolate fixed w-full transition-all duration-300',
+      props.variant === 'default' ? 'bg-background z-50 border-b' : 'z-30',
+      props.class,
+    )"
     :style="topStyle"
   >
     <div
-      :class="[
+      class="mx-auto px-3" :class="[
         props.variant === 'default'
-          ? 'container flex items-center justify-between'
-          : 'mx-auto mt-2 max-w-6xl px-3 md:mt-3 lg:px-6',
+          ? 'flex items-center justify-between sm:container'
+          : 'mt-2 max-w-6xl md:mt-3 lg:px-6',
       ]"
     >
       <div
-        class="flex size-full flex-col" :class="[
-          { 'relative rounded-2xl border bg-background/90 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' },
-        ]"
+        class="flex size-full flex-col"
+        :class="{ 'relative rounded-2xl border bg-background/90 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' }"
         :style="headerStyle"
       >
-        <div class="flex items-start justify-between py-1">
+        <div class="flex items-center justify-between py-1">
           <div class="flex h-full items-center">
             <slot name="left" />
           </div>
