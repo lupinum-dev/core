@@ -38,7 +38,7 @@ function toggleNav() {
       <h2 class="text-lg font-semibold">
         {{ showMainNav ? 'Main Navigation' : 'Wiki Navigation' }}
       </h2>
-      <UiButton v-if="isWikiPage" @click="toggleNav" variant="outline" size="sm">
+      <UiButton v-if="isWikiPage" variant="outline" size="sm" @click="toggleNav">
         <Icon :name="showMainNav ? 'mdi:book-open' : 'mdi:home'" class="mr-2 size-4" />
         {{ showMainNav ? 'Wiki Nav' : 'Main Nav' }}
       </UiButton>

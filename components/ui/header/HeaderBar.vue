@@ -53,7 +53,7 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
 <template>
   <header
     :class="cn(
-      'isolate fixed w-full transition-all duration-300',
+      'isolate fixed w-dvw transition-all duration-300 -translate-x-[7px]',
       props.variant === 'default' ? 'bg-background z-50 border-b' : 'z-30',
       props.class,
     )"
