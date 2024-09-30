@@ -34,9 +34,9 @@ function closeAdBanner() {
       v-if="isVisible"
       class="ad-banner   top-0 z-30 flex h-[var(--header-ad-height)] w-full items-center justify-between bg-blue-500 px-6"
     >
-      <div class="flex w-full justify-center text-center">
+      <!-- <div class="flex w-full justify-center text-center">
         <slot />
-      </div>
+      </div> -->
       <!-- <div class="right-0 top-0 justify-end">
         <slot name="icon">
           <button
