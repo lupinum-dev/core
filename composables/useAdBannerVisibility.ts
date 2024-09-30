@@ -21,13 +21,12 @@ export function useAdBannerVisibility() {
 
   const threshold = 50
 
-  // Use a computed to create the cookie with the current cookieKey
-  const adDismissed = computed(() => useCookie<boolean>(cookieKey.value, {
+  const adDismissed = useCookie<boolean>(() => cookieKey.value, {
     maxAge: 60 * 60 * 24 * 30,
-  }))
+  })
 
   const isVisible = computed(() => {
-    if (adDismissed.value.value) {
+    if (adDismissed.value) {
       isAdBannerVisible.value = false
       return false
     }
@@ -40,7 +39,7 @@ export function useAdBannerVisibility() {
   const setAdBannerVisibility = (value: boolean) => {
     isAdBannerVisible.value = value
     if (!value) {
-      adDismissed.value.value = true
+      adDismissed.value = true
     }
   }
 
@@ -57,6 +56,5 @@ export function useAdBannerVisibility() {
     setAdBannerVisibility,
     setHideOnScroll,
     setCookieKey,
-    cookieKey, // Add this line to export cookieKey
   }
 }
