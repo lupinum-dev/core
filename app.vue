@@ -21,19 +21,44 @@ watch(headerState, (newState) => {
 const useIdFunction = () => useId()
 
 // Debug information
-const { isVisible } = useAdBannerVisibility()
+const { isVisible, setAdBannerVisibility, cookieKey } = useAdBannerVisibility()
 const debugInfo = ref({
   adBannerVisible: isVisible.value,
   screenWidth: 0,
   screenHeight: 0,
   userAgent: '',
+  cookieValue: '',
+  cookieKey: cookieKey.value,
 })
 
+const updateDebugInfo = () => {
+  const cookie = useCookie(cookieKey.value)
+  debugInfo.value = {
+    adBannerVisible: isVisible.value,
+    screenWidth: window.innerWidth,
+    screenHeight: window.innerHeight,
+    userAgent: navigator.userAgent,
+    cookieValue: cookie.value?.toString() ?? 'not set',
+    cookieKey: cookieKey.value,
+  }
+}
+
 onMounted(() => {
-  debugInfo.value.screenWidth = window.innerWidth
-  debugInfo.value.screenHeight = window.innerHeight
-  debugInfo.value.userAgent = navigator.userAgent
+  updateDebugInfo()
+  window.addEventListener('resize', updateDebugInfo)
 })
+
+const deleteCookie = () => {
+  const cookie = useCookie(cookieKey.value)
+  cookie.value = null
+  setAdBannerVisibility(true)
+  updateDebugInfo()
+}
+
+const toggleAdBanner = () => {
+  setAdBannerVisibility(!isVisible.value)
+  updateDebugInfo()
+}
 </script>
 
 <template>
@@ -50,6 +75,20 @@ onMounted(() => {
         Debug Info:
       </h3>
       <pre>{{ JSON.stringify(debugInfo, null, 2) }}</pre>
+      <div class="mt-4 flex space-x-4">
+        <button
+          class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+          @click="deleteCookie"
+        >
+          Delete Cookie
+        </button>
+        <button
+          class="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+          @click="toggleAdBanner"
+        >
+          Toggle Ad Banner
+        </button>
+      </div>
     </div>
   </ConfigProvider>
 </template>

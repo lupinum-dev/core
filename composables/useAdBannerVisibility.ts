@@ -57,5 +57,6 @@ export function useAdBannerVisibility() {
     setAdBannerVisibility,
     setHideOnScroll,
     setCookieKey,
+    cookieKey, // Add this line to export cookieKey
   }
 }
