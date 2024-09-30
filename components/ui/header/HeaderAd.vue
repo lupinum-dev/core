@@ -32,7 +32,7 @@ function closeAdBanner() {
   <Transition name="ad-banner">
     <div
       v-if="isVisible"
-      class="ad-banner fixed  top-0 z-30 flex h-[var(--header-ad-height)] w-full items-center justify-between bg-blue-500 px-6"
+      class="ad-banner fixed  top-0 z-30 flex h-12 w-full items-center justify-between bg-blue-500 px-6"
     >
       <div class="flex w-full justify-center text-center">
         <slot />
