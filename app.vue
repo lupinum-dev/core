@@ -20,7 +20,7 @@ watch(headerState, (newState) => {
 </script>
 
 <template>
-  <SectionsHeader />
+  <!-- <SectionsHeader /> -->
   <Transition
     enter-active-class="transition-opacity duration-300 ease-in-out"
     leave-active-class="transition-opacity duration-300 ease-in-out"

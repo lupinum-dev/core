@@ -90,9 +90,8 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
               <span class="ml-2 hidden text-xs text-gray-400 sm:block lg:hidden">Search ..</span>
               <span class="ml-2 hidden text-xs text-gray-400 lg:inline-block">Search Site  ⌘ + K</span>
             </UiButton>
-            <UiButton variant="link" class="hidden xl:block">
-              <Icon name="heroicons:sun-20-solid" class="size-5" />
-            </UiButton>
+            <UiColorModeDropdown variant="ghost" />
+
             <UiButton variant="link" class="hidden xl:block">
               <Icon name="heroicons:language-20-solid" class="size-5" />
             </UiButton>

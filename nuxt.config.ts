@@ -8,6 +8,13 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt',
     '@nuxt/image',
     '@formkit/auto-animate/nuxt',
+    '@nuxtjs/color-mode',
 
   ],
+  colorMode: {
+    classPrefix: '',
+    classSuffix: '',
+    storage: 'cookie',
+    storageKey: 'color-mode',
+  },
 })
