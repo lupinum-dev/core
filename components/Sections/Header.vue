@@ -20,7 +20,6 @@ const updateIsScrolled = useDebounceFn(() => {
 
   previousScrollPosition.value = currentPosition
 }, 10)
-
 const isMobileScreen = useMediaQuery('(max-width: 639px)')
 const isTabletScreen = useMediaQuery('(max-width: 1023px)')
 
@@ -29,9 +28,10 @@ watch(y, updateIsScrolled, { immediate: true })
 
 <template>
   <!-- Default Header -->
+  <!-- TODO Abstract everything what is not needed away -->
   <UiHeaderWrapper>
-    <UiHeaderAd :scroll-hide="true" class="bg-accent-foreground text-background">
-      <div class="flex flex-row gap-4 text-xs sm:gap-7 sm:text-base">
+    <UiHeaderAd :scroll-hide="false" :let-close="false" class="bg-accent-foreground text-background">
+      <div class="flex flex-row gap-4 text-sm sm:gap-7 sm:text-base">
         <div>
           +43 664 8373842
         </div>
@@ -42,10 +42,13 @@ watch(y, updateIsScrolled, { immediate: true })
     </UiHeaderAd>
     <UiHeaderBar variant="bar">
       <template #left>
-        <!-- TODO: Make SSR compatible, currently hydration error -->
+        <!-- TODO Make SSR compatible, currently hydration error -->
         <ClientOnly>
           <div class="relative flex items-center gap-4">
+            <!-- TODO I need to able to change the logo size! -->
+            <!-- TODO I need to make sure when the logo is pretty long, we need to show the icon only -->
             <Transition name="fade-slide">
+              <!-- TODO Logo should support light and dark mode -->
               <NuxtImg
                 v-if="!(isScrolled && isMobileScreen)"
                 src="/ginko_light.svg"
@@ -54,6 +57,7 @@ watch(y, updateIsScrolled, { immediate: true })
               />
             </Transition>
 
+            <!-- TODO I need to be able to change the offset of the Logo -->
             <div
               :class="{ 'left-0': isScrolled && isMobileScreen, 'left-20': !(isScrolled && isMobileScreen) }"
               class="absolute transition-all duration-300"

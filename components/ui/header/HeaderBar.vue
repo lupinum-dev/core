@@ -68,7 +68,7 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
     >
       <div
         class="flex size-full flex-col"
-        :class="{ 'relative rounded-2xl border bg-background/90 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' }"
+        :class="{ 'relative rounded-2xl border bg-background/95 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' }"
         :style="headerStyle"
       >
         <div class="flex items-center justify-between py-1">

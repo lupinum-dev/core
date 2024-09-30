@@ -5,7 +5,7 @@ interface Props {
   adKey?: string
   letClose?: boolean
   closingIcon?: string
-  hideOnScroll?: boolean
+  scrollHide?: boolean
   cookieKey?: string
 }
 
@@ -13,14 +13,14 @@ const props = withDefaults(defineProps<Props>(), {
   adKey: 'banner',
   letClose: true,
   closingIcon: 'heroicons:x-mark-20-solid',
-  hideOnScroll: true,
+  scrollHide: true,
   cookieKey: 'header-ad',
 })
 
 const { isVisible, setAdBannerVisibility, setHideOnScroll, setCookieKey } = useAdBannerVisibility()
 
 // Set the initial values based on props
-setHideOnScroll(props.hideOnScroll)
+setHideOnScroll(props.scrollHide)
 setCookieKey(props.cookieKey)
 
 function closeAdBanner() {
