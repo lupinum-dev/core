@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { inject, ref } from 'vue'
+import { computed, inject, ref } from 'vue'
 
 interface NavLink {
   label: string
   href?: string
   icon?: string
-  open?: boolean
+  childrenOpen?: boolean
+  childrenTrailing?: boolean
   children?: NavLink[]
 }
 const navLinks = ref<NavLink[]>([
@@ -14,7 +15,7 @@ const navLinks = ref<NavLink[]>([
   {
     label: 'Wiki',
     icon: 'heroicons:book-open',
-    open: true,
+    childrenOpen: true,
     children: [
       { label: 'Getting Started', href: '/wiki/getting-started' },
       { label: 'Core Concepts', href: '/wiki/core-concepts' },
@@ -24,6 +25,8 @@ const navLinks = ref<NavLink[]>([
   {
     label: 'Docs',
     icon: 'mdi:file-document',
+    childrenOpen: true,
+    childrenTrailing: false,
     children: [
       { label: 'API Reference', href: '/docs/api' },
       { label: 'Components', href: '/docs/components' },
@@ -56,18 +59,6 @@ const activeRoute = computed(() => route.path)
 
 const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
 
-const openItems = ref<string[]>([])
-
-function toggleAccordion(label: string) {
-  const index = openItems.value.indexOf(label)
-  if (index > -1) {
-    openItems.value.splice(index, 1)
-  }
-  else {
-    openItems.value.push(label)
-  }
-}
-
 function handleLinkClick() {
   toggleHeaderExpansion()
 }
@@ -77,19 +68,19 @@ function handleLinkClick() {
   <ul class="w-full space-y-1 px-2">
     <li v-for="link in navLinks" :key="link.label">
       <template v-if="link.children">
-        <UiAccordion :model-value="openItems" variant="ghost" class="p-0" @update:model-value="openItems = $event">
+        <UiAccordion type="single" collapsible variant="ghost" class="p-0" :default-value="link.childrenOpen ? link.label : ''">
           <UiAccordionItem :value="link.label" class="p-0 ">
             <UiAccordionTrigger class="px-4">
               <div class="flex items-center  py-0 text-base font-medium text-foreground">
-                <Icon :name="link.icon" class="mr-3 size-5" />
+                <Icon :name="link.icon || ''" class="mr-3 size-5" />
                 {{ link.label }}
               </div>
             </UiAccordionTrigger>
             <UiAccordionContent>
-              <ul class="mt-1 space-y-1 pl-8">
+              <ul class="ml-6 mt-1 space-y-1 border-l border-border ps-2">
                 <li v-for="child in link.children" :key="child.href">
                   <NuxtLink
-                    :to="child.href"
+                    :to="child.href || ''"
                     class="flex items-center rounded-md px-3 py-2 font-medium transition-colors duration-200"
                     :class="[
                       activeRoute === child.href
@@ -99,7 +90,11 @@ function handleLinkClick() {
                     @click="handleLinkClick"
                   >
                     {{ child.label }}
-                    <Icon name="lucide:chevron-right" class="ml-4 size-4" />
+                    <Icon
+                      v-if="link.childrenTrailing !== false"
+                      name="lucide:chevron-right"
+                      class="ml-4 size-4"
+                    />
                   </NuxtLink>
                 </li>
               </ul>
@@ -123,17 +118,19 @@ function handleLinkClick() {
       </NuxtLink>
     </li>
   </ul>
-  <div class="flex justify-center space-x-6 pb-20 pt-12 opacity-70">
-    <a
-      v-for="social in socials"
-      :key="social.icon"
-      :href="social.href"
-      :aria-label="social.label"
-      class="text-muted-foreground transition-colors duration-200 hover:text-foreground"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <Icon :name="social.icon" class="size-6" />
-    </a>
+  <div>
+    <div class="flex justify-center space-x-6 pb-20 pt-12">
+      <a
+        v-for="social in socials"
+        :key="social.icon"
+        :href="social.href"
+        :aria-label="social.label"
+        class="text-muted-foreground transition-colors duration-200 hover:text-foreground"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon :name="social.icon" class="size-6" />
+      </a>
+    </div>
   </div>
 </template>
