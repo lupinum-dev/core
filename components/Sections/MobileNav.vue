@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import WikiNav from './MobileSubWikiNav.vue'
+import BlogNav from './MobileSubBlogNav.vue'
 
-const isDarkMode = ref(false)
 const selectedLanguage = ref('en')
 
 const languages = [
@@ -11,51 +10,53 @@ const languages = [
   { code: 'fr', label: 'Français' },
 ]
 
+const subNavigations = [
+  {
+    label: 'Wiki',
+    component: WikiNav,
+    route: '/wiki',
+  },
+  {
+    label: 'Blog',
+    component: BlogNav,
+    route: '/blog',
+  },
+]
 const route = useRoute()
-const isWikiPage = computed(() => route.path.startsWith('/wiki'))
-const showMainNav = ref(!isWikiPage.value)
 
-function toggleDarkMode() {
-  isDarkMode.value = !isDarkMode.value
-  document.documentElement.classList.toggle('dark', isDarkMode.value)
-}
-
-function toggleNav() {
-  showMainNav.value = !showMainNav.value
-}
+const currentSubNav = computed(() => subNavigations.find(nav => nav.route === route.path))
+const showMainNav = computed(() => !currentSubNav.value)
 </script>
 
 <template>
   <nav class="flex h-[98%] flex-col transition-colors duration-300">
-    <UiDivider class="mb-4" />
     <div class="mb-4 flex items-center justify-between px-6" />
-    <UiScrollArea class="relative">
-      <div class="h-full">
+
+    <UiScrollArea class="relative" type="auto">
+      <div class="h-full px-2">
         <SectionsMainNav v-if="showMainNav" />
-        <SectionsWikiNav v-else />
+        <component :is="currentSubNav?.component" v-else />
       </div>
-      <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/5 bg-gradient-to-t from-background to-transparent" />
     </UiScrollArea>
 
     <footer class="mt-auto space-y-6 border-t border-border p-6">
       <div class="flex items-center justify-between">
-        <UiButton
-          class="rounded-full bg-secondary p-2 text-secondary-foreground transition-colors duration-200 hover:bg-secondary/80"
-          :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
-          @click="toggleDarkMode"
-        >
-          <Icon :name="isDarkMode ? 'heroicons:sun' : 'heroicons:moon'" class="size-5" />
-        </UiButton>
+        <UiColorModeDropdown />
 
-        <select
-          v-model="selectedLanguage"
-          class="rounded-md bg-secondary px-3 py-2 text-secondary-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-          aria-label="Select language"
-        >
-          <option v-for="lang in languages" :key="lang.code" :value="lang.code">
-            {{ lang.label }}
-          </option>
-        </select>
+        <UiDropdownMenuRoot>
+          <UiDropdownMenuTrigger as-child>
+            <UiButton variant="ghost">
+              <Icon :name="`emojione:flag-for-${selectedLanguage === 'en' ? 'united-states' : selectedLanguage === 'es' ? 'spain' : 'france'}`" class="mr-2 size-5" />
+              {{ languages.find(lang => lang.code === selectedLanguage)?.label }}
+            </UiButton>
+          </UiDropdownMenuTrigger>
+          <UiDropdownMenuContent align="end">
+            <UiDropdownMenuItem v-for="lang in languages" :key="lang.code" @click="selectedLanguage = lang.code">
+              <Icon :name="`emojione:flag-for-${lang.code === 'en' ? 'united-states' : lang.code === 'es' ? 'spain' : 'france'}`" class="mr-2 size-4" />
+              {{ lang.label }}
+            </UiDropdownMenuItem>
+          </UiDropdownMenuContent>
+        </UiDropdownMenuRoot>
       </div>
     </footer>
   </nav>

@@ -11,20 +11,20 @@ interface NavLink {
   children?: NavLink[]
 }
 const navLinks = ref<NavLink[]>([
-  { label: 'Home', href: '/', icon: 'mdi:home' },
+  { label: 'Home', href: '/', icon: 'lucide:home' },
   {
     label: 'Wiki',
-    icon: 'heroicons:book-open',
+    icon: 'lucide:book-open',
     childrenOpen: true,
     children: [
-      { label: 'Getting Started', href: '/wiki/getting-started' },
-      { label: 'Core Concepts', href: '/wiki/core-concepts' },
-      { label: 'Advanced Topics', href: '/wiki/advanced-topics' },
+      { label: 'Getting Started', href: '/wiki/' },
+      { label: 'Core Concepts', href: '/wiki/' },
+      { label: 'Advanced Topics', href: '/wiki/' },
     ],
   },
   {
     label: 'Docs',
-    icon: 'mdi:file-document',
+    icon: 'lucide:file-text',
     childrenOpen: true,
     childrenTrailing: false,
     children: [
@@ -35,17 +35,17 @@ const navLinks = ref<NavLink[]>([
   },
   {
     label: 'Courses',
-    icon: 'mdi:file-document',
+    icon: 'lucide:graduation-cap',
     children: [
       { label: 'API Reference', href: '/docs/api' },
       { label: 'Components', href: '/docs/components' },
       { label: 'Guides', href: '/docs/guides' },
     ],
   },
-  { label: 'Videos', href: '/videos', icon: 'mdi:video' },
-  { label: 'Course', href: '/course', icon: 'mdi:school' },
-  { label: 'Blog', href: '/blog', icon: 'mdi:post' },
-  { label: 'Contact', href: '/contact', icon: 'mdi:email' },
+  { label: 'Videos', href: '/videos', icon: 'lucide:video' },
+  { label: 'Course', href: '/course', icon: 'lucide:book' },
+  { label: 'Blog', href: '/blog', icon: 'lucide:pen-tool' },
+  { label: 'Contact', href: '/contact', icon: 'lucide:mail' },
 ])
 
 const socials = [

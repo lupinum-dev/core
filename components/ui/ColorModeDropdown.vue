@@ -5,6 +5,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  inheritAttrs: false,
   variant: 'ghost',
   displayType: 'icon',
 })
@@ -32,6 +33,7 @@ const currentModeText = computed(() => {
       <UiButton
         :size="props.displayType === 'icon' ? 'icon' : 'default'"
         :variant="props.variant"
+        v-bind="$attrs"
       >
         <template v-if="props.displayType === 'icon'">
           <Icon name="heroicons:moon" class="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
