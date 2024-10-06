@@ -1,15 +1,15 @@
 <script setup lang="ts">
-interface NavItem {
+interface NavigationItem {
   title: string
   _path: string
-  children?: NavItem[]
+  children?: NavigationItem[]
   icon?: string
   group?: string
   firstLink?: string
-  status?: string
+  status?: 'updated' | 'wip' | 'outdated' | 'new'
 }
 
-type Navigation = NavItem[]
+type Navigation = NavigationItem[]
 
 const wikiNavigation = inject<Ref<Navigation>>('navigation-wiki')
 
@@ -51,7 +51,7 @@ const ungroupedItems = computed(() => {
                 v-if="item.children"
                 :title="item.title"
                 :children="item.children"
-                :icon="item.icon || ''"
+                :icon="item.icon ?? ''"
               />
               <UiNavigationTreeLink
                 v-else
@@ -74,9 +74,9 @@ const ungroupedItems = computed(() => {
             v-if="item.children"
             :title="item.title"
             :children="item.children"
-            :icon="item.icon || ''"
+            :icon="item.icon ?? ''"
           />
-          <UiNavigationMenuLink
+          <UiNavigationTreeLink
             v-else
             :title="item.title"
             :icon="item.icon"

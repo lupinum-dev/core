@@ -28,16 +28,22 @@ const subNavigations = [
 const route = useRoute()
 
 // Open submenu automatically if on a submenu route
+// When i am on route "/wiki/fundamentals/world-of-bees/overview" we should extract "wiki" so we know which submenuComponent to show
+// but We need the full path to to show the currentSubNav like "/wiki/fundamentals"
+
 onMounted(() => {
-  const currentSubNav = subNavigations.find(nav => route.path.startsWith(nav.route))
-  if (currentSubNav) {
-    openSubmenu(currentSubNav.route)
+  const currentPath = route.path
+  const subNav = subNavigations.find(nav => currentPath.startsWith(nav.route))
+  if (subNav) {
+    const pathParts = currentPath.split('/')
+    const subNavPath = `/${pathParts[1]}/${pathParts[2] || ''}`
+    openSubmenu(subNavPath)
   }
 })
 
 const currentSubNav = computed(() => {
   if (isSubmenuShown.value && currentSubmenuRoute.value) {
-    return subNavigations.find(nav => currentSubmenuRoute.value?.startsWith(nav.route))
+    return subNavigations.find(nav => currentSubmenuRoute.value.startsWith(nav.route))
   }
   return subNavigations.find(nav => route.path.startsWith(nav.route))
 })
@@ -54,15 +60,16 @@ function goToSubMenu() {
   }
 }
 
-console.log(currentSubNav.value)
+// Remove the console.log statement
+// console.log(currentSubNav.value)
 </script>
 
 <template>
   <nav class="flex h-[98%] flex-col transition-colors duration-300">
-    <div class="mb-4 flex items-center justify-between px-6">
+    <div class="my-2 flex items-center justify-between px-6">
       <UiButton
         v-if="!showMainNav"
-        variant="ghost"
+        variant="link"
         class="flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
         @click="goToMainMenu"
       >
@@ -71,11 +78,11 @@ console.log(currentSubNav.value)
       </UiButton>
       <UiButton
         v-if="showMainNav && currentSubNav"
-        variant="ghost"
+        variant="link"
         class="flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
         @click="goToSubMenu"
       >
-        Go to {{ currentSubNav.label }} Menu
+        Back to {{ currentSubNav.label }} Menu
         <Icon name="heroicons:chevron-right" class="ml-2 size-4" />
       </UiButton>
     </div>
