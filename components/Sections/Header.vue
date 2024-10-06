@@ -6,7 +6,7 @@
   <!-- Default Header -->
   <!-- TODO Abstract everything what is not needed away -->
   <UiHeaderWrapper>
-    <UiHeaderAd class="bg-accent-foreground text-background">
+    <UiHeaderAd cookie-key="test2" class="bg-accent-foreground text-background">
       <div class="flex flex-row gap-4 text-sm sm:gap-7 sm:text-base">
         <div>
           +43 664 8373842

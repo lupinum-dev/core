@@ -3,7 +3,7 @@ import { useScroll } from '@vueuse/core'
 
 const useSharedAdBannerVisible = () => useState('adBannerVisible', () => true)
 const useSharedHideOnScroll = () => useState('hideOnScroll', () => true)
-const useSharedCookieKey = () => useState('adBannerCookieKey', () => 'ad-banner')
+const useSharedCookieKey = () => useState('adBannerCookieKey', () => 'header-ad')
 
 export function useAdBannerVisibility() {
   const isAdBannerVisible = useSharedAdBannerVisible()
@@ -21,7 +21,7 @@ export function useAdBannerVisibility() {
 
   const threshold = 50
 
-  const adDismissed = useCookie<boolean>(() => cookieKey.value, {
+  const adDismissed = useCookie<boolean>(cookieKey.value, {
     maxAge: 60 * 60 * 24 * 30,
   })
 
@@ -49,6 +49,9 @@ export function useAdBannerVisibility() {
 
   const setCookieKey = (value: string) => {
     cookieKey.value = value
+    adDismissed.value = useCookie<boolean>(value, {
+      maxAge: 60 * 60 * 24 * 30,
+    }).value
   }
 
   return {
