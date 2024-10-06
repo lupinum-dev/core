@@ -26,9 +26,7 @@ const isExpanded = ref(false)
 // When using the var(--header-height), the opening animation is croggy
 const headerHeight = computed(() =>
   isExpanded.value
-    ? props.variant === 'default'
-      ? `calc(100dvh)`
-      : `calc(100dvh - 16px)`
+    ? '100dvh'
     : '50px',
 )
 
@@ -90,7 +88,7 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
         class="flex size-full flex-col"
         :class="[
 
-          { 'relative border bg-background/95 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' },
+          { 'relative border bg-background/95 px-2 shadow-lg backdrop-blur-sm dark:shadow-gray-900': props.variant !== 'default' },
           isExpanded ? 'rounded-none ' : roundedClass,
         ]"
         :style="headerStyle"
@@ -114,13 +112,13 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
               <span class="ml-1 hidden text-xs text-gray-400 lg:inline-block">Search Site ⌘ + K</span>
             </UiButton>
 
-            <UiButton variant="ghost" class="">
+            <UiButton variant="ghost" class="px-2 ">
               <Icon name="heroicons:magnifying-glass-20-solid" class="size-5 sm:hidden" />
             </UiButton>
 
             <UiColorModeDropdown variant="ghost" class="hidden lg:block" />
 
-            <UiButton variant="ghost" class="hidden xl:flex">
+            <UiButton variant="ghost" class="hidden px-2 lg:block">
               <Icon name="heroicons:language-20-solid" class="size-5" />
             </UiButton>
 

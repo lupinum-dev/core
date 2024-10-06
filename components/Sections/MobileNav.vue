@@ -24,18 +24,46 @@ const subNavigations = [
 ]
 const route = useRoute()
 
-const currentSubNav = computed(() => subNavigations.find(nav => nav.route === route.path))
-const showMainNav = computed(() => !currentSubNav.value)
+const currentSubNav = computed(() => subNavigations.find(nav => route.path.startsWith(nav.route)))
+const showMainNav = ref(!currentSubNav.value)
+
+function goToMainMenu() {
+  showMainNav.value = true
+}
+
+function goToSubMenu() {
+  showMainNav.value = false
+}
 </script>
 
 <template>
   <nav class="flex h-[98%] flex-col transition-colors duration-300">
-    <div class="mb-4 flex items-center justify-between px-6" />
+    <div class="mb-4 flex items-center justify-between px-6">
+      <UiButton
+        v-if="!showMainNav"
+        variant="ghost"
+        class="flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
+        @click="goToMainMenu"
+      >
+        <Icon name="heroicons:chevron-left" class="mr-2 size-4" />
+        Back to Main Menu
+      </UiButton>
+      <UiButton
+        v-if="showMainNav && currentSubNav"
+        variant="ghost"
+        class="flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
+        @click="goToSubMenu"
+      >
+        Back to {{ currentSubNav?.label }} Menu
+        <Icon name="heroicons:chevron-right" class="ml-2 size-4" />
+      </UiButton>
+    </div>
 
     <UiScrollArea class="relative" type="auto">
-      <div class="h-full px-2">
-        <SectionsMainNav v-if="showMainNav" />
-        <component :is="currentSubNav?.component" v-else />
+      <div class="relative h-full px-2">
+        <!-- TODO Can we add a smooth Transition? -->
+        <SectionsMainNav v-if="showMainNav" key="main-nav" />
+        <component :is="currentSubNav?.component" v-else :key="currentSubNav?.label" />
       </div>
     </UiScrollArea>
 

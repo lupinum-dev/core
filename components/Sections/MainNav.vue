@@ -9,6 +9,7 @@ interface NavLink {
   childrenOpen?: boolean
   childrenTrailing?: boolean
   children?: NavLink[]
+  showSubmenu?: boolean
 }
 const navLinks = ref<NavLink[]>([
   { label: 'Home', href: '/', icon: 'lucide:home' },
@@ -17,7 +18,7 @@ const navLinks = ref<NavLink[]>([
     icon: 'lucide:book-open',
     childrenOpen: true,
     children: [
-      { label: 'Getting Started', href: '/wiki/' },
+      { label: 'Getting Started', href: '/wiki/', showSubmenu: true },
       { label: 'Core Concepts', href: '/wiki/' },
       { label: 'Advanced Topics', href: '/wiki/' },
     ],
@@ -44,7 +45,7 @@ const navLinks = ref<NavLink[]>([
   },
   { label: 'Videos', href: '/videos', icon: 'lucide:video' },
   { label: 'Course', href: '/course', icon: 'lucide:book' },
-  { label: 'Blog', href: '/blog', icon: 'lucide:pen-tool' },
+  { label: 'Blog', href: '/blog', icon: 'lucide:pen-tool', showSubmenu: true },
   { label: 'Contact', href: '/contact', icon: 'lucide:mail' },
 ])
 
@@ -103,7 +104,7 @@ function handleLinkClick() {
         </UiAccordion>
       </template>
       <NuxtLink
-        v-else
+        v-else-if="!link.showSubmenu"
         :to="link.href || ''"
         class="flex items-center rounded-md px-4 py-3 text-base font-medium transition-colors duration-200"
         :class="[
@@ -114,6 +115,7 @@ function handleLinkClick() {
         @click="handleLinkClick"
       >
         <Icon :name="link.icon || ''" class="mr-3 size-5" />
+
         {{ link.label }}
       </NuxtLink>
     </li>
