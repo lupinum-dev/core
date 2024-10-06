@@ -35,56 +35,52 @@ const ungroupedItems = computed(() => {
 </script>
 
 <template>
-  <div>
-    <template v-if="hasGroups">
-      <template v-for="(group, index) in groupedItems" :key="group.title">
-        <div class="px-4 md:px-3">
-          <div v-if="group.group" class="mb-3 flex items-center">
-            <Icon v-if="group.icon" :name="group.icon" class="size-5" />
-            <p class="font-heading px-2 text-sm first:mt-0">
-              {{ group.group }}
-            </p>
-          </div>
-          <div v-if="group.children" class="flex flex-col gap-1">
-            <template v-for="item in group.children" :key="item.title">
-              <UiNavigationTreeAccordion
-                v-if="item.children"
-                :title="item.title"
-                :children="item.children"
-                :icon="item.icon ?? ''"
-              />
-              <UiNavigationTreeLink
-                v-else
-                :title="item.title"
-                :icon="item.icon"
-                :to="item._path"
-                :tag="item.status"
-              />
-            </template>
-          </div>
-        </div>
-        <hr v-if="index < groupedItems.length - 1" class="mx-4 my-6 border-gray-o-1 md:mx-3">
+  <div v-if="ungroupedItems.length > 0" class="px-4 md:px-3">
+    <div class="flex flex-col gap-1">
+      <template v-for="item in ungroupedItems" :key="item.title">
+        <UiNavigationTreeAccordion
+          v-if="item.children"
+          :title="item.title"
+          :children="item.children"
+          :icon="item.icon ?? ''"
+        />
+        <UiNavigationTreeLink
+          v-else
+          :title="item.title"
+          :icon="item.icon"
+          :to="item._path"
+          :tag="item.status"
+        />
       </template>
-      <hr v-if="ungroupedItems.length > 0" class="mx-4 my-6 border-gray-o-1 md:mx-3">
-    </template>
-    <div v-if="ungroupedItems.length > 0" class="px-4 md:px-3">
-      <div class="flex flex-col gap-1">
-        <template v-for="item in ungroupedItems" :key="item.title">
-          <UiNavigationTreeAccordion
-            v-if="item.children"
-            :title="item.title"
-            :children="item.children"
-            :icon="item.icon ?? ''"
-          />
-          <UiNavigationTreeLink
-            v-else
-            :title="item.title"
-            :icon="item.icon"
-            :to="item._path"
-            :tag="item.status"
-          />
-        </template>
-      </div>
     </div>
   </div>
+  <template v-if="hasGroups">
+    <template v-for="(group, index) in groupedItems" :key="group.title">
+      <div class="px-4 md:px-3">
+        <div v-if="group.group" class="mb-3 flex items-center">
+          <Icon v-if="group.icon" :name="group.icon" class="size-5" />
+          <p class="px-2 text-sm font-black first:mt-0">
+            {{ group.group }}
+          </p>
+        </div>
+        <div v-if="group.children" class="flex flex-col gap-1">
+          <template v-for="item in group.children" :key="item.title">
+            <UiNavigationTreeAccordion
+              v-if="item.children"
+              :title="item.title"
+              :children="item.children"
+              :icon="item.icon ?? ''"
+            />
+            <UiNavigationTreeLink
+              v-else
+              :title="item.title"
+              :icon="item.icon"
+              :to="item._path"
+              :tag="item.status"
+            />
+          </template>
+        </div>
+      </div>
+    </template>
+  </template>
 </template>
