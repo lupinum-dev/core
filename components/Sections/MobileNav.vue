@@ -27,26 +27,27 @@ const subNavigations = [
 ]
 const route = useRoute()
 
-// Open submenu automatically if on a submenu route
-// When i am on route "/wiki/fundamentals/world-of-bees/overview" we should extract "wiki" so we know which submenuComponent to show
-// but We need the full path to to show the currentSubNav like "/wiki/fundamentals"
+function getSubNavPath(path: string) {
+  const pathParts = path.split('/')
+  return `/${pathParts[1]}/${pathParts[2] || ''}`
+}
 
-onMounted(() => {
-  const currentPath = route.path
-  const subNav = subNavigations.find(nav => currentPath.startsWith(nav.route))
+function findSubNav(path: string) {
+  return subNavigations.find(nav => path.startsWith(nav.route))
+}
+
+function openSubMenuIfNeeded(path: string) {
+  const subNav = findSubNav(path)
   if (subNav) {
-    const pathParts = currentPath.split('/')
-    const subNavPath = `/${pathParts[1]}/${pathParts[2] || ''}`
-    openSubmenu(subNavPath)
+    openSubmenu(getSubNavPath(path))
   }
-})
+}
 
-const currentSubNav = computed(() => {
-  if (isSubmenuShown.value && currentSubmenuRoute.value) {
-    return subNavigations.find(nav => currentSubmenuRoute.value.startsWith(nav.route))
-  }
-  return subNavigations.find(nav => route.path.startsWith(nav.route))
-})
+onMounted(() => openSubMenuIfNeeded(route.path))
+
+const currentSubNav = computed(() => 
+  findSubNav(isSubmenuShown.value && currentSubmenuRoute.value ? currentSubmenuRoute.value : route.path)
+)
 
 const showMainNav = computed(() => !isSubmenuShown.value)
 
@@ -55,13 +56,7 @@ function goToMainMenu() {
 }
 
 function goBackToSubMenu() {
-  const currentPath = route.path
-  const subNav = subNavigations.find(nav => currentPath.startsWith(nav.route))
-  if (subNav) {
-    const pathParts = currentPath.split('/')
-    const subNavPath = `/${pathParts[1]}/${pathParts[2] || ''}`
-    openSubmenu(subNavPath)
-  }
+  openSubMenuIfNeeded(route.path)
 }
 </script>
 
