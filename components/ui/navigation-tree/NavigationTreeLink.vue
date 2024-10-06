@@ -9,7 +9,7 @@ const props = defineProps<{
   to?: string
   collapsible?: boolean
   isAccordion?: boolean
-  tag?: 'updated' | 'wip' | 'outdated' | 'new' // New prop for tag type
+  tag?: 'updated' | 'wip' | 'outdated' | 'new'
 }>()
 
 const route = useRoute()
@@ -19,38 +19,46 @@ const shouldHighlight = computed(() => isActive.value || isParentActive.value)
 </script>
 
 <template>
-  <div class="group mb-2 flex items-center gap-1 lg:mb-0.5">
+  <div class="group">
     <UiButton
-      v-if="props.icon"
-      variant="outline"
-      size="icon"
-      class="transition-all group-hover:bg-secondary/80"
-      :class="[
-        shouldHighlight ? 'border-primary bg-primary/10 group-hover:bg-primary/20' : '',
-      ]"
-    >
-      <Icon :name="props.icon" class="size-4 text-foreground/60" />
-    </UiButton>
-    <UiButton
-      :variant="shouldHighlight ? 'outline' : 'ghost'"
-      size="xs"
-      class="w-full group-hover:bg-secondary/80"
-      :class="shouldHighlight ? 'bg-primary/10 border-primary group-hover:bg-primary/20' : ''"
+      variant="ghost"
+      size="sm"
+      class="w-full transition-all duration-200 ease-in-out"
+      :class="{
+        'bg-primary/5 text-primary shadow-sm': shouldHighlight,
+        'hover:bg-secondary/80': !shouldHighlight,
+      }"
       :as="props.to ? NuxtLink : 'button'"
       :to="props.to"
     >
-      <div class="flex w-full items-center px-2">
-        <span class="mr-2 truncate font-medium text-foreground lg:text-sm">
-          {{ props.title }}
-        </span>
-        <UiNavigationTreeTag v-if="props.tag" :type="props.tag" />
+      <div class="flex w-full items-center gap-3 px-3 py-2">
+        <div
+          v-if="props.icon"
+          class="flex size-6 shrink-0 items-center justify-center rounded-md transition-colors duration-200"
+        >
+          <Icon :name="props.icon" class="size-[18px]" />
+        </div>
+        <div class="flex flex-grow items-center justify-between">
+          <span class="truncate text-sm font-medium" :class="{ 'text-primary': shouldHighlight }">
+            {{ props.title }}
+          </span>
+          <div class="flex items-center gap-2">
+            <UiNavigationTreeTag v-if="props.tag" :type="props.tag" />
+            <Icon
+              v-if="props.isAccordion"
+              name="heroicons:chevron-down"
+              class="size-4 shrink-0 transition-transform duration-200"
+              :class="{ 'rotate-180': props.open }"
+            />
+          </div>
+        </div>
       </div>
-      <Icon
-        v-if="props.isAccordion"
-        id="icon"
-        name="heroicons:chevron-down"
-        class="rotate-icon size-4 shrink-0 transition-transform duration-200"
-      />
     </UiButton>
   </div>
 </template>
+
+<style scoped>
+.group:hover .rotate-icon {
+  transform: rotate(180deg);
+}
+</style>

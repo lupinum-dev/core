@@ -57,9 +57,9 @@ const ungroupedItems = computed(() => {
   <template v-if="hasGroups">
     <template v-for="(group, index) in groupedItems" :key="group.title">
       <div class="px-4 md:px-3">
-        <div v-if="group.group" class="mb-3 flex items-center">
+        <div v-if="group.group" class="mb-1.5 mt-4 flex items-center">
           <Icon v-if="group.icon" :name="group.icon" class="size-5" />
-          <p class="px-2 text-sm font-black first:mt-0">
+          <p class="px-2 text-xs font-black first:mt-0">
             {{ group.group }}
           </p>
         </div>
