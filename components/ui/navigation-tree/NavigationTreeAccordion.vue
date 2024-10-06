@@ -7,6 +7,7 @@ interface NavigationItem {
   _path: string
   icon?: string
   children?: NavigationItem[]
+  status?: 'updated' | 'wip' | 'outdated' | 'new'
 }
 
 const props = defineProps<{
@@ -34,10 +35,10 @@ watch(isActive, (newValue) => {
 </script>
 
 <template>
-  <LibAccordion v-model="open" type="multiple" collapsible>
-    <LibAccordionItem2 :value="props.title">
-      <LibAccordionTrigger2 class="w-full">
-        <UiWikiNavigationLink
+  <UiAccordion v-model="open" type="multiple" collapsible>
+    <UiAccordionItem2 :value="props.title">
+      <UiAccordionTrigger2 class="w-full">
+        <UiWikiNavigationTreeLink
           :title="props.title"
           :icon="props.icon"
           :open="isActive"
@@ -45,19 +46,19 @@ watch(isActive, (newValue) => {
           class="w-full"
           :is-accordion="true"
         />
-      </LibAccordionTrigger2>
-      <LibAccordionContent class="ms-2 flex flex-col border-s border-gray-o-1 ps-1">
+      </UiAccordionTrigger2>
+      <UiAccordionContent class="ms-2 flex flex-col border-s border-border ps-1">
         <template v-for="child in props.children" :key="child._path">
           <div v-if="child.children">
-            <UiWikiNavigationAccordion :title="child.title" :children="child.children" :icon="child.icon || ''" />
+            <UiNavigationTreeAccordion :title="child.title" :children="child.children" :icon="child.icon || ''" />
           </div>
           <div v-else>
-            <UiWikiNavigationLink :title="child.title" :icon="child.icon" :to="child._path" :tag="child.status" />
+            <UiNavigationTreeLink :title="child.title" :icon="child.icon" :to="child._path" :tag="child.status" />
           </div>
         </template>
-      </LibAccordionContent>
-    </LibAccordionItem2>
-  </LibAccordion>
+      </UiAccordionContent>
+    </UiAccordionItem2>
+  </UiAccordion>
 </template>
 
 <style scoped>

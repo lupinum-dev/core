@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Tag from './Tag.vue' // Import the new Tag component
 import { NuxtLink } from '#components'
 
 const props = defineProps<{
@@ -21,29 +20,30 @@ const shouldHighlight = computed(() => isActive.value || isParentActive.value)
 
 <template>
   <div class="group mb-2 flex items-center gap-1 lg:mb-0.5">
-    <LibButton
+    <UiButton
       v-if="props.icon"
       variant="outline"
       size="icon"
-      class="transition-all group-hover:bg-gray-i-1" :class="[
-        shouldHighlight ? 'border-prime-o-1 bg-prime-i-1 group-hover:bg-prime-i-2' : '',
+      class="transition-all group-hover:bg-secondary/80"
+      :class="[
+        shouldHighlight ? 'border-primary bg-primary/10 group-hover:bg-primary/20' : '',
       ]"
     >
-      <Icon :name="props.icon" class="size-4 text-gray-t-2" />
-    </LibButton>
-    <LibButton
+      <Icon :name="props.icon" class="size-4 text-foreground/60" />
+    </UiButton>
+    <UiButton
       :variant="shouldHighlight ? 'outline' : 'ghost'"
       size="xs"
-      class=" w-full group-hover:bg-gray-i-1  "
-      :class="shouldHighlight ? 'bg-prime-i-1 border-prime-o-1 group-hover:bg-prime-i-2' : ''"
+      class="w-full group-hover:bg-secondary/80"
+      :class="shouldHighlight ? 'bg-primary/10 border-primary group-hover:bg-primary/20' : ''"
       :as="props.to ? NuxtLink : 'button'"
       :to="props.to"
     >
-      <div class="flex w-full items-center  px-2 ">
-        <span class="mr-2 truncate  font-desc text-lg text-gray-t-1 lg:text-[15px]">
+      <div class="flex w-full items-center px-2">
+        <span class="mr-2 truncate font-medium text-foreground lg:text-sm">
           {{ props.title }}
         </span>
-        <Tag v-if="props.tag" :type="props.tag" />
+        <UiNavigationTreeTag v-if="props.tag" :type="props.tag" />
       </div>
       <Icon
         v-if="props.isAccordion"
@@ -51,6 +51,6 @@ const shouldHighlight = computed(() => isActive.value || isParentActive.value)
         name="heroicons:chevron-down"
         class="rotate-icon size-4 shrink-0 transition-transform duration-200"
       />
-    </LibButton>
+    </UiButton>
   </div>
 </template>
