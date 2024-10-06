@@ -11,20 +11,36 @@ interface NavLink {
 const navLinks = ref<NavLink[]>([
   { label: 'Home', href: '/', icon: 'mdi:home' },
   {
-    label: 'Getting Started',
+    label: 'Wiki',
     icon: 'heroicons:book-open',
     children: [
-      { label: 'Introduction', href: '/getting-started', icon: 'mdi:chevron-right' },
-      { label: 'Installation', href: '/pro/getting-started/installation', icon: 'mdi:chevron-right' },
-      { label: 'Theming', href: '/pro/getting-started/theming', icon: 'mdi:chevron-right' },
-      { label: 'Structure', href: '/pro/getting-started/structure', icon: 'mdi:chevron-right' },
-      { label: 'Content', href: '/pro/getting-started/content', icon: 'mdi:chevron-right' },
+      { label: 'Getting Started', href: '/wiki/getting-started', icon: 'mdi:chevron-right' },
+      { label: 'Core Concepts', href: '/wiki/core-concepts', icon: 'mdi:chevron-right' },
+      { label: 'Advanced Topics', href: '/wiki/advanced-topics', icon: 'mdi:chevron-right' },
     ],
   },
-  { label: 'Documentation', href: '/wiki', icon: 'mdi:book-open' },
-  { label: 'Templates', href: '/templates', icon: 'mdi:page-layout-body' },
-  { label: 'Guides', href: '/guides', icon: 'mdi:school' },
-  { label: 'Pricing', href: '/pricing', icon: 'mdi:currency-usd' },
+  {
+    label: 'Docs',
+    icon: 'mdi:file-document',
+    children: [
+      { label: 'API Reference', href: '/docs/api', icon: 'mdi:chevron-right' },
+      { label: 'Components', href: '/docs/components', icon: 'mdi:chevron-right' },
+      { label: 'Guides', href: '/docs/guides', icon: 'mdi:chevron-right' },
+    ],
+  },
+  {
+    label: 'Courses',
+    icon: 'mdi:file-document',
+    children: [
+      { label: 'API Reference', href: '/docs/api', icon: 'mdi:chevron-right' },
+      { label: 'Components', href: '/docs/components', icon: 'mdi:chevron-right' },
+      { label: 'Guides', href: '/docs/guides', icon: 'mdi:chevron-right' },
+    ],
+  },
+  { label: 'Videos', href: '/videos', icon: 'mdi:video' },
+  { label: 'Course', href: '/course', icon: 'mdi:school' },
+  { label: 'Blog', href: '/blog', icon: 'mdi:post' },
+  { label: 'Contact', href: '/contact', icon: 'mdi:email' },
 ])
 
 const route = useRoute()
@@ -38,18 +54,18 @@ function handleLinkClick() {
 </script>
 
 <template>
-  <ul class="space-y-2 ">
+  <ul class="w-full space-y-1 px-2">
     <li v-for="link in navLinks" :key="link.label">
       <template v-if="link.children">
-        <div class="px-6 py-4 text-lg font-medium text-foreground">
-          <Icon :name="link.icon" class="mr-4 size-6" />
+        <div class="flex items-center px-4 py-3 text-base font-medium text-foreground">
+          <Icon :name="link.icon" class="mr-3 size-5" />
           {{ link.label }}
         </div>
-        <ul class="mt-2 space-y-1 pl-10">
+        <ul class="mt-1 space-y-1 pl-8">
           <li v-for="child in link.children" :key="child.href">
             <NuxtLink
               :to="child.href"
-              class="flex items-center rounded-lg px-4 py-2 text-base font-medium transition-colors duration-200"
+              class="flex items-center rounded-md px-3 py-2 font-medium transition-colors duration-200"
               :class="[
                 activeRoute === child.href
                   ? 'bg-accent text-accent-foreground'
@@ -66,7 +82,7 @@ function handleLinkClick() {
       <NuxtLink
         v-else
         :to="link.href"
-        class="flex items-center rounded-lg px-6 py-4 text-lg font-medium transition-colors duration-200"
+        class="flex items-center rounded-md px-4 py-3 text-base font-medium transition-colors duration-200"
         :class="[
           activeRoute === link.href
             ? 'bg-accent text-accent-foreground'
@@ -74,9 +90,9 @@ function handleLinkClick() {
         ]"
         @click="handleLinkClick"
       >
-        <Icon :name="link.icon" class="mr-4 size-6" />
+        <Icon :name="link.icon" class="mr-3 size-5" />
         {{ link.label }}
-        <Icon name="chevron-right" class="ml-auto size-5" />
+        <Icon name="chevron-right" class="ml-auto size-4" />
       </NuxtLink>
     </li>
   </ul>

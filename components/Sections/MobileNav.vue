@@ -34,15 +34,7 @@ function toggleNav() {
 <template>
   <nav class="flex h-[98%] flex-col transition-colors duration-300">
     <UiDivider class="mb-4" />
-    <div class="mb-4 flex items-center justify-between px-6">
-      <h2 class="text-lg font-semibold">
-        {{ showMainNav ? 'Main Navigation' : 'Wiki Navigation' }}
-      </h2>
-      <UiButton v-if="isWikiPage" variant="outline" size="sm" @click="toggleNav">
-        <Icon :name="showMainNav ? 'mdi:book-open' : 'mdi:home'" class="mr-2 size-4" />
-        {{ showMainNav ? 'Wiki Nav' : 'Main Nav' }}
-      </UiButton>
-    </div>
+    <div class="mb-4 flex items-center justify-between px-6" />
     <UiScrollArea>
       <SectionsMainNav v-if="showMainNav" />
       <SectionsWikiNav v-else />
