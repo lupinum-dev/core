@@ -53,6 +53,8 @@ function goToSubMenu() {
     openSubmenu(currentSubNav.value.route)
   }
 }
+
+
 </script>
 
 <template>
@@ -86,8 +88,8 @@ function goToSubMenu() {
       </div>
     </UiScrollArea>
 
-    <footer class="mt-auto space-y-6 border-t border-border p-6">
-      <div class="flex items-center justify-between">
+    <footer class="mt-auto border-t border-border pb-5 pt-1">
+      <div class="flex items-center justify-between px-3">
         <UiColorModeDropdown />
 
         <UiDropdownMenuRoot>

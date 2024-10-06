@@ -19,6 +19,19 @@ watch(headerState, (newState) => {
 })
 
 const useIdFunction = () => useId()
+
+const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
+provide('navigation', navigation)
+// TODO: Move folder definition to a separate file
+const wikiFolder = '/wiki'
+const navigationWiki = computed(() => {
+  return navigation.value?.find(item => item._path === wikiFolder)?.children?.map(item => ({
+    ...item,
+    firstLink: item.children?.[0]?._path ?? item._path,
+  }))
+})
+
+provide('navigation-wiki', navigationWiki)
 </script>
 
 <template>

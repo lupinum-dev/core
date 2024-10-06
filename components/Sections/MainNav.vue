@@ -19,9 +19,9 @@ const navLinks = ref<NavLink[]>([
     icon: 'lucide:book-open',
     childrenOpen: true,
     children: [
-      { label: 'Getting Started', href: '/wiki/', showSubmenu: true },
-      { label: 'Core Concepts', href: '/wiki/' },
-      { label: 'Advanced Topics', href: '/wiki/' },
+      { label: 'Getting Started', href: '/wiki/fundamentals', showSubmenu: true },
+      { label: 'Core Concepts', href: '/wiki/intermediate', showSubmenu: true },
+      { label: 'Advanced Topics', href: '/wiki/queen-rearing', showSubmenu: true },
     ],
   },
   {
@@ -89,16 +89,16 @@ function handleOpenSubmenu(href: string | undefined) {
             <UiAccordionContent>
               <ul class="ml-6 mt-1 space-y-1 border-l border-border ps-2">
                 <li v-for="child in link.children" :key="child.href">
-                  <NuxtLink
-                    v-if="!child.showSubmenu"
-                    :to="child.href || ''"
+                  <component
+                    :is="child.showSubmenu ? 'div' : 'NuxtLink'"
+                    :to="!child.showSubmenu ? (child.href || '') : undefined"
                     class="flex items-center rounded-md px-3 py-2 font-medium transition-colors duration-200"
                     :class="[
                       activeRoute === child.href
-                        ? 'bg-accent text-accent-foreground'
+                        ? 'font-bold underline'
                         : 'text-foreground hover:bg-accent hover:text-accent-foreground',
                     ]"
-                    @click="handleLinkClick"
+                    @click="child.showSubmenu ? handleOpenSubmenu(child.href) : handleLinkClick"
                   >
                     {{ child.label }}
                     <Icon
@@ -106,60 +106,28 @@ function handleOpenSubmenu(href: string | undefined) {
                       name="lucide:chevron-right"
                       class="ml-4 size-4"
                     />
-                  </NuxtLink>
-                  <div
-                    v-if="child.showSubmenu"
-
-                    class="flex items-center rounded-md px-3 py-2 font-medium transition-colors duration-200"
-                    :class="[
-                      activeRoute === child.href
-                        ? 'bg-accent text-accent-foreground'
-                        : 'text-foreground hover:bg-accent hover:text-accent-foreground',
-                    ]"
-                    @click="handleOpenSubmenu(child.href)"
-                  >
-                    >> {{ child.label }}
-                    <Icon
-                      v-if="link.childrenTrailing !== false"
-                      name="lucide:chevron-right"
-                      class="ml-4 size-4"
-                    />
-                  </div>
+                  </component>
                 </li>
               </ul>
             </UiAccordionContent>
           </UiAccordionItem>
         </UiAccordion>
       </template>
-      <NuxtLink
-        v-else-if="!link.showSubmenu"
-        :to="link.href || ''"
+      <component
+        :is="link.showSubmenu ? 'div' : 'NuxtLink'"
+        v-else
+        :to="!link.showSubmenu ? (link.href || '') : undefined"
         class="flex items-center rounded-md px-4 py-3 text-base font-medium transition-colors duration-200"
         :class="[
           activeRoute === link.href
-            ? 'bg-accent text-accent-foreground'
+            ? 'font-bold underline'
             : 'text-foreground hover:bg-accent hover:text-accent-foreground',
         ]"
-        @click="handleLinkClick"
+        @click="link.showSubmenu ? handleOpenSubmenu(link.href) : handleLinkClick"
       >
         <Icon :name="link.icon || ''" class="mr-3 size-5" />
-
         {{ link.label }}
-      </NuxtLink>
-      <div
-        v-else-if="link.showSubmenu"
-        class="flex items-center rounded-md px-4 py-3 text-base font-medium transition-colors duration-200"
-        :class="[
-          activeRoute === link.href
-            ? 'bg-accent text-accent-foreground'
-            : 'text-foreground hover:bg-accent hover:text-accent-foreground',
-        ]"
-        @click="handleOpenSubmenu(link.href)"
-      >
-        <Icon :name="link.icon || ''" class="mr-3 size-5" />
-
-        {{ link.label }}
-      </div>
+      </component>
     </li>
   </ul>
   <div>

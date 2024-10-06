@@ -9,11 +9,19 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@formkit/auto-animate/nuxt',
     '@nuxtjs/color-mode',
+    '@nuxt/content',
   ],
+
   colorMode: {
     classPrefix: '',
     classSuffix: '',
     storage: 'cookie',
     storageKey: 'color-mode',
+  },
+
+  content: {
+    navigation: {
+      fields: ['group', 'description', 'duration', 'icon', 'status'],
+    },
   },
 })
