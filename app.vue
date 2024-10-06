@@ -7,21 +7,18 @@ import { useAdBannerVisibility } from '@/composables/useAdBannerVisibility'
 const headerState = ref(false)
 provide('headerState', headerState)
 
-let lockScroll: ReturnType<typeof useScrollLock>
+const lockScroll = ref(null)
 
 onMounted(() => {
-  lockScroll = useScrollLock(document.body)
-  lockScroll.value = false
+  lockScroll.value = useScrollLock(document.body)
 })
 
 watch(headerState, (newState) => {
-  lockScroll.value = newState
+  if (lockScroll.value)
+    lockScroll.value.value = newState
 })
 
 const useIdFunction = () => useId()
-const { isVisible } = useAdBannerVisibility()
-
-const { y: scrollY } = useScroll(window)
 </script>
 
 <template>
@@ -31,9 +28,5 @@ const { y: scrollY } = useScroll(window)
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-    <div class="mt-20 text-7xl">
-      Is visible: {{ isVisible }}
-      Scroll position: {{ Math.round(scrollY) }}px
-    </div>
   </ConfigProvider>
 </template>

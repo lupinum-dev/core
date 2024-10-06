@@ -7,6 +7,7 @@ const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
   showAdBanner: true,
   adKey: 'banner',
+  rounded: '2xl',
 })
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
   showAdBanner?: boolean
   adKey?: string
   variant?: 'default' | 'bar'
+  rounded?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full' | 'none'
 }
 
 const { isVisible } = useAdBannerVisibility()
@@ -30,7 +32,7 @@ const headerHeight = computed(() =>
     : '50px',
 )
 
-const headerState = inject('headerState', false)
+const headerState = inject('headerState', ref(false))
 
 const headerStyle = computed(() => ({
   '--header-height': headerHeight.value,
@@ -41,10 +43,27 @@ const headerStyle = computed(() => ({
 const topStyle = computed(() => ({
   top: isVisible.value ? 'var(--header-ad-height)' : '0',
 }))
+const roundedClass = computed(() => {
+  if (props.variant === 'default')
+    return ''
+
+  const roundedMap = {
+    'sm': 'rounded-sm',
+    'md': 'rounded-md',
+    'lg': 'rounded-lg',
+    'xl': 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    'full': 'rounded-full',
+    'none': '',
+  }
+
+  return roundedMap[props.rounded] || ''
+})
 
 function toggleHeaderExpansion() {
   isExpanded.value = !isExpanded.value
-  headerState.value = !headerState.value
+  headerState.value = isExpanded.value
 }
 
 provide('toggleHeaderExpansion', toggleHeaderExpansion)
@@ -53,8 +72,9 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
 <template>
   <header
     :class="cn(
-      'isolate fixed w-dvw transition-all duration-300 ',
+      'isolate fixed w-dvw transition-all duration-300',
       props.variant === 'default' ? 'bg-background z-50 border-b' : 'z-30',
+      { 'z-[60]': isExpanded }, // Ensure header is above the dark overlay
       props.class,
     )"
     :style="topStyle"
@@ -68,7 +88,10 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
     >
       <div
         class="flex size-full flex-col"
-        :class="{ 'relative rounded-2xl border bg-background/95 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' }"
+        :class="[
+          roundedClass,
+          { 'relative border bg-background/95 px-2 shadow-lg backdrop-blur-sm': props.variant !== 'default' },
+        ]"
         :style="headerStyle"
       >
         <div class="flex items-center justify-between py-1">

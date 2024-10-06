@@ -16,7 +16,7 @@
         </div>
       </div>
     </UiHeaderAd>
-    <UiHeaderBar variant="bar">
+    <UiHeaderBar variant="bar" rounded="2xl">
       <template #left>
         <!-- TODO Make SSR compatible, currently hydration error -->
 
