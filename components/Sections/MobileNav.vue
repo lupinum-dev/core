@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import WikiNav from './MobileSubWikiNav.vue'
 import BlogNav from './MobileSubBlogNav.vue'
+import { useSubMenu } from '~/composables/useSubMenu'
+
+const { currentSubmenuRoute, isSubmenuShown, closeSubmenu, openSubmenu } = useSubMenu()
 
 const selectedLanguage = ref('en')
 
@@ -24,15 +27,31 @@ const subNavigations = [
 ]
 const route = useRoute()
 
-const currentSubNav = computed(() => subNavigations.find(nav => route.path.startsWith(nav.route)))
-const showMainNav = ref(!currentSubNav.value)
+// Open submenu automatically if on a submenu route
+onMounted(() => {
+  const currentSubNav = subNavigations.find(nav => route.path.startsWith(nav.route))
+  if (currentSubNav) {
+    openSubmenu(currentSubNav.route)
+  }
+})
+
+const currentSubNav = computed(() => {
+  if (isSubmenuShown.value && currentSubmenuRoute.value) {
+    return subNavigations.find(nav => currentSubmenuRoute.value?.startsWith(nav.route))
+  }
+  return subNavigations.find(nav => route.path.startsWith(nav.route))
+})
+
+const showMainNav = computed(() => !isSubmenuShown.value)
 
 function goToMainMenu() {
-  showMainNav.value = true
+  closeSubmenu()
 }
 
 function goToSubMenu() {
-  showMainNav.value = false
+  if (currentSubNav.value) {
+    openSubmenu(currentSubNav.value.route)
+  }
 }
 </script>
 
@@ -54,7 +73,7 @@ function goToSubMenu() {
         class="flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
         @click="goToSubMenu"
       >
-        Back to {{ currentSubNav?.label }} Menu
+        Go to {{ currentSubNav.label }} Menu
         <Icon name="heroicons:chevron-right" class="ml-2 size-4" />
       </UiButton>
     </div>

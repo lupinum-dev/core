@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { computed, inject, ref } from 'vue'
+import { useSubMenu } from '~/composables/useSubMenu'
 
 interface NavLink {
   label: string
@@ -60,8 +61,16 @@ const activeRoute = computed(() => route.path)
 
 const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
 
+const { openSubmenu } = useSubMenu()
+
 function handleLinkClick() {
   toggleHeaderExpansion()
+}
+
+function handleOpenSubmenu(href: string | undefined) {
+  if (href) {
+    openSubmenu(href)
+  }
 }
 </script>
 
@@ -81,6 +90,7 @@ function handleLinkClick() {
               <ul class="ml-6 mt-1 space-y-1 border-l border-border ps-2">
                 <li v-for="child in link.children" :key="child.href">
                   <NuxtLink
+                    v-if="!child.showSubmenu"
                     :to="child.href || ''"
                     class="flex items-center rounded-md px-3 py-2 font-medium transition-colors duration-200"
                     :class="[
@@ -97,6 +107,24 @@ function handleLinkClick() {
                       class="ml-4 size-4"
                     />
                   </NuxtLink>
+                  <div
+                    v-if="child.showSubmenu"
+
+                    class="flex items-center rounded-md px-3 py-2 font-medium transition-colors duration-200"
+                    :class="[
+                      activeRoute === child.href
+                        ? 'bg-accent text-accent-foreground'
+                        : 'text-foreground hover:bg-accent hover:text-accent-foreground',
+                    ]"
+                    @click="handleOpenSubmenu(child.href)"
+                  >
+                    >> {{ child.label }}
+                    <Icon
+                      v-if="link.childrenTrailing !== false"
+                      name="lucide:chevron-right"
+                      class="ml-4 size-4"
+                    />
+                  </div>
                 </li>
               </ul>
             </UiAccordionContent>
@@ -118,6 +146,20 @@ function handleLinkClick() {
 
         {{ link.label }}
       </NuxtLink>
+      <div
+        v-else-if="link.showSubmenu"
+        class="flex items-center rounded-md px-4 py-3 text-base font-medium transition-colors duration-200"
+        :class="[
+          activeRoute === link.href
+            ? 'bg-accent text-accent-foreground'
+            : 'text-foreground hover:bg-accent hover:text-accent-foreground',
+        ]"
+        @click="handleOpenSubmenu(link.href)"
+      >
+        <Icon :name="link.icon || ''" class="mr-3 size-5" />
+
+        {{ link.label }}
+      </div>
     </li>
   </ul>
   <div>
