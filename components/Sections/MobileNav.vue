@@ -2,12 +2,6 @@
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-const socials = [
-  { icon: 'mdi:github', href: 'https://github.com', label: 'GitHub' },
-  { icon: 'mdi:twitter', href: 'https://twitter.com', label: 'Twitter' },
-  { icon: 'mdi:linkedin', href: 'https://linkedin.com', label: 'LinkedIn' },
-]
-
 const isDarkMode = ref(false)
 const selectedLanguage = ref('en')
 
@@ -35,26 +29,15 @@ function toggleNav() {
   <nav class="flex h-[98%] flex-col transition-colors duration-300">
     <UiDivider class="mb-4" />
     <div class="mb-4 flex items-center justify-between px-6" />
-    <UiScrollArea>
-      <SectionsMainNav v-if="showMainNav" />
-      <SectionsWikiNav v-else />
+    <UiScrollArea class="relative">
+      <div class="h-full">
+        <SectionsMainNav v-if="showMainNav" />
+        <SectionsWikiNav v-else />
+      </div>
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/5 bg-gradient-to-t from-background to-transparent" />
     </UiScrollArea>
 
     <footer class="mt-auto space-y-6 border-t border-border p-6">
-      <div class="flex justify-center space-x-6">
-        <a
-          v-for="social in socials"
-          :key="social.icon"
-          :href="social.href"
-          :aria-label="social.label"
-          class="text-muted-foreground transition-colors duration-200 hover:text-foreground"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon :name="social.icon" class="size-6" />
-        </a>
-      </div>
-
       <div class="flex items-center justify-between">
         <UiButton
           class="rounded-full bg-secondary p-2 text-secondary-foreground transition-colors duration-200 hover:bg-secondary/80"
