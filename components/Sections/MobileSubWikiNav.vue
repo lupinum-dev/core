@@ -6,6 +6,7 @@ interface NavItem {
   icon?: string
   group?: string
   firstLink?: string
+  status?: string
 }
 
 type Navigation = NavItem[]
@@ -14,25 +15,26 @@ const wikiNavigation = inject<Ref<Navigation>>('navigation-wiki')
 
 const { currentSubmenuRoute } = useSubMenu()
 
-const wikiSubNavigation = computed(() => {
+const wikiSubNavigation = computed<NavItem | undefined>(() => {
   return wikiNavigation?.value?.find(item => item._path === currentSubmenuRoute.value)
 })
 
-const hasGroups = computed(() => props.navigation.some(item => item.group))
+const hasGroups = computed(() => wikiSubNavigation.value?.children?.some(item => item.group) ?? false)
 
 const groupedItems = computed(() => {
-  if (!hasGroups.value)
+  if (!hasGroups.value || !wikiSubNavigation.value?.children)
     return []
-  return wikiSubNavigation.value.filter(item => item.group)
+  return wikiSubNavigation.value.children.filter(item => item.group)
 })
 
 const ungroupedItems = computed(() => {
-  return wikiSubNavigation.value.filter(item => !item.group)
+  if (!wikiSubNavigation.value?.children)
+    return []
+  return wikiSubNavigation.value.children.filter(item => !item.group)
 })
 </script>
 
 <template>
-  {{ wikiSubNavigation }}
   <div>
     <template v-if="hasGroups">
       <template v-for="(group, index) in groupedItems" :key="group.title">
@@ -68,13 +70,13 @@ const ungroupedItems = computed(() => {
     <div v-if="ungroupedItems.length > 0" class="px-4 md:px-3">
       <div class="flex flex-col gap-1">
         <template v-for="item in ungroupedItems" :key="item.title">
-          <UiWikiNavigationAccordion
+          <UiNavigationTreeAccordion
             v-if="item.children"
             :title="item.title"
             :children="item.children"
             :icon="item.icon || ''"
           />
-          <UiWikiNavigationLink
+          <UiNavigationMenuLink
             v-else
             :title="item.title"
             :icon="item.icon"

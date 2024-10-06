@@ -35,10 +35,10 @@ watch(isActive, (newValue) => {
 </script>
 
 <template>
-  <UiAccordion v-model="open" type="multiple" collapsible>
+  <UiAccordion v-model="open" type="multiple" collapsible variant="ghost" class="p-0">
     <UiAccordionItem2 :value="props.title">
       <UiAccordionTrigger2 class="w-full">
-        <UiWikiNavigationTreeLink
+        <UiNavigationTreeLink
           :title="props.title"
           :icon="props.icon"
           :open="isActive"

@@ -54,7 +54,7 @@ function goToSubMenu() {
   }
 }
 
-
+console.log(currentSubNav.value)
 </script>
 
 <template>
