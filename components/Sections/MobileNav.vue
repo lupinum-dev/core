@@ -54,14 +54,15 @@ function goToMainMenu() {
   closeSubmenu()
 }
 
-function goToSubMenu() {
-  if (currentSubNav.value) {
-    openSubmenu(currentSubNav.value.route)
+function goBackToSubMenu() {
+  const currentPath = route.path
+  const subNav = subNavigations.find(nav => currentPath.startsWith(nav.route))
+  if (subNav) {
+    const pathParts = currentPath.split('/')
+    const subNavPath = `/${pathParts[1]}/${pathParts[2] || ''}`
+    openSubmenu(subNavPath)
   }
 }
-
-// Remove the console.log statement
-// console.log(currentSubNav.value)
 </script>
 
 <template>
@@ -73,17 +74,17 @@ function goToSubMenu() {
         class="flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
         @click="goToMainMenu"
       >
-        <Icon name="heroicons:chevron-left" class="mr-2 size-4" />
+        <Icon name="heroicons:chevron-left" class="mr-2 size-3" />
         Back to Main Menu
       </UiButton>
       <UiButton
         v-if="showMainNav && currentSubNav"
         variant="link"
         class="flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
-        @click="goToSubMenu"
+        @click="goBackToSubMenu"
       >
         Back to {{ currentSubNav.label }} Menu
-        <Icon name="heroicons:chevron-right" class="ml-2 size-4" />
+        <Icon name="heroicons:chevron-right" class="ml-2 size-3" />
       </UiButton>
     </div>
 
