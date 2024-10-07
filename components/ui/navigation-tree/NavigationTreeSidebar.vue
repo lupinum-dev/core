@@ -77,9 +77,9 @@ const ungroupedItems = computed(() => {
             </template>
           </div>
         </div>
-        <hr v-if="index < groupedItems.length - 1" class="mx-4 my-6 border-gray-o-1 md:mx-3">
+        <hr v-if="index < groupedItems.length - 1" class="mx-4 my-6 border-border md:mx-3">
       </template>
-      <hr v-if="ungroupedItems.length > 0" class="mx-4 my-6 border-gray-o-1 md:mx-3">
+      <hr v-if="ungroupedItems.length > 0" class="mx-4 my-6 border-border md:mx-3">
     </template>
   </div>
 </template>

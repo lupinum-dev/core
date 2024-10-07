@@ -142,25 +142,25 @@ module.exports = {
         return {
           DEFAULT: {
             css: {
-              '--tw-prose-body': 'var(--gray-t-2)',
-              '--tw-prose-headings': 'var(--gray-t-1)',
-              '--tw-prose-links': 'var(--prime-t-1)',
-              'color': 'var(--gray-t-2)',
+              '--tw-prose-body': theme('colors.foreground'),
+              '--tw-prose-headings': theme('colors.foreground'),
+              '--tw-prose-links': theme('colors.primary'),
+              'color': theme('colors.foreground'),
               'maxWidth': 'none',
               'h1, h2, h3': {
                 fontFamily: theme('fontFamily.heading').join(', '),
                 fontWeight: theme('fontWeight.normal'),
-                color: 'var(--gray-t-1)',
+                color: theme('colors.foreground'),
               },
               'h4': {
                 fontWeight: theme('fontWeight.normal'),
-                color: 'var(--gray-t-1)',
+                color: theme('colors.foreground'),
               },
               'h1, h2, h3, h4': {
                 'scroll-margin-top': 'var(--scroll-mt)',
               },
               'a': {
-                'color': 'var(--prime-t-1)',
+                'color': theme('colors.primary'),
                 'textDecoration': 'none',
                 'fontWeight': theme('fontWeight.normal'),
                 '&:hover': {

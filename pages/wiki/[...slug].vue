@@ -50,7 +50,7 @@ isContentSite.value = true
       </ClientOnly>
 
       <div
-        class="text-desc-1 prose-primary prose w-full rounded-lg font-desc text-gray-t-2 dark:prose-invert"
+        class="text-desc-1  prose w-full rounded-lg font-desc text-muted-foreground dark:prose-invert "
       >
         <ContentRenderer v-if="page?.body" :value="page" />
         <hr v-if="surround?.length">

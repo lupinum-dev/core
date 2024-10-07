@@ -26,7 +26,7 @@ const maxWidthClass = computed(() => {
 </script>
 
 <template>
-  <div :class="cn('container px-0 mx-auto bg-gray-b-0 min-h-screen', maxWidthClass, props.class)">
+  <div :class="cn('container px-0 mx-auto  min-h-screen', maxWidthClass, props.class)">
     <slot />
   </div>
 </template>

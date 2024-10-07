@@ -36,10 +36,10 @@ const showSelect = computed(() => appConfig.wiki.mode === 'select')
 </script>
 
 <template>
-  <div class="relative min-h-screen bg-gray-b-0">
+  <div class="relative min-h-screen ">
     <div
       id="sidenav"
-      class="fixed left-0 top-0 z-10 hidden h-screen overflow-y-auto border-r border-gray-o-1 transition-all duration-300 ease-in-out lg:block"
+      class="fixed left-0 top-0 z-10 hidden h-screen overflow-y-auto border-r border-border transition-all duration-300 ease-in-out lg:block"
       :class="{ 'lg:w-[310px] xl:w-[450px]': isSidebarOpen, 'lg:w-16': !isSidebarOpen }"
     >
       <div class="flex justify-end p-2">
