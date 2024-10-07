@@ -9,7 +9,7 @@ const props = defineProps<{
   to?: string
   collapsible?: boolean
   isAccordion?: boolean
-  tag?: 'updated' | 'wip' | 'outdated' | 'new'
+  status?: 'updated' | 'wip' | 'outdated' | 'new'
 }>()
 
 const route = useRoute()
@@ -23,27 +23,31 @@ const shouldHighlight = computed(() => isActive.value || isParentActive.value)
     <UiButton
       variant="ghost"
       size="sm"
-      class="w-full transition-all duration-200 ease-in-out"
-      :class="{
-        'bg-primary/5 text-primary shadow-sm': shouldHighlight,
-        'hover:bg-secondary/80': !shouldHighlight,
-      }"
+      class="w-full gap-2 transition-all duration-200 ease-in-out"
+
       :as="props.to ? NuxtLink : 'button'"
       :to="props.to"
     >
-      <div class="flex w-full items-center gap-3 px-3 py-2">
+      <div class="flex w-full items-center gap-2 py-2">
         <div
           v-if="props.icon"
-          class="flex size-6 shrink-0 items-center justify-center rounded-md transition-colors duration-200"
+          class="from-fd-secondary flex size-6 items-center justify-center rounded-md border bg-gradient-to-b shadow-sm"
         >
           <Icon :name="props.icon" class="size-[18px]" />
         </div>
         <div class="flex flex-grow items-center justify-between">
-          <span class="truncate text-sm font-medium" :class="{ 'text-primary': shouldHighlight }">
-            {{ props.title }}
-          </span>
+          <div class="flex items-center gap-3">
+            <span
+              class="truncate text-sm font-medium"
+              :class="{ 'font-semibold underline': shouldHighlight }"
+            >
+              {{ props.title }}
+
+            </span>
+            <UiNavigationTreeTag v-if="props.status" variant="rounded" :type="props.status" />
+          </div>
+
           <div class="flex items-center gap-2">
-            <UiNavigationTreeTag v-if="props.tag" :type="props.tag" />
             <Icon
               v-if="props.isAccordion"
               name="heroicons:chevron-down"

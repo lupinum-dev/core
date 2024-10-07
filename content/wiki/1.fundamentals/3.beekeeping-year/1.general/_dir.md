@@ -1,5 +1,3 @@
 ---
 status: wip
 ---
-
-Alles gut

@@ -14,6 +14,7 @@ const props = defineProps<{
   title: string
   icon: string
   children: NavigationItem[]
+  status?: 'updated' | 'wip' | 'outdated' | 'new'
 }>()
 
 const open = ref<string[]>([])
@@ -45,15 +46,16 @@ watch(isActive, (newValue) => {
           collapsible
           class="w-full"
           :is-accordion="true"
+          :status="props.status"
         />
       </UiAccordionTrigger2>
       <UiAccordionContent class="ms-2 flex flex-col border-s border-border ps-1">
         <template v-for="child in props.children" :key="child._path">
           <div v-if="child.children">
-            <UiNavigationTreeAccordion :title="child.title" :children="child.children" :icon="child.icon || ''" />
+            <UiNavigationTreeAccordion :title="child.title" :children="child.children" :icon="child.icon || ''" :status="child.status" />
           </div>
           <div v-else>
-            <UiNavigationTreeLink :title="child.title" :icon="child.icon" :to="child._path" :tag="child.status" />
+            <UiNavigationTreeLink :title="child.title" :icon="child.icon" :to="child._path" :status="child.status" />
           </div>
         </template>
       </UiAccordionContent>

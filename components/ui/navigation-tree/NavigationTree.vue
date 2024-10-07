@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 interface NavigationItem {
@@ -17,18 +17,21 @@ const props = defineProps<{
 const route = useRoute()
 const openSections = ref<string[]>([])
 
-const isActive = (item: NavigationItem) => computed(() => {
-  if (item.to) {
-    return item.to === route.path
-  }
-  return item.children?.some(child => child.to === route.path) || false
-})
+function isActive(item: NavigationItem) {
+  return computed(() => {
+    if (item.to) {
+      return item.to === route.path
+    }
+    return item.children?.some(child => child.to === route.path) || false
+  })
+}
 
-const toggleSection = (title: string) => {
+function toggleSection(title: string) {
   const index = openSections.value.indexOf(title)
   if (index > -1) {
     openSections.value.splice(index, 1)
-  } else {
+  }
+  else {
     openSections.value.push(title)
   }
 }
@@ -46,13 +49,14 @@ const toggleSection = (title: string) => {
           :title="item.title"
           :to="item.to"
           :icon="item.icon"
-          :tag="item.status"
+          :status="item.status"
         />
         <UiNavigationTreeAccordion
           v-else
           :title="item.title"
           :icon="item.icon"
           :children="item.children"
+          :status="item.status"
           :is-open="openSections.includes(item.title)"
           @toggle="toggleSection(item.title)"
         />
