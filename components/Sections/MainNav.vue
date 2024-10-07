@@ -65,13 +65,21 @@ const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
 const { openSubmenu } = useSubMenu()
 
 function handleLinkClick() {
-  console.log('handleLinkClick')
   toggleHeaderExpansion()
 }
 
 function handleOpenSubmenu(href: string | undefined) {
   if (href) {
     openSubmenu(href)
+  }
+}
+
+function handleItemClick(showSubmenu: boolean | undefined, href: string | undefined) {
+  if (showSubmenu) {
+    handleOpenSubmenu(href)
+  }
+  else {
+    handleLinkClick()
   }
 }
 </script>
@@ -100,7 +108,7 @@ function handleOpenSubmenu(href: string | undefined) {
                         ? 'font-bold underline'
                         : 'text-foreground hover:bg-accent hover:text-accent-foreground',
                     ]"
-                    @click="child.showSubmenu ? handleOpenSubmenu(child.href) : handleLinkClick"
+                    @click="() => handleItemClick(child.showSubmenu, child.href)"
                   >
                     {{ child.label }}
                     <Icon
@@ -126,9 +134,8 @@ function handleOpenSubmenu(href: string | undefined) {
             ? 'font-bold underline'
             : 'text-foreground hover:bg-accent hover:text-accent-foreground',
         ]"
-        @click="link.showSubmenu ? handleOpenSubmenu(link.href) : handleLinkClick"
+        @click="() => handleItemClick(link.showSubmenu, link.href)"
       >
-        {{ link.showSubmenu }}
         <Icon :name="link.icon || ''" class="mr-3 size-5" />
         {{ link.label }}
       </component>
