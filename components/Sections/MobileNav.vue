@@ -58,13 +58,11 @@ function goToMainMenu() {
 function goBackToSubMenu() {
   openSubMenuIfNeeded(route.path)
 }
-
-
 </script>
 
 <template>
   <nav class="flex h-[98%] flex-col transition-colors duration-300">
-    <div class=" flex items-center justify-between border-b border-border px-6 py-1">
+    <div v-if="!showMainNav || currentSubNav" class=" flex items-center justify-between border-b border-border px-6 py-1">
       <UiButton
         v-if="!showMainNav"
         variant="link"
@@ -86,7 +84,7 @@ function goBackToSubMenu() {
     </div>
 
     <UiScrollArea class="relative" type="auto">
-      <div class="relative h-full px-2">
+      <div class="relative h-full px-2 py-4">
         <!-- TODO Can we add a smooth Transition? -->
         <SectionsMainNav v-if="showMainNav" key="main-nav" />
         <component :is="currentSubNav?.component" v-else :key="currentSubNav?.label" />
