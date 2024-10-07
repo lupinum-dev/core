@@ -54,17 +54,17 @@ const showLogo = computed(() => !isContentSite.value)
       <Transition name="fade-slide" class="sm:hidden">
         <NuxtLink v-if="!isScrolled" to="/" class="flex items-center">
           <NuxtImg
-
+            v-if="isContentSite"
             :src="props.icon"
             alt="Logo Icon"
-            class="h-7 sm:hidden "
+            class="h-7  sm:hidden"
           />
           <UiColorModeImage
-
+            v-else
             light="/logo_light.svg"
             dark="/logo_dark.svg"
             alt="Logo"
-            class="hidden h-7 sm:block "
+            class="h-7  "
           />
         </NuxtLink>
       </Transition>
@@ -74,7 +74,7 @@ const showLogo = computed(() => !isContentSite.value)
           light="/logo_light.svg"
           dark="/logo_dark.svg"
           alt="Logo"
-          class="hidden h-7 sm:block "
+          class="h-7"
         />
         <NuxtImg
           :src="props.icon"

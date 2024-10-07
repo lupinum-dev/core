@@ -1,23 +1,23 @@
 <script setup lang="ts">
+import { cn } from '@/lib/utils'
+
 defineOptions({
   inheritAttrs: false,
 })
 
-defineProps({
-  dark: {
-    type: String,
-    required: true,
-  },
-  light: {
-    type: String,
-    required: true,
-  },
-})
+interface Props {
+  dark: string
+  light: string
+  class?: string
+}
+
+const props = defineProps<Props>()
+
+const lightClasses = computed(() => cn(props.class, 'dark:hidden'))
+const darkClasses = computed(() => cn(props.class, 'hidden dark:block'))
 </script>
 
 <template>
-  <div v-bind="$attrs">
-    <NuxtImg :src="light" class="dark:hidden" />
-    <NuxtImg :src="dark" class="hidden dark:block" />
-  </div>
+  <NuxtImg :src="light" :class="lightClasses" v-bind="$attrs" />
+  <NuxtImg :src="dark" :class="darkClasses" v-bind="$attrs" />
 </template>

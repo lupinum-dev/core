@@ -36,7 +36,6 @@ const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.
             src-light="/logo_light.svg"
             src-dark="/logo_dark.svg"
             icon="/logo_icon.svg"
-            size="base"
             :content-routes="contentRoutes"
           />
 
@@ -44,7 +43,7 @@ const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.
           <ClientOnly>
             <div
               :class="{ 'left-0': isScrolled && isMobileScreen, 'left-9': !(isScrolled && isMobileScreen) }"
-              class="absolute mt-0.5 transition-all duration-300"
+              class="absolute mt-0.5 transition-all duration-300 sm:left-40"
             >
               <UiContentMobileToc v-if="isTabletScreen && isContentSite" />
             </div>
