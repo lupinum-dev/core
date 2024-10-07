@@ -16,6 +16,8 @@ const route = useRoute()
 const isActive = computed(() => props.to === route.path)
 const isParentActive = computed(() => props.open && props.collapsible)
 const shouldHighlight = computed(() => isActive.value || isParentActive.value)
+
+const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
 </script>
 
 <template>
@@ -24,9 +26,9 @@ const shouldHighlight = computed(() => isActive.value || isParentActive.value)
       variant="ghost"
       size="sm"
       class="w-full gap-2 transition-all duration-200 ease-in-out"
-
       :as="props.to ? NuxtLink : 'button'"
       :to="props.to"
+      @click="toggleHeaderExpansion"
     >
       <div class="flex w-full items-center gap-2 py-2">
         <div
