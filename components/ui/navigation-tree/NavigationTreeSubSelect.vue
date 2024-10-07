@@ -16,28 +16,28 @@ function closePopover() {
 </script>
 
 <template>
-  <LibPopover v-model:open="isOpen">
-    <LibPopoverTrigger
-      class="group mx-2 mb-8 flex w-[calc(100%-1rem)] items-center justify-between rounded-lg p-2 text-gray-t-1 transition-all duration-150 hover:bg-prime-i-1"
+  <UiPopover v-model:open="isOpen">
+    <UiPopoverTrigger
+      class="group mx-2 mb-8 mt-6 flex w-[calc(100%-1rem)] items-center justify-between rounded-lg p-2 text-foreground transition-all duration-150 hover:bg-accent"
     >
       <div class="flex items-center gap-3">
-        <div class="flex size-10 items-center justify-center rounded-md bg-prime-i-2 transition-colors duration-150 group-hover:bg-prime-i-1">
-          <Icon :name="currentNavItem.icon || 'i-heroicons-bars-3'" class="size-6 text-prime-t-2 transition-transform duration-150 group-hover:scale-110" />
+        <div class="flex size-10 items-center justify-center rounded-md bg-secondary transition-colors duration-150 group-hover:bg-accent">
+          <Icon :name="currentNavItem.icon || 'i-heroicons-bars-3'" class="size-6 text-secondary-foreground transition-transform duration-150 group-hover:scale-110" />
         </div>
         <div class="flex-1 text-left">
-          <p class="font-heading transition-colors duration-150 group-hover:text-prime-t-1">
+          <p class="font-heading transition-colors duration-150 group-hover:text-accent-foreground">
             {{ currentNavItem.title }}
           </p>
-          <p class="font-pressura text-sm text-gray-t-3 transition-colors duration-150 group-hover:text-prime-t-2">
+          <p v-if="currentNavItem.description" class="font-pressura text-sm text-muted-foreground transition-colors duration-150 group-hover:text-accent-foreground">
             {{ currentNavItem.description ?? 'No description available' }}
           </p>
         </div>
       </div>
-      <Icon name="i-heroicons-chevron-down" class="size-5 text-gray-t-3 transition-transform duration-150 " />
-    </LibPopoverTrigger>
+      <Icon name="i-heroicons-chevron-down" class="size-5 text-muted-foreground transition-transform duration-150" />
+    </UiPopoverTrigger>
 
-    <LibPopoverContent
-      class="z-50 overflow-hidden rounded-lg bg-gray-b-0 p-2 shadow-lg"
+    <UiPopoverContent
+      class="z-50 overflow-hidden rounded-lg bg-popover p-2 shadow-lg"
       :style="{
         width: 'var(--radix-popover-trigger-width)',
         maxHeight: 'var(--radix-popover-content-available-height)',
@@ -55,26 +55,26 @@ function closePopover() {
             class="flex w-full items-center gap-3 rounded-md p-2 transition duration-150"
             :class="[
               isActiveRoute(item.firstLink ?? '')
-                ? 'bg-gray-i-1 text-prime-t-1'
-                : 'text-gray-t-1 hover:bg-prime-i-1',
+                ? 'bg-accent text-accent-foreground'
+                : 'text-popover-foreground hover:bg-accent hover:text-accent-foreground',
             ]"
           >
             <div
-              class="flex size-8 shrink-0 items-center justify-center rounded-md  p-1.5"
+              class="flex size-8 shrink-0 items-center justify-center rounded-md p-1.5"
             >
-              <Icon :name="item.icon || 'i-heroicons-bars-3'" class="size-6 text-prime-t-2" />
+              <Icon :name="item.icon || 'i-heroicons-bars-3'" class="size-6 text-primary" />
             </div>
             <div class="flex-1 text-left">
               <p class="font-heading text-sm">
                 {{ item.title }}
               </p>
-              <p class="font-pressura text-sm text-gray-t-2">
+              <p v-if="item.description" class="font-pressura text-sm text-muted-foreground">
                 {{ item.description ?? 'Navigation item' }}
               </p>
             </div>
           </div>
         </NuxtLink>
       </div>
-    </LibPopoverContent>
-  </LibPopover>
+    </UiPopoverContent>
+  </UiPopover>
 </template>

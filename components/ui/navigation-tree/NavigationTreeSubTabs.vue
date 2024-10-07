@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import type { NavItem } from '@/types/navigation'
 
 const props = withDefaults(
@@ -33,8 +32,8 @@ const tabWidth = computed(() => props.tabCount === 2 ? 'w-1/2' : '')
     :default-value="currentNavItem._path"
     class="mb-4 px-2"
   >
-    <TabsList class="flex w-full">
-      <TabsTrigger
+    <UiTabsList class="flex w-full">
+      <UiTabsTrigger
         v-for="item in navigation.slice(0, tabCount)"
         :key="item._path"
         :value="item._path"
@@ -45,7 +44,7 @@ const tabWidth = computed(() => props.tabCount === 2 ? 'w-1/2' : '')
           <Icon v-if="showIcons && item.icon" :name="item.icon" class="mr-2 size-4" />
           <span class="truncate">{{ item.title }}</span>
         </div>
-      </TabsTrigger>
-    </TabsList>
-  </Tabs>
+      </UiTabsTrigger>
+    </UiTabsList>
+  </UiTabs>
 </template>

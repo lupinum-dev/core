@@ -30,13 +30,16 @@ const isSidebarOpen = useCookie<boolean>('wiki-sidebar-open', {
 function toggleSidebar() {
   isSidebarOpen.value = !isSidebarOpen.value
 }
+
+const showTabs = computed(() => appConfig.wiki.mode === 'tabs')
+const showSelect = computed(() => appConfig.wiki.mode === 'select')
 </script>
 
 <template>
-  <div class="mx-auto flex min-h-screen max-w-[1900px] flex-row justify-center bg-gray-b-0">
+  <div class="relative mx-auto flex min-h-screen max-w-[1900px] flex-row justify-center bg-gray-b-0">
     <div
       id="sidenav"
-      class="hidden overflow-y-auto border-r border-gray-o-1 transition-all duration-300 ease-in-out lg:sticky lg:flex lg:h-screen lg:flex-col"
+      class="sticky hidden overflow-y-auto border-r border-gray-o-1 transition-all duration-300 ease-in-out lg:sticky lg:flex lg:h-screen lg:flex-col"
       :class="{ 'w-[310px] xl:w-[450px]': isSidebarOpen, 'w-16': !isSidebarOpen }"
     >
       <div class="flex justify-end p-2">
@@ -44,15 +47,16 @@ function toggleSidebar() {
           v-if="isSidebarOpen"
           trigger-button="Dots"
         /> -->
-        <UiButton variant="link" size="icon" @click="toggleSidebar">
+        <!-- <UiButton variant="link" size="icon" @click="toggleSidebar">
           <Icon
             :name="isSidebarOpen ? 'tabler:layout-sidebar-left-collapse-filled' : 'tabler:layout-sidebar-left-expand-filled'"
             class="size-6 text-gray-t-3"
           />
-        </UiButton>
+        </UiButton> -->
       </div>
       <ClientOnly v-if="isSidebarOpen ">
         <UiNavigationTreeSubTabs
+          v-if="showTabs"
           :current-nav-item="currentNavItem"
           :navigation="navigation"
           :is-active-route="isActiveRoute"
@@ -65,7 +69,7 @@ function toggleSidebar() {
           :navigation="navigation"
           :is-active-route="isActiveRoute"
         />
-        <UiWikiSidebarNavigation :navigation="currentNavItemChildren" />
+        <UiNavigationTreeSidebar :navigation="currentNavItemChildren" />
       </ClientOnly>
     </div>
     <slot />
