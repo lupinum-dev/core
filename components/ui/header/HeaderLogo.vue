@@ -57,14 +57,14 @@ const showLogo = computed(() => !isContentSite.value)
             v-if="isContentSite"
             :src="props.icon"
             alt="Logo Icon"
-            class="h-7  sm:hidden"
+            class="h-7 sm:hidden"
           />
           <UiColorModeImage
             v-else
             light="/logo_light.svg"
             dark="/logo_dark.svg"
             alt="Logo"
-            class="h-7  "
+            class="h-7"
           />
         </NuxtLink>
       </Transition>
@@ -79,7 +79,7 @@ const showLogo = computed(() => !isContentSite.value)
         <NuxtImg
           :src="props.icon"
           alt="Logo Icon"
-          class="hidden h-7 "
+          class="hidden h-7"
         />
       </div>
 

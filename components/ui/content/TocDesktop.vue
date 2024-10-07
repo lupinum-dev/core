@@ -1,0 +1,130 @@
+<script setup lang="ts">
+import { nextTick, onMounted, onUnmounted, onUpdated, ref } from 'vue'
+import { useActiveAnchor } from '~/composables/useActiveAnchor'
+import { useSharedTocState } from '@/composables/useSharedTocState'
+
+interface TocItem {
+  id: string
+  depth: number
+  text: string
+  children?: TocItem[]
+}
+
+const props = defineProps<{ links: TocItem[], title?: string }>()
+
+const container = ref<HTMLElement | null>(null)
+const marker = ref<HTMLElement | null>(null)
+
+const { setActiveLink, activeLink, initializeActiveLink } = useActiveAnchor(container, marker, props.links)
+const { setActiveLink: setSharedActiveLink } = useSharedTocState()
+
+let rafId: number | null = null
+
+function debouncedSetActiveLink() {
+  if (rafId)
+    cancelAnimationFrame(rafId)
+  rafId = requestAnimationFrame(() => {
+    setActiveLink()
+    setSharedActiveLink(activeLink.value?.text ?? null)
+  })
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+onMounted(() => {
+  nextTick(() => {
+    initializeActiveLink()
+    debouncedSetActiveLink()
+  })
+  window.addEventListener('scroll', debouncedSetActiveLink, { passive: true })
+})
+
+onUpdated(debouncedSetActiveLink)
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', debouncedSetActiveLink)
+  if (rafId)
+    cancelAnimationFrame(rafId)
+})
+
+const Circle = h('div', { class: 'flex size-4 text-xs items-center justify-center text-white rounded-full bg-gray-o-3 mr-2' }, '1')
+</script>
+
+<template>
+  <nav
+    ref="container"
+    aria-labelledby="doc-outline-aria-label"
+    class="relative py-3 lg:py-6"
+    :class="{ block: props.links.length > 0, hidden: !props.links.length }"
+  >
+    <h3
+      id="doc-outline-aria-label"
+      class="mb-3 text-sm font-semibold"
+    />
+
+    <div class="relative pl-4">
+      <div ref="marker" class="outline-marker" />
+      <div class="vertical-line" />
+
+      <ul v-if="props.links.length" class="space-y-1 text-sm">
+        <li v-for="link in props.links" :key="link.id">
+          <div class="flex items-center">
+            <!-- TODO: With steps component the circle should be shown like Clerk Docs -->
+            <Circle v-if="false" />
+            <NuxtLink
+              :href="`#${link.id}`"
+              class="block py-1 text-gray-t-3 transition-colors duration-200 hover:underline"
+              :class="{ active: activeLink?.id === link.id }"
+            >
+              {{ link.text }}
+            </NuxtLink>
+          </div>
+          <ul v-if="link.children?.length" class="mt-1 space-y-1 pl-4">
+            <li v-for="child in link.children" :key="child.id">
+              <!-- TODO: With steps component the circle should be shown like Clerk Docs -->
+              <div class="flex items-center">
+                <Circle v-if="false" />
+                <NuxtLink
+                  :href="`#${child.id}`"
+                  class="block py-1 text-gray-t-3 transition-colors duration-200 hover:underline"
+                  :class="{ active: activeLink?.id === child.id }"
+                >
+                  {{ child.text }}
+                </NuxtLink>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-4">
+      <LibButton variant="link" class="flex items-center text-gray-t-3 opacity-75" @click="scrollToTop">
+        <Icon name="i-heroicons-chevron-up" class="mr-1" />
+        Back to Top
+      </LibButton>
+    </div>
+    <div>
+      <UiUserTextConfig trigger-button="Settings" />
+    </div>
+  </nav>
+</template>
+
+<style scoped>
+.vertical-line {
+  @apply absolute top-0 bottom-0 left-0 w-px bg-gray-o-1;
+}
+
+.outline-marker {
+  @apply absolute top-[33px] -left-px z-10 opacity-0 w-[3px] rounded-[2px] h-[18px] bg-prime-c-1;
+  transition:
+    top 0.25s cubic-bezier(0, 1, 0.5, 1),
+    background-color 0.5s,
+    opacity 0.25s;
+}
+.active {
+  @apply text-prime-c-1 font-semibold;
+}
+</style>
