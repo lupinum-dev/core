@@ -42,19 +42,13 @@ isContentSite.value = true
 
 <template>
   <div class="container relative w-full flex-grow px-0">
-    <!-- <UiWikiTocMobile
-      :links="tocLinks"
-      class="w-full" :class="{
-        'lg:hidden': !isSidebarOpen,
-        'xl:hidden': isSidebarOpen,
-      }"
-    /> -->
-
     <div id="content" class="container left-0 top-0 mx-auto mt-36 min-w-0 max-w-[700px] px-3  2xl:max-w-[800px]">
-      <!-- <UiWikiHeader :title="page?.title ?? ''" :description="page?.description ?? ''" /> -->
+      <UiContentHeader :title="page?.title ?? ''" :description="page?.description ?? ''" />
+
       <ClientOnly>
-        <!-- <LayoutCTA /> -->
+        <UiContentCTA />
       </ClientOnly>
+
       <div
         class="text-desc-1 prose-primary prose w-full rounded-lg font-desc text-gray-t-2 dark:prose-invert"
       >
@@ -63,12 +57,13 @@ isContentSite.value = true
       </div>
 
       <ClientOnly>
-        <!-- <LayoutCTA2 /> -->
+        <UiContentCTA2 />
       </ClientOnly>
 
-      <!-- <UiSurround :surround="surround ?? []" /> -->
+      <UiContentSurround :surround="surround ?? []" />
       <div class="mt-2 flex justify-center">
-        <!-- <UiFeedback /> -->
+        <!-- DOES NOT WORK -->
+        <!-- <UiElementsFeedback /> -->
       </div>
       <!-- Spacer -->
       <div class="h-56" />

@@ -60,16 +60,16 @@ function openDialog(emojiIndex: number) {
       </div>
     </div>
 
-    <LibDialog v-model:open="isDialogOpen">
-      <LibDialogContent class="sm:max-w-xl">
-        <LibDialogHeader>
-          <LibDialogTitle class="text-gray-t-1">
+    <UiDialog v-model:open="isDialogOpen">
+      <UiDialogContent class="sm:max-w-xl">
+        <UiDialogHeader>
+          <UiDialogTitle class="text-gray-t-1">
             Provide Feedback
-          </LibDialogTitle>
-          <LibDialogDescription class="text-gray-t-3">
+          </UiDialogTitle>
+          <UiDialogDescription class="text-gray-t-3">
             We appreciate your feedback. Thank you for sharing your thoughts with us.
-          </LibDialogDescription>
-        </LibDialogHeader>
+          </UiDialogDescription>
+        </UiDialogHeader>
 
         <div class="mb-4 flex justify-center space-x-2">
           <button
@@ -88,87 +88,87 @@ function openDialog(emojiIndex: number) {
         </div>
 
         <form v-auto-animate class="space-y-4" @submit="onSubmit">
-          <LibFormField v-slot="{ componentField }" name="feedback">
-            <LibFormItem>
-              <LibFormLabel class="text-gray-t-2">
+          <FormField v-slot="{ componentField }" name="feedback">
+            <UiFormItem>
+              <UiFormLabel class="text-gray-t-2">
                 Feedback
-              </LibFormLabel>
-              <LibFormControl>
-                <LibTextarea v-bind="componentField" placeholder="Your Feedback" class="border-gray-o-1 bg-gray-b-0" />
-              </LibFormControl>
-              <LibFormMessage class="text-prime-c-1" />
-            </LibFormItem>
-          </LibFormField>
+              </UiFormLabel>
+              <UiFormControl>
+                <UiTextarea v-bind="componentField" placeholder="Your Feedback" class="border-gray-o-1 bg-gray-b-0" />
+              </UiFormControl>
+              <UiFormMessage class="text-prime-c-1" />
+            </UiFormItem>
+          </FormField>
 
-          <LibFormField v-slot="{ componentField }" name="files">
-            <LibFormItem>
-              <LibFormLabel class="text-gray-t-2">
+          <FormField v-slot="{ componentField }" name="files">
+            <UiFormItem>
+              <UiFormLabel class="text-gray-t-2">
                 Upload Files
-              </LibFormLabel>
-              <LibFormControl>
-                <LibInput type="file" v-bind="componentField" multiple class="border-gray-o-1 bg-gray-b-0" />
-              </LibFormControl>
-            </LibFormItem>
-          </LibFormField>
+              </UiFormLabel>
+              <UiFormControl>
+                <UiInput type="file" v-bind="componentField" multiple class="border-gray-o-1 bg-gray-b-0" />
+              </UiFormControl>
+            </UiFormItem>
+          </FormField>
 
-          <LibFormField v-slot="{ value, handleChange }" name="shouldContact">
-            <LibFormItem class="flex flex-row items-center justify-between rounded-lg border border-gray-o-1  p-4">
+          <FormField v-slot="{ value, handleChange }" name="shouldContact">
+            <UiFormItem class="flex flex-row items-center justify-between rounded-lg border border-gray-o-1  p-4">
               <div class="space-y-0.5">
-                <LibFormLabel class="text-base text-gray-t-2">
+                <UiFormLabel class="text-base text-gray-t-2">
                   Should we get back to you?
-                </LibFormLabel>
+                </UiFormLabel>
               </div>
-              <LibFormControl>
-                <LibSwitch
+              <UiFormControl>
+                <UiSwitch
                   :checked="value"
                   @update:checked="handleChange"
                 />
-              </LibFormControl>
-            </LibFormItem>
-          </LibFormField>
+              </UiFormControl>
+            </UiFormItem>
+          </FormField>
 
           <div v-if="values.shouldContact" v-auto-animate class="space-y-4">
-            <LibFormField v-slot="{ componentField }" name="name">
-              <LibFormItem>
-                <LibFormLabel class="text-gray-t-2">
+            <FormField v-slot="{ componentField }" name="name">
+              <UiFormItem>
+                <UiFormLabel class="text-gray-t-2">
                   Name
-                </LibFormLabel>
-                <LibFormControl>
-                  <LibInput v-bind="componentField" placeholder="Your Name" class="border-gray-o-1 bg-gray-b-0" />
-                </LibFormControl>
-              </LibFormItem>
-            </LibFormField>
+                </UiFormLabel>
+                <UiFormControl>
+                  <UiInput v-bind="componentField" placeholder="Your Name" class="border-gray-o-1 bg-gray-b-0" />
+                </UiFormControl>
+              </UiFormItem>
+            </FormField>
 
-            <LibFormField v-slot="{ componentField }" name="email">
-              <LibFormItem>
-                <LibFormLabel class="text-gray-t-2">
+            <FormField v-slot="{ componentField }" name="email">
+              <UiFormItem>
+                <UiFormLabel class="text-gray-t-2">
                   Email
-                </LibFormLabel>
-                <LibFormControl>
-                  <LibInput v-bind="componentField" type="email" placeholder="your@email.com" class="border-gray-o-1 bg-gray-b-0" />
-                </LibFormControl>
-              </LibFormItem>
-            </LibFormField>
+                </UiFormLabel>
+                <UiFormControl>
+                  <UiInput v-bind="componentField" type="email" placeholder="your@email.com" class="border-gray-o-1 bg-gray-b-0" />
+                </UiFormControl>
+              </UiFormItem>
+            </FormField>
 
-            <LibFormField v-slot="{ componentField }" name="telephone">
-              <LibFormItem>
-                <LibFormLabel class="text-gray-t-2">
+            <FormField v-slot="{ componentField }" name="telephone">
+              <UiFormItem>
+                <UiFormLabel class="text-gray-t-2">
                   Telephone
-                </LibFormLabel>
-                <LibFormControl>
-                  <LibInput v-bind="componentField" type="tel" placeholder="Your Phone Number" class="border-gray-o-1 bg-gray-b-0" />
-                </LibFormControl>
-              </LibFormItem>
-            </LibFormField>
+                </UiFormLabel>
+                <UiFormControl>
+                  <UiInput v-bind="componentField" type="tel" placeholder="Your Phone Number" class="border-gray-o-1 bg-gray-b-0" />
+                </UiFormControl>
+              </UiFormItem>
+            </FormField>
           </div>
 
-          <LibDialogFooter>
-            <LibButton type="submit" class="bg-gray-c-1 text-gray-b-0 hover:bg-gray-c-2">
+          <UiDialogFooter>
+            <UiButton type="submit" class="bg-gray-c-1 text-gray-b-0 hover:bg-gray-c-2">
               Submit Feedback
-            </LibButton>
-          </LibDialogFooter>
+            </UiButton>
+          </UiDialogFooter>
         </form>
-      </LibDialogContent>
-    </LibDialog>
+      </UiDialogContent>
+    </UiDialog>
   </ClientOnly>
 </template>

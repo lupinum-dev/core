@@ -20,10 +20,10 @@ const containerClasses = computed(() => [
 ])
 
 const linkClasses = computed(() => [
-  'flex w-full h-full flex-col gap-2 rounded-lg ring-1 ring-gray-o-1 p-4 shadow-sm dark:shadow-white/10 transition-all duration-300 text-md transition-colors bg-gray-b-1',
+  'flex w-full h-full flex-col gap-2 rounded-lg ring-1 ring-border p-4 shadow-sm dark:shadow-white/10 transition-all duration-300 text-md transition-colors bg-card',
   {
     'col-start-2 text-end': props.isNext,
-    'group-hover:ring-2 group-hover:ring-gray-o-2 group-hover:bg-gray-b-2': props.link !== null,
+    'group-hover:ring-2 group-hover:ring-ring group-hover:bg-accent': props.link !== null,
   },
 ])
 
@@ -39,12 +39,12 @@ const iconName = computed(() => props.isNext ? 'i-heroicons-chevron-right' : 'i-
   <div :class="containerClasses">
     <NuxtLink v-if="link" :to="link._path" :class="linkClasses">
       <div :class="iconContainerClasses">
-        <Icon :name="iconName" class="size-4 text-gray-t-2" />
-        <p class="font-heading-med text-md text-gray-t-3">
+        <Icon :name="iconName" class="size-4 text-muted-foreground" />
+        <p class="font-heading-med text-md text-muted-foreground">
           {{ isNext ? 'Next' : 'Previous' }}
         </p>
       </div>
-      <p class="font-heading text-lg text-gray-t-1">
+      <p class="font-heading text-lg text-foreground">
         {{ link.title }}
       </p>
     </NuxtLink>

@@ -29,7 +29,7 @@ const ungroupedItems = computed(() => {
 
 <template>
   <div>
-    <div v-if="ungroupedItems.length > 0" class="px-4 md:px-3">
+    <div v-if="ungroupedItems.length > 0" class="mb-3 px-4 md:px-3 ">
       <div class="flex flex-col gap-1">
         <template v-for="item in ungroupedItems" :key="item.title">
           <UiNavigationTreeAccordion

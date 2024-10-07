@@ -15,12 +15,12 @@ const next = computed(() => props.surround[1] || null)
 
 <template>
   <div class="not-prose grid-cols-2 flex-col gap-4 space-y-3 pb-6 sm:grid sm:space-y-0">
-    <UiSurroundLink
+    <UiContentSurroundLink
       :link="prev"
       :is-next="false"
     />
 
-    <UiSurroundLink
+    <UiContentSurroundLink
       :link="next"
       :is-next="true"
     />

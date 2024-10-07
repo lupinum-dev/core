@@ -31,22 +31,22 @@ const randomCTA = computed(() => ctaTexts[Math.floor(Math.random() * ctaTexts.le
 </script>
 
 <template>
-  <div class="not-prose space-md mb-8 mt-6 flex w-full items-center justify-between space-x-10 rounded-2xl bg-gray-b-1 p-5 ring-1 ring-gray-o-1">
-    <Icon name="heroicons:academic-cap-16-solid" class="size-10 flex-shrink-0 text-prime-c-1" />
+  <div class="not-prose space-md mb-8 mt-6 flex w-full items-center justify-between space-x-10 rounded-2xl bg-card p-5 ring-1 ring-border">
+    <Icon name="heroicons:academic-cap-16-solid" class="size-10 flex-shrink-0 text-primary" />
 
     <div class="flex flex-1 flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div class="flex flex-col space-y-0.5 text-center sm:text-left">
-        <div class="font-heading-med text-sm text-prime-t-3">
+        <div class="font-heading-med text-sm text-muted-foreground">
           {{ randomCTA.question }}
         </div>
-        <div class="font-heading text-lg text-prime-t-1">
+        <div class="font-heading text-lg text-foreground">
           {{ randomCTA.statement }}
         </div>
       </div>
 
-      <LibButton variant="default">
+      <UiButton variant="default">
         {{ randomCTA.action }}
-      </LibButton>
+      </UiButton>
     </div>
   </div>
 </template>
