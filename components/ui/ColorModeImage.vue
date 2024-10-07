@@ -16,6 +16,8 @@ defineProps({
 </script>
 
 <template>
-  <NuxtImg :src="light" class="dark:hidden" v-bind="$attrs" />
-  <NuxtImg :src="dark" class="hidden dark:block" v-bind="$attrs" />
+  <div v-bind="$attrs">
+    <NuxtImg :src="light" class="dark:hidden" />
+    <NuxtImg :src="dark" class="hidden dark:block" />
+  </div>
 </template>

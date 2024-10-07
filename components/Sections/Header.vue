@@ -1,5 +1,16 @@
 <script setup lang="ts">
+import { useScroll, useWindowSize } from '@vueuse/core'
 
+const { y } = useScroll(window)
+const { width } = useWindowSize()
+
+const isScrolled = computed(() => y.value > 0)
+const isMobileScreen = computed(() => width.value < 640)
+const isTabletScreen = computed(() => width.value < 1024)
+
+// Content Site Handling
+const contentRoutes = ['/wiki', '/blog', '/showcase']
+const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.startsWith(path)))
 </script>
 
 <template>
@@ -21,15 +32,23 @@
         <!-- TODO Make SSR compatible, currently hydration error -->
 
         <div class="relative flex items-center gap-4">
-          <UiHeaderLogo src-light="/logo_light.svg" src-dark="/logo_dark.svg" icon="/logo_icon.svg" size="base" />
+          <UiHeaderLogo
+            src-light="/logo_light.svg"
+            src-dark="/logo_dark.svg"
+            icon="/logo_icon.svg"
+            size="base"
+            :content-routes="contentRoutes"
+          />
 
           <!-- TODO I need to be able to change the offset of the Logo -->
-          <!-- <div
-              :class="{ 'left-0': isScrolled && isMobileScreen, 'left-20': !(isScrolled && isMobileScreen) }"
-              class="absolute transition-all duration-300"
+          <ClientOnly>
+            <div
+              :class="{ 'left-0': isScrolled && isMobileScreen, 'left-9': !(isScrolled && isMobileScreen) }"
+              class="absolute mt-0.5 transition-all duration-300"
             >
-              <UiContentMobileToc v-if="isTabletScreen" />
-            </div> -->
+              <UiContentMobileToc v-if="isTabletScreen && isContentSite" />
+            </div>
+          </ClientOnly>
         </div>
       </template>
       <template #center>

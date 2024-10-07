@@ -1,12 +1,21 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useColorMode, useDebounceFn, useMediaQuery, useRoute, useScroll } from '@vueuse/core'
+import { useDebounceFn, useScroll } from '@vueuse/core'
+
+interface Props {
+  srcDark?: string
+  srcLight?: string
+  icon?: string
+  contentRoutes: string[]
+}
 
 const props = withDefaults(defineProps<Props>(), {
   srcDark: '',
   srcLight: '',
   icon: '',
+  contentRoutes: () => ['/wiki', '/blog', '/showcase'],
 })
+
 const { y } = useScroll(window)
 const isScrolled = ref(false)
 const previousScrollPosition = ref(0)
@@ -29,13 +38,9 @@ const updateIsScrolled = useDebounceFn(() => {
 
 watch(y, updateIsScrolled, { immediate: true })
 
-interface Props {
-  srcDark?: string
-  srcLight?: string
-  icon?: string
-}
+const route = useRoute()
 
-const isContentSite = ref(true)
+const isContentSite = computed(() => props.contentRoutes.some(path => route.path.startsWith(path)))
 
 provide('isContentSite', isContentSite)
 
@@ -49,33 +54,32 @@ const showLogo = computed(() => !isContentSite.value)
       <Transition name="fade-slide" class="sm:hidden">
         <NuxtLink v-if="!isScrolled" to="/" class="flex items-center">
           <NuxtImg
-            v-if="showIcon"
+
             :src="props.icon"
             alt="Logo Icon"
-            class="h-7 sm:hidden"
+            class="h-7 sm:hidden "
           />
           <UiColorModeImage
-            v-if="showLogo"
+
             light="/logo_light.svg"
             dark="/logo_dark.svg"
             alt="Logo"
-            class="h-7"
+            class="hidden h-7 sm:block "
           />
         </NuxtLink>
       </Transition>
       <div class="hidden sm:block">
         <UiColorModeImage
-          v-if="showLogo"
+
           light="/logo_light.svg"
           dark="/logo_dark.svg"
           alt="Logo"
-          class="h-7"
+          class="hidden h-7 sm:block "
         />
         <NuxtImg
-          v-else-if="showIcon"
           :src="props.icon"
           alt="Logo Icon"
-          class="h-7"
+          class="hidden h-7 "
         />
       </div>
 
@@ -85,14 +89,14 @@ const showLogo = computed(() => !isContentSite.value)
             v-if="showIcon"
             :src="icon"
             alt="Logo Icon"
-            class="h-7 sm:hidden"
+            class="b h-7 sm:hidden"
           />
           <UiColorModeImage
             v-if="showLogo"
             light="/logo_light.svg"
             dark="/logo_dark.svg"
             alt="Logo"
-            class="h-7"
+            class="h-7 "
           />
         </NuxtLink>
       </template>

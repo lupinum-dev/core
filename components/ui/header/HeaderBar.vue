@@ -64,8 +64,6 @@ function toggleHeaderExpansion() {
   headerState.value = isExpanded.value
 }
 
-const isContentSite = ref(false)
-
 provide('toggleHeaderExpansion', toggleHeaderExpansion)
 </script>
 
@@ -95,7 +93,7 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
         ]"
         :style="headerStyle"
       >
-        <div class="flex items-center justify-between py-1">
+        <div class="flex items-center justify-between py-1.5">
           <div class="flex h-full items-center">
             <slot name="left" />
           </div>
@@ -104,27 +102,28 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
             <slot name="center" />
           </div>
 
-          <div class="flex h-full items-center space-x-2">
+          <div class="flex h-full items-center">
             <div class="hidden lg:block">
               <slot name="right" />
             </div>
 
-            <UiButton variant="ghost" class="flex items-center">
+            <UiButton variant="ghost" class="hidden items-center sm:flex">
+              <Icon name="heroicons:magnifying-glass-20-solid" class="size-5" />
               <span class="ml-1 hidden text-xs text-gray-400 sm:block lg:hidden">Search ..</span>
               <span class="ml-1 hidden text-xs text-gray-400 lg:inline-block">Search Site ⌘ + K</span>
             </UiButton>
 
-            <UiButton variant="ghost" class="px-2 ">
-              <Icon name="heroicons:magnifying-glass-20-solid" class="size-5 sm:hidden" />
+            <UiButton variant="ghost" size="sm" class="sm:hidden">
+              <Icon name="heroicons:magnifying-glass-20-solid" class="size-5" />
             </UiButton>
 
             <UiColorModeDropdown variant="ghost" class="hidden lg:block" />
 
-            <UiButton variant="ghost" class="hidden px-2 lg:block">
+            <UiButton variant="ghost" size="sm" class="hidden  lg:block">
               <Icon name="heroicons:language-20-solid" class="size-5" />
             </UiButton>
 
-            <UiButton variant="ghost" class="lg:hidden" @click="toggleHeaderExpansion">
+            <UiButton variant="ghost" size="sm" class="lg:hidden" @click="toggleHeaderExpansion">
               <Icon
                 :name="isExpanded ? 'heroicons:x-mark-20-solid' : 'heroicons:bars-3-bottom-right-20-solid'"
                 class="size-5"

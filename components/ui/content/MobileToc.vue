@@ -5,7 +5,6 @@ const { y } = useScroll(window)
 const isScrolled = computed(() => y.value > 0)
 
 const delayedIsScrolled = ref(false)
-const maxWidth = ref('16ch')
 
 const currentText = computed(() => {
   if (y.value === 0)
@@ -29,35 +28,22 @@ watch(isScrolled, (newValue) => {
     delayedIsScrolled.value = false
   }
 })
-
-watch(delayedIsScrolled, (newValue) => {
-  if (newValue) {
-    maxWidth.value = '29ch'
-  }
-  else {
-    setTimeout(() => {
-      maxWidth.value = '16ch'
-    }, 200)
-  }
-}, { immediate: true })
 </script>
 
 <template>
   <UiButton
     variant="ghost"
-    class="inline-flex size-full items-center gap-2 text-nowrap p-2 text-left text-xs transition-all duration-300 md:px-3"
+    class="flex size-full cursor-pointer items-center gap-2 text-nowrap p-2 text-left text-xs transition-all duration-300 hover:bg-muted md:px-3"
     aria-label="Table of Contents"
   >
-    <Icon name="lucide:text" class="size-4 shrink-0" />
+    <Icon name="lucide:book-open" class="size-[15px] shrink-0" />
     <span
-      class="font-heading-med overflow-hidden truncate text-xs transition-all duration-300"
-      :style="{ maxWidth }"
+      class="font-heading-med max-w-[28ch] truncate text-xs transition-all duration-300"
     >
 
-      <div class="flex flex-1 items-center gap-2">
-        <!-- <div class="  rounded-lg bg-gray-900 p-1 px-2 text-gray-400">1</div>  -->
-        {{ currentText }}
-      </div>
+      {{ currentText }}
+
     </span>
+    <Icon v-if="y === 0" name="heroicons:chevron-down" class=" size-4" />
   </UiButton>
 </template>
