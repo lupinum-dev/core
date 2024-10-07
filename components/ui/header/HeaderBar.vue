@@ -64,6 +64,8 @@ function toggleHeaderExpansion() {
   headerState.value = isExpanded.value
 }
 
+const isContentSite = ref(false)
+
 provide('toggleHeaderExpansion', toggleHeaderExpansion)
 </script>
 

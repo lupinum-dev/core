@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router'
 import { computed, inject, ref } from 'vue'
 import { useSubMenu } from '~/composables/useSubMenu'
+import { NuxtLink } from '#components'
 
 interface NavLink {
   label: string
@@ -64,6 +65,7 @@ const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
 const { openSubmenu } = useSubMenu()
 
 function handleLinkClick() {
+  console.log('handleLinkClick')
   toggleHeaderExpansion()
 }
 
@@ -90,7 +92,7 @@ function handleOpenSubmenu(href: string | undefined) {
               <ul class="ml-6 mt-1 space-y-1 border-l border-border ps-2">
                 <li v-for="child in link.children" :key="child.href">
                   <component
-                    :is="child.showSubmenu ? 'div' : 'NuxtLink'"
+                    :is="child.showSubmenu ? 'div' : NuxtLink"
                     :to="!child.showSubmenu ? (child.href || '') : undefined"
                     class="flex items-center rounded-md px-3 py-2 font-medium transition-colors duration-200"
                     :class="[
@@ -113,8 +115,9 @@ function handleOpenSubmenu(href: string | undefined) {
           </UiAccordionItem>
         </UiAccordion>
       </template>
+
       <component
-        :is="link.showSubmenu ? 'div' : 'NuxtLink'"
+        :is="link.showSubmenu ? 'div' : NuxtLink"
         v-else
         :to="!link.showSubmenu ? (link.href || '') : undefined"
         class="flex items-center rounded-md px-4 py-3 text-base font-medium transition-colors duration-200"
@@ -125,6 +128,7 @@ function handleOpenSubmenu(href: string | undefined) {
         ]"
         @click="link.showSubmenu ? handleOpenSubmenu(link.href) : handleLinkClick"
       >
+        {{ link.showSubmenu }}
         <Icon :name="link.icon || ''" class="mr-3 size-5" />
         {{ link.label }}
       </component>

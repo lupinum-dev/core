@@ -13,6 +13,9 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => qu
   .only(['title', 'description', '_path'])
   .findSurround(withoutTrailingSlash(route.path)))
 
+const isContentSite = inject<Ref<boolean>>('isContentSite', ref(false))
+isContentSite.value = true
+
 // const userConfig = useUserTextConfig()
 
 // defineOgImage({

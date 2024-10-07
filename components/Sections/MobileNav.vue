@@ -58,6 +58,8 @@ function goToMainMenu() {
 function goBackToSubMenu() {
   openSubMenuIfNeeded(route.path)
 }
+
+
 </script>
 
 <template>

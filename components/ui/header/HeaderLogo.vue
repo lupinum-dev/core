@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useColorMode, useDebounceFn, useMediaQuery, useScroll } from '@vueuse/core'
+import { useColorMode, useDebounceFn, useMediaQuery, useRoute, useScroll } from '@vueuse/core'
 
 const props = withDefaults(defineProps<Props>(), {
   srcDark: '',
@@ -35,34 +35,45 @@ interface Props {
   icon?: string
 }
 
-const showIcon = computed(() => !!props.icon)
+const isContentSite = ref(true)
+
+provide('isContentSite', isContentSite)
+
+const showIcon = computed(() => isContentSite.value && !!props.icon)
+const showLogo = computed(() => !isContentSite.value)
 </script>
 
 <template>
   <div class="ml-2">
     <ClientOnly>
       <Transition name="fade-slide" class="sm:hidden">
-        <NuxtLink v-if="!(isScrolled)" to="/" class="flex items-center">
+        <NuxtLink v-if="!isScrolled" to="/" class="flex items-center">
           <NuxtImg
             v-if="showIcon"
             :src="props.icon"
             alt="Logo Icon"
             class="h-7 sm:hidden"
           />
-          <div class="hidden sm:block">
-            <UiColorModeImage
-              light="/logo_light.svg"
-              dark="/logo_dark.svg"
-              alt="Logo Icon"
-              class="h-7"
-            />
-          </div>
+          <UiColorModeImage
+            v-if="showLogo"
+            light="/logo_light.svg"
+            dark="/logo_dark.svg"
+            alt="Logo"
+            class="h-7"
+          />
         </NuxtLink>
       </Transition>
       <div class="hidden sm:block">
         <UiColorModeImage
+          v-if="showLogo"
           light="/logo_light.svg"
           dark="/logo_dark.svg"
+          alt="Logo"
+          class="h-7"
+        />
+        <NuxtImg
+          v-else-if="showIcon"
+          :src="props.icon"
           alt="Logo Icon"
           class="h-7"
         />
@@ -76,14 +87,13 @@ const showIcon = computed(() => !!props.icon)
             alt="Logo Icon"
             class="h-7 sm:hidden"
           />
-          <div class="hidden sm:block">
-            <UiColorModeImage
-              light="/logo_light.svg"
-              dark="/logo_dark.svg"
-              alt="Logo Icon"
-              class="h-7"
-            />
-          </div>
+          <UiColorModeImage
+            v-if="showLogo"
+            light="/logo_light.svg"
+            dark="/logo_dark.svg"
+            alt="Logo"
+            class="h-7"
+          />
         </NuxtLink>
       </template>
     </ClientOnly>
