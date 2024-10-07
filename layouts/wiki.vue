@@ -36,11 +36,11 @@ const showSelect = computed(() => appConfig.wiki.mode === 'select')
 </script>
 
 <template>
-  <div class="relative mx-auto flex min-h-screen max-w-[1900px] flex-row justify-center bg-gray-b-0">
+  <div class="relative min-h-screen bg-gray-b-0">
     <div
       id="sidenav"
-      class="sticky hidden overflow-y-auto border-r border-gray-o-1 transition-all duration-300 ease-in-out lg:sticky lg:flex lg:h-screen lg:flex-col"
-      :class="{ 'w-[310px] xl:w-[450px]': isSidebarOpen, 'w-16': !isSidebarOpen }"
+      class="fixed left-0 top-0 z-10 hidden h-screen overflow-y-auto border-r border-gray-o-1 transition-all duration-300 ease-in-out lg:block"
+      :class="{ 'lg:w-[310px] xl:w-[450px]': isSidebarOpen, 'lg:w-16': !isSidebarOpen }"
     >
       <div class="flex justify-end p-2">
         <!-- <UiContentUserConfig
@@ -54,24 +54,33 @@ const showSelect = computed(() => appConfig.wiki.mode === 'select')
           />
         </UiButton> -->
       </div>
-      <ClientOnly v-if="isSidebarOpen ">
-        <UiNavigationTreeSubTabs
-          v-if="showTabs"
-          :current-nav-item="currentNavItem"
-          :navigation="navigation"
-          :is-active-route="isActiveRoute"
-          :tab-count="appConfig.wiki.tabs.count"
-          :show-icons="appConfig.wiki.tabs.showIcons"
-        />
-        <UiNavigationTreeSubSelect
-          v-if="showSelect"
-          :current-nav-item="currentNavItem"
-          :navigation="navigation"
-          :is-active-route="isActiveRoute"
-        />
-        <UiNavigationTreeSidebar :navigation="currentNavItemChildren" />
-      </ClientOnly>
+      <div class="mt-16">
+        <ClientOnly v-if="isSidebarOpen ">
+          <UiNavigationTreeSubTabs
+            v-if="showTabs"
+            :current-nav-item="currentNavItem"
+            :navigation="navigation"
+            :is-active-route="isActiveRoute"
+            :tab-count="appConfig.wiki.tabs.count"
+            :show-icons="appConfig.wiki.tabs.showIcons"
+          />
+          <UiNavigationTreeSubSelect
+            v-if="showSelect"
+            :current-nav-item="currentNavItem"
+            :navigation="navigation"
+            :is-active-route="isActiveRoute"
+          />
+          <UiNavigationTreeSidebar :navigation="currentNavItemChildren" />
+        </ClientOnly>
+      </div>
     </div>
-    <slot />
+    <div
+      class="min-h-screen"
+      :class="{ 'lg:pl-[310px] xl:pl-[450px]': isSidebarOpen, 'lg:pl-16': !isSidebarOpen }"
+    >
+      <div class="mx-auto max-w-[1900px]">
+        <slot />
+      </div>
+    </div>
   </div>
 </template>
