@@ -45,8 +45,8 @@ function openSubMenuIfNeeded(path: string) {
 
 onMounted(() => openSubMenuIfNeeded(route.path))
 
-const currentSubNav = computed(() => 
-  findSubNav(isSubmenuShown.value && currentSubmenuRoute.value ? currentSubmenuRoute.value : route.path)
+const currentSubNav = computed(() =>
+  findSubNav(isSubmenuShown.value && currentSubmenuRoute.value ? currentSubmenuRoute.value : route.path),
 )
 
 const showMainNav = computed(() => !isSubmenuShown.value)
@@ -62,7 +62,7 @@ function goBackToSubMenu() {
 
 <template>
   <nav class="flex h-[98%] flex-col transition-colors duration-300">
-    <div class="my-2 flex items-center justify-between px-6">
+    <div class=" flex items-center justify-between border-b border-border px-6 py-1">
       <UiButton
         v-if="!showMainNav"
         variant="link"
@@ -91,7 +91,7 @@ function goBackToSubMenu() {
       </div>
     </UiScrollArea>
 
-    <footer class="mt-auto border-t border-border pb-5 pt-1">
+    <footer class="mt-auto border-t border-border pb-3 pt-1">
       <div class="flex items-center justify-between px-3">
         <UiColorModeDropdown />
 
