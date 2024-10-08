@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
+
+// const isSidebarOpen = inject<Ref<boolean>>('isSidebarOpen')
+
+// Add this import if not already present
+import UiElementsDiscussion from '~/components/ui/elements/Discussion.vue'
 // import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 // import type { NavItem } from '@/types/navigation'
 // import { useUserTextConfig } from '~/composables/useUserTextConfig'
@@ -36,8 +41,6 @@ onMounted(() => {
     target: ref(document.getElementById(link.id)),
   })) ?? []
 })
-
-// const isSidebarOpen = inject<Ref<boolean>>('isSidebarOpen')
 </script>
 
 <template>
@@ -62,6 +65,10 @@ onMounted(() => {
       <div class="mt-2 flex justify-center">
         <UiElementsFeedback />
       </div>
+
+      <!-- Add the Discussion component here -->
+      <UiElementsDiscussion />
+
       <!-- Spacer -->
       <div class="h-56" />
     </div>

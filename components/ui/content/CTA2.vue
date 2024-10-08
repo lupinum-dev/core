@@ -36,20 +36,20 @@ const randomCTA = computed(() => ctaTexts[Math.floor(Math.random() * ctaTexts.le
 </script>
 
 <template>
-  <div class="not-prose space-md mb-8 mt-6 flex w-full items-center justify-between space-x-10 rounded-2xl bg-card p-5 ring-1 ring-border">
-    <Icon name="heroicons:clock-20-solid" class="size-10 flex-shrink-0 text-primary" />
+  <div class="not-prose mb-8 mt-6 flex w-full flex-col items-center rounded-2xl bg-card p-4 ring-1 ring-border sm:flex-row sm:items-center sm:justify-between sm:space-x-6 sm:p-5 md:space-x-10">
+    <Icon name="heroicons:clock-20-solid" class="mb-4 size-8 flex-shrink-0 text-primary sm:mb-0 sm:size-10" />
 
-    <div class="flex flex-1 flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between">
-      <div class="flex flex-col space-y-0.5 text-center sm:text-left">
+    <div class="flex flex-1 flex-col items-center space-y-4 text-center sm:flex-row sm:items-center sm:justify-between sm:space-y-0 sm:text-left lg:pr-1">
+      <div class="flex flex-col space-y-0.5">
         <div class="font-heading-med text-sm text-muted-foreground">
           {{ randomCTA.question }}
         </div>
-        <div class="font-heading text-lg text-foreground">
+        <div class="font-heading text-base text-foreground xl:text-lg">
           {{ randomCTA.statement }}
         </div>
       </div>
 
-      <UiButton variant="default">
+      <UiButton variant="default" class="mt-2 w-full sm:mt-0 sm:w-auto">
         {{ randomCTA.action }}
       </UiButton>
     </div>
