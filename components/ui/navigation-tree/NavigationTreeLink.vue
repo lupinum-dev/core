@@ -28,6 +28,7 @@ const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
       class="w-full gap-2 transition-all duration-200 ease-in-out"
       :as="props.to ? NuxtLink : 'button'"
       :to="props.to"
+      :class="{ 'bg-primary-foreground ': shouldHighlight }"
       @click="toggleHeaderExpansion"
     >
       <div class="flex w-full items-center gap-2 py-2">
@@ -41,7 +42,7 @@ const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
           <div class="flex items-center gap-3">
             <span
               class="truncate text-sm font-medium"
-              :class="{ 'font-semibold underline': shouldHighlight }"
+              :class="{ 'font-semibold': shouldHighlight }"
             >
               {{ props.title }}
 

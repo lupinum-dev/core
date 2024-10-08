@@ -42,7 +42,7 @@ onMounted(() => {
 
 <template>
   <div class="container relative flex w-full flex-grow px-0">
-    <div id="content" class="container left-0 top-0 mx-auto mt-36 min-w-0 max-w-[600px] px-3 xl:max-w-[700px] 2xl:max-w-[800px]">
+    <div id="content" class="container left-0 top-0 mx-auto mt-36 min-w-0  lg:max-w-[600px] lg:px-6 xl:max-w-[700px] xl:px-12 2xl:max-w-[800px]">
       <UiContentHeader :title="page?.title ?? ''" :description="page?.description ?? ''" />
 
       <ClientOnly>
@@ -67,7 +67,7 @@ onMounted(() => {
     </div>
 
     <!-- TOC on the right side, sticky -->
-    <div id="toc" class="sticky top-20 ml-8 hidden h-[calc(100vh-5rem)] w-[300px] overflow-y-auto p-6 lg:block xl:w-[420px]">
+    <div id="toc" class="sticky top-20 mr-auto hidden h-[calc(100vh-5rem)] w-[300px] overflow-y-auto px-3 py-6 lg:block xl:max-w-[420px] ">
       <ClientOnly>
         <UiContentTocDesktop :links="tocLinks" />
       </ClientOnly>

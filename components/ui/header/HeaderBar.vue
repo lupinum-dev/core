@@ -88,7 +88,7 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
         class="flex size-full flex-col"
         :class="[
 
-          { 'relative border bg-background/95 px-2 shadow-lg backdrop-blur-sm dark:shadow-gray-900': props.variant !== 'default' },
+          { 'relative border bg-background/95 px-2 shadow-lg backdrop-blur-sm dark:shadow-foreground/10': props.variant !== 'default' },
           isExpanded ? 'rounded-none ' : roundedClass,
         ]"
         :style="headerStyle"

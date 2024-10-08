@@ -39,7 +39,7 @@ const showSelect = computed(() => appConfig.wiki.mode === 'select')
   <div class="relative min-h-screen ">
     <div
       id="sidenav"
-      class="fixed left-0 top-0 z-10 hidden h-screen overflow-y-auto border-r border-border transition-all duration-300 ease-in-out lg:block lg:w-[270px] xl:w-[320px] 2xl:w-[400px]"
+      class="fixed left-0 top-0 z-10 mx-auto hidden h-screen overflow-y-auto border-r border-border transition-all duration-300 ease-in-out lg:block lg:w-[270px] xl:w-[320px] 2xl:w-[400px] 2xl:px-6"
     >
       <div class="flex justify-end p-2">
         <!-- <UiContentUserConfig

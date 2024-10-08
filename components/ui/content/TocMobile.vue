@@ -35,8 +35,8 @@ const topPosition = computed(() => {
     class="sticky isolate z-10 overflow-hidden border-b border-gray-o-1 bg-gray-b-0 text-sm transition-all duration-300 xl:hidden"
     :style="{ top: topPosition }"
   >
-    <LibPopover>
-      <LibPopoverTrigger
+    <UiPopover>
+      <UiPopoverTrigger
         class="inline-flex size-full items-center gap-2 text-nowrap px-4 py-2 text-left text-gray-t-2 md:px-3"
         aria-label="Table of Contents"
       >
@@ -45,10 +45,10 @@ const topPosition = computed(() => {
 
         <Icon name="lucide:chevron-right" class="-mx-1.5 size-4 shrink-0" />
         <span class="font-heading-med truncate text-[13px]">{{ activeLink || (props.links[0]?.text ?? '') }}</span>
-      </LibPopoverTrigger>
-      <LibPopoverContent align="start" class="ml-6 mt-0.5">
+      </UiPopoverTrigger>
+      <UiPopoverContent align="start" class="ml-6 mt-0.5">
         <UiWikiTocDesktop :links="props.links" class="px-3" />
-      </LibPopoverContent>
-    </LibPopover>
+      </UiPopoverContent>
+    </UiPopover>
   </div>
 </template>
