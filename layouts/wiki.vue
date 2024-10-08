@@ -61,7 +61,7 @@ watch(() => route.path, () => {
           />
         </UiButton> -->
       </div>
-      <div class="mt-16">
+      <div class="mt-28 2xl:mt-16">
         <ClientOnly v-if="isSidebarOpen ">
           <UiNavigationTreeSubTabs
             v-if="showTabs"

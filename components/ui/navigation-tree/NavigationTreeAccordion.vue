@@ -64,7 +64,5 @@ watch(isActive, (newValue) => {
 </template>
 
 <style scoped>
-.LibAccordionTrigger2 {
-  width: 100%;
-}
+
 </style>

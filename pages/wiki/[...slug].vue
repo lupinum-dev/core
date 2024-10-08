@@ -42,7 +42,7 @@ onMounted(() => {
 
 <template>
   <div class="container relative flex w-full flex-grow px-0">
-    <div id="content" class="container left-0 top-0 mx-auto mt-36 min-w-0  lg:max-w-[600px] lg:px-6 xl:max-w-[700px] xl:px-12 2xl:max-w-[800px]">
+    <div id="content" class="container left-0 top-0 mx-auto mt-24 min-w-0 lg:max-w-[600px] lg:px-6  xl:mt-32 xl:max-w-[700px] xl:px-12 2xl:mt-36 2xl:max-w-[800px]">
       <UiContentHeader :title="page?.title ?? ''" :description="page?.description ?? ''" />
 
       <ClientOnly>

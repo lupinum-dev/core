@@ -34,23 +34,27 @@ const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
       <div class="flex w-full items-center gap-2 py-2">
         <div
           v-if="props.icon"
-          class="from-fd-secondary flex size-6 items-center justify-center rounded-md border bg-gradient-to-b shadow-sm"
+          class="from-fd-secondary flex size-6 items-center justify-center rounded-md border bg-gradient-to-b shadow-sm flex-shrink-0"
         >
           <Icon :name="props.icon" class="size-[18px]" />
         </div>
-        <div class="flex flex-grow items-center justify-between">
-          <div class="flex items-center gap-3">
+        <div class="flex flex-grow items-center justify-between min-w-0">
+          <div class="flex items-center gap-3 min-w-0">
             <span
-              class="truncate text-sm font-medium"
+              class="text-sm font-medium flex-shrink-0"
               :class="{ 'font-semibold': shouldHighlight }"
             >
               {{ props.title }}
-
             </span>
-            <UiNavigationTreeTag v-if="props.status" variant="rounded" :type="props.status" />
+            <UiNavigationTreeTag
+              v-if="props.status"
+              variant="rounded"
+              :type="props.status"
+              class="flex-shrink truncate"
+            />
           </div>
 
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 flex-shrink-0">
             <Icon
               v-if="props.isAccordion"
               name="heroicons:chevron-down"

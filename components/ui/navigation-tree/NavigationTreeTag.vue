@@ -32,7 +32,7 @@ const tagStyles = computed(() => {
 </script>
 
 <template>
-  <span :class="`relative inline-flex items-center text-xs font-medium ${tagStyles}`">
+  <span :class="`relative inline-flex items-center text-xs font-medium ${tagStyles} truncate`">
     {{ props.type }}
     <template v-if="variant === 'dashed'">
       <span class="absolute inset-x-[-0.1875rem] -top-px block transform-gpu text-current">
