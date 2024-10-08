@@ -33,6 +33,14 @@ function toggleSidebar() {
 
 const showTabs = computed(() => appConfig.wiki.mode === 'tabs')
 const showSelect = computed(() => appConfig.wiki.mode === 'select')
+
+// We need this for the TOC, otherwise the marker will stay in the wrong position
+watch(() => route.path, () => {
+  // Reset scroll position when navigating to a new page
+  if (process.client) {
+    window.scrollTo(0, 0)
+  }
+}, { immediate: true })
 </script>
 
 <template>
