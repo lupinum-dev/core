@@ -61,8 +61,8 @@ const showLogo = computed(() => !isContentSite.value)
           />
           <UiColorModeImage
             v-else
-            light="/logo_light.svg"
-            dark="/logo_dark.svg"
+            :light="props.srcLight"
+            :dark="props.srcDark"
             alt="Logo"
             class="h-7"
           />
@@ -70,9 +70,8 @@ const showLogo = computed(() => !isContentSite.value)
       </Transition>
       <div class="hidden sm:block">
         <UiColorModeImage
-
-          light="/logo_light.svg"
-          dark="/logo_dark.svg"
+          :light="props.srcLight"
+          :dark="props.srcDark"
           alt="Logo"
           class="h-7"
         />
@@ -93,8 +92,8 @@ const showLogo = computed(() => !isContentSite.value)
           />
           <UiColorModeImage
             v-if="showLogo"
-            light="/logo_light.svg"
-            dark="/logo_dark.svg"
+            :light="props.srcLight"
+            :dark="props.srcDark"
             alt="Logo"
             class="h-7 "
           />
