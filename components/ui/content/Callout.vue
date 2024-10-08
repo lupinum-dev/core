@@ -76,17 +76,17 @@ const typeMapped = computed(() => {
 
 <template>
   <div
-    class="group relative block rounded-lg border-l-4 pl-4 pr-6 text-sm/6 font-normal last:mb-0"
+    class="group relative block rounded-lg border-l-4 pl-4 pr-6 text-sm/6  "
     :class="[typeMapped.borderColor, typeMapped.bgColor]"
   >
     <UiAccordion :default-value="props.closed ? undefined : 'item-1'" type="single" collapsible size="zero" variant="ghost">
       <UiAccordionItem value="item-1" class="border-none">
         <UiAccordionTrigger
-          class="flex w-full items-center justify-between"
+          class="mt-2 flex w-full items-center justify-between "
           :class="typeMapped.textColor"
         >
           <div class="flex items-center">
-            <Icon :name="typeMapped.icon" class="mr-2 size-5" />
+            <Icon :name="typeMapped.icon" class="mr-2 size-5 " />
             <span class="font-heading text-base sm:text-lg">{{ props.title }}</span>
           </div>
         </UiAccordionTrigger>

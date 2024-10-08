@@ -40,7 +40,7 @@ const props = defineProps({
 
       <div class="flex-1">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-          <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h1 class="font-heading text-2xl tracking-tight text-foreground sm:text-3xl">
             <slot name="title">
               {{ title }}
             </slot>

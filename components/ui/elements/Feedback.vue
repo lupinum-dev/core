@@ -53,7 +53,7 @@ function openDialog(emojiIndex: number) {
             type="button"
             @click="openDialog(index)"
           >
-            <Icon :name="icon" class="size-[18px] text-muted-foreground" />
+            <Icon :name="icon" class="size-[18px] text-foreground" />
           </button>
         </div>
       </div>

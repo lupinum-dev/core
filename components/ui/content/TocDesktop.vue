@@ -49,7 +49,7 @@ onUnmounted(() => {
     cancelAnimationFrame(rafId)
 })
 
-const Circle = h('div', { class: 'flex size-4 text-xs items-center justify-center text-white rounded-full bg-gray-o-3 mr-2' }, '1')
+const Circle = h('div', { class: 'flex size-4 xl:text-xs items-center justify-center text-primary-foreground rounded-full bg-primary mr-2' }, '1')
 </script>
 
 <template>
@@ -61,21 +61,21 @@ const Circle = h('div', { class: 'flex size-4 text-xs items-center justify-cente
   >
     <h3
       id="doc-outline-aria-label"
-      class="mb-3 text-sm font-semibold"
+      class="mb-3 text-sm font-semibold text-foreground"
     />
 
     <div class="relative pl-4">
       <div ref="marker" class="outline-marker" />
       <div class="vertical-line" />
 
-      <ul v-if="props.links.length" class="space-y-1 text-sm">
+      <ul v-if="props.links.length" class="space-y-1  text-sm">
         <li v-for="link in props.links" :key="link.id">
           <div class="flex items-center">
             <!-- TODO: With steps component the circle should be shown like Clerk Docs -->
             <Circle v-if="false" />
             <NuxtLink
               :href="`#${link.id}`"
-              class="block py-1 text-gray-t-3 transition-colors duration-200 hover:underline"
+              class="block py-1 text-muted-foreground transition-colors duration-200 hover:text-foreground hover:underline"
               :class="{ active: activeLink?.id === link.id }"
             >
               {{ link.text }}
@@ -88,7 +88,7 @@ const Circle = h('div', { class: 'flex size-4 text-xs items-center justify-cente
                 <Circle v-if="false" />
                 <NuxtLink
                   :href="`#${child.id}`"
-                  class="block py-1 text-gray-t-3 transition-colors duration-200 hover:underline"
+                  class="block py-1 text-muted-foreground transition-colors duration-200 hover:text-foreground hover:underline"
                   :class="{ active: activeLink?.id === child.id }"
                 >
                   {{ child.text }}
@@ -101,10 +101,10 @@ const Circle = h('div', { class: 'flex size-4 text-xs items-center justify-cente
     </div>
 
     <div class="mt-4">
-      <LibButton variant="link" class="flex items-center text-gray-t-3 opacity-75" @click="scrollToTop">
+      <UiButton variant="link" class="flex items-center text-muted-foreground opacity-75" @click="scrollToTop">
         <Icon name="i-heroicons-chevron-up" class="mr-1" />
         Back to Top
-      </LibButton>
+      </UiButton>
     </div>
     <div>
       <UiUserTextConfig trigger-button="Settings" />
@@ -114,17 +114,17 @@ const Circle = h('div', { class: 'flex size-4 text-xs items-center justify-cente
 
 <style scoped>
 .vertical-line {
-  @apply absolute top-0 bottom-0 left-0 w-px bg-gray-o-1;
+  @apply absolute top-0 bottom-0 left-0 w-px bg-border;
 }
 
 .outline-marker {
-  @apply absolute top-[33px] -left-px z-10 opacity-0 w-[3px] rounded-[2px] h-[18px] bg-prime-c-1;
+  @apply absolute top-[33px] -left-px z-10 opacity-0 w-[3px] rounded-[2px] h-[18px] bg-primary;
   transition:
     top 0.25s cubic-bezier(0, 1, 0.5, 1),
     background-color 0.5s,
     opacity 0.25s;
 }
 .active {
-  @apply text-prime-c-1 font-semibold;
+  @apply text-primary font-semibold;
 }
 </style>

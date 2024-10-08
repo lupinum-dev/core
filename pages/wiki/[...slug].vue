@@ -28,30 +28,28 @@ isContentSite.value = true
 //   description: page.value?.description ?? 'Default Description',
 // })
 
-// const tocLinks = ref<Array<{ id: string, text: string, target: Ref<HTMLElement | null> }>>([])
+const tocLinks = ref<Array<{ id: string, text: string, target: Ref<HTMLElement | null> }>>([])
 
-// onMounted(() => {
-//   tocLinks.value = page.value?.body?.toc?.links?.map((link: any) => ({
-//     ...link,
-//     target: ref(document.getElementById(link.id)),
-//   })) ?? []
-// })
+onMounted(() => {
+  tocLinks.value = page.value?.body?.toc?.links?.map((link: any) => ({
+    ...link,
+    target: ref(document.getElementById(link.id)),
+  })) ?? []
+})
 
 // const isSidebarOpen = inject<Ref<boolean>>('isSidebarOpen')
 </script>
 
 <template>
-  <div class="container relative w-full flex-grow px-0">
-    <div id="content" class="container left-0 top-0 mx-auto mt-36 min-w-0 max-w-[700px] px-3  2xl:max-w-[800px]">
+  <div class="container relative flex w-full flex-grow px-0">
+    <div id="content" class="container left-0 top-0 mx-auto mt-36 min-w-0 max-w-[600px] px-3 xl:max-w-[700px] 2xl:max-w-[800px]">
       <UiContentHeader :title="page?.title ?? ''" :description="page?.description ?? ''" />
 
       <ClientOnly>
         <UiContentCTA />
       </ClientOnly>
 
-      <div
-        class="text-desc-1  prose w-full rounded-lg font-desc text-muted-foreground dark:prose-invert "
-      >
+      <div class="text-desc-1 prose w-full rounded-lg font-desc text-muted-foreground dark:prose-invert">
         <ContentRenderer v-if="page?.body" :value="page" />
         <hr v-if="surround?.length">
       </div>
@@ -67,18 +65,14 @@ isContentSite.value = true
       <!-- Spacer -->
       <div class="h-56" />
     </div>
-  </div>
 
-  <!-- TOC visibility is now controlled by isSidebarOpen -->
-  <!-- <div
-    id="toc"
-    class="bg-gray-b-1/75 w-[300px] p-6 xl:w-[420px]"
-    :class="{ 'hidden xl:block': isSidebarOpen, 'hidden lg:block': !isSidebarOpen }"
-  >
-    <ClientOnly>
-      <UiWikiTocDesktop :links="tocLinks" class="sticky top-20" />
-    </ClientOnly>
-  </div> -->
+    <!-- TOC on the right side, sticky -->
+    <div id="toc" class="sticky top-20 ml-8 hidden h-[calc(100vh-5rem)] w-[300px] overflow-y-auto p-6 lg:block xl:w-[420px]">
+      <ClientOnly>
+        <UiContentTocDesktop :links="tocLinks" />
+      </ClientOnly>
+    </div>
+  </div>
 </template>
 
 <style>

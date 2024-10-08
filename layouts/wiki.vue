@@ -39,8 +39,7 @@ const showSelect = computed(() => appConfig.wiki.mode === 'select')
   <div class="relative min-h-screen ">
     <div
       id="sidenav"
-      class="fixed left-0 top-0 z-10 hidden h-screen overflow-y-auto border-r border-border transition-all duration-300 ease-in-out lg:block"
-      :class="{ 'lg:w-[310px] xl:w-[450px]': isSidebarOpen, 'lg:w-16': !isSidebarOpen }"
+      class="fixed left-0 top-0 z-10 hidden h-screen overflow-y-auto border-r border-border transition-all duration-300 ease-in-out lg:block lg:w-[270px] xl:w-[320px] 2xl:w-[400px]"
     >
       <div class="flex justify-end p-2">
         <!-- <UiContentUserConfig
@@ -76,7 +75,7 @@ const showSelect = computed(() => appConfig.wiki.mode === 'select')
     </div>
     <div
       class="min-h-screen"
-      :class="{ 'lg:pl-[310px] xl:pl-[450px]': isSidebarOpen, 'lg:pl-16': !isSidebarOpen }"
+      :class="{ 'lg:pl-[290px] xl:pl-[300px] 2xl:pl-[380px]': isSidebarOpen, 'lg:pl-16': !isSidebarOpen }"
     >
       <div class="mx-auto max-w-[1900px]">
         <slot />
