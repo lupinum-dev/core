@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { useScroll, useScrollLock } from '@vueuse/core'
+import { useScrollLock } from '@vueuse/core'
 import { onMounted, provide, ref, watch } from 'vue'
 import { ConfigProvider } from 'radix-vue'
-import { useAdBannerVisibility } from '@/composables/useAdBannerVisibility'
+
+import { configure } from 'vee-validate'
 
 const headerState = ref(false)
 provide('headerState', headerState)
@@ -32,14 +33,23 @@ const navigationWiki = computed(() => {
 })
 
 provide('navigation-wiki', navigationWiki)
+
+configure({
+  validateOnBlur: true,
+  validateOnChange: true,
+  validateOnInput: false,
+  validateOnModelUpdate: false,
+})
 </script>
 
 <template>
   <ConfigProvider :use-id="useIdFunction">
     <SectionsHeader />
-
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <ClientOnly>
+      <UiSearchModal />
+    </ClientOnly>
   </ConfigProvider>
 </template>

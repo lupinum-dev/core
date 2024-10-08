@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils'
 
 const props = withDefaults(defineProps<DialogContentProps & {
   class?: HTMLAttributes['class']
-  variant?: 'default' | 'large' | 'full'
+  variant?: 'default' | 'large' | 'full' | 'search'
   closeButton?: boolean
 }>(), {
   closeButton: true,

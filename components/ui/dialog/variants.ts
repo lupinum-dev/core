@@ -8,6 +8,7 @@ export const dialogContentVariants = cva(
         default: 'top-1/2 grid w-full max-w-lg -translate-y-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%]',
         large: 'top-[5vh] grid h-[70vh] w-[90vw] max-w-[900px] data-[state=closed]:slide-out-to-top-[5%] data-[state=open]:slide-in-from-top-[5%]',
         full: 'top-1/2 size-full -translate-y-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%]',
+        search: 'top-1/2 size-full -translate-y-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%] sm:top-[5vh] sm:grid sm:h-[70vh] sm:w-[90vw] sm:max-w-[900px] sm:translate-y-0 sm:data-[state=closed]:slide-out-to-top-[5%] sm:data-[state=open]:slide-in-from-top-[5%]',
       },
     },
     defaultVariants: {

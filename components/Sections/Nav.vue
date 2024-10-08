@@ -66,10 +66,10 @@ const components: { title: string, href: string, description: string }[] = [
             <li>
               <UiNavigationMenuLink as-child>
                 <a
-                  href="/docs"
+                  href="http://localhost:3000/wiki/fundamentals/intro"
                   class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                 >
-                  <div class="text-sm font-medium leading-none">Introduction</div>
+                  <div class="text-sm font-medium leading-none">Fundamentals</div>
                   <p class="line-clamp-2 text-sm leading-snug text-muted-foreground">
                     Re-usable components built using Radix UI and Tailwind CSS.
                   </p>

@@ -107,22 +107,12 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
               <slot name="right" />
             </div>
 
-            <UiButton variant="ghost" class="hidden items-center sm:flex">
-              <Icon name="heroicons:magnifying-glass-20-solid" class="size-5" />
-              <span class="ml-1 hidden text-xs text-gray-400 sm:block lg:hidden">Search ..</span>
-              <span class="ml-1 hidden text-xs text-gray-400 lg:inline-block">Search Site ⌘ + K</span>
-            </UiButton>
-
-            <UiButton variant="ghost" size="sm" class="sm:hidden">
-              <Icon name="heroicons:magnifying-glass-20-solid" class="size-5" />
-            </UiButton>
+            <UiSearchButton />
 
             <div class="hidden lg:block">
               <UiColorModeDropdown variant="ghost" />
 
-              <UiButton variant="ghost" size="sm" class="">
-                <UiElementsLanguageDropdown />
-              </UiButton>
+              <UiElementsLanguageDropdown />
             </div>
             <UiButton variant="ghost" size="sm" class="lg:hidden" @click="toggleHeaderExpansion">
               <Icon

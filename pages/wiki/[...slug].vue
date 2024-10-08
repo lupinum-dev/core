@@ -62,8 +62,7 @@ isContentSite.value = true
 
       <UiContentSurround :surround="surround ?? []" />
       <div class="mt-2 flex justify-center">
-        <!-- DOES NOT WORK -->
-        <!-- <UiElementsFeedback /> -->
+        <UiElementsFeedback />
       </div>
       <!-- Spacer -->
       <div class="h-56" />

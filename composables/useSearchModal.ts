@@ -1,11 +1,19 @@
 import { ref } from 'vue'
 
-export function dialogState() {
-  const isOpen = ref(false)
+const isOpen = ref(false)
+
+export function useSearchModal() {
+  function openDialog() {
+    isOpen.value = true
+  }
 
   function closeDialog() {
     isOpen.value = false
   }
 
-  return [isOpen, closeDialog]
+  return {
+    isOpen,
+    openDialog,
+    closeDialog
+  }
 }

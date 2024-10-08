@@ -49,7 +49,7 @@ const currentLocaleIcon = computed(() => getLocaleIcon(locale.value))
       <UiDropdownMenuItem
         v-for="l in locales"
         :key="l.code"
-        :class="{ 'bg-gray-i-1': locale === l.code }"
+        :class="{ 'bg-accent text-accent-foreground': locale === l.code }"
         @click="setLanguage(l.code)"
       >
         <Icon :name="getLocaleIcon(l.code)" class="mr-2 size-4" />

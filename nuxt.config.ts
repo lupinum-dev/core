@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+import { defaultLocale, locales, pages, siteUrl, strategy } from './nuxt.config-utils'
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
@@ -19,6 +22,10 @@ export default defineNuxtConfig({
     '@nuxt/test-utils/module',
   ],
 
+  site: {
+    url: siteUrl,
+  },
+
   colorMode: {
     classPrefix: '',
     classSuffix: '',
@@ -31,4 +38,31 @@ export default defineNuxtConfig({
       fields: ['group', 'description', 'duration', 'icon', 'status'],
     },
   },
+  // https://github.com/nuxt/nuxt/issues/27544
+  vite: {
+    optimizeDeps: {
+      exclude: ['vee-validate'],
+    },
+  },
+
+  // 3. Internationalization
+  i18n: {
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    },
+    strategy,
+    defaultLocale,
+    locales,
+    customRoutes: 'config',
+    pages,
+  },
+
+  runtimeConfig: {
+    public: {
+      siteUrl,
+    },
+  },
+
 })

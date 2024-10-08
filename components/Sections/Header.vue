@@ -16,6 +16,7 @@ const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.
 <template>
   <!-- Default Header -->
   <!-- TODO Abstract everything what is not needed away -->
+
   <UiHeaderWrapper>
     <UiHeaderAd cookie-key="test2" class="bg-accent-foreground text-background">
       <div class="flex flex-row gap-4 text-sm sm:gap-7 sm:text-base">
@@ -27,6 +28,7 @@ const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.
         </div>
       </div>
     </UiHeaderAd>
+
     <UiHeaderBar variant="bar" rounded="2xl">
       <template #left>
         <!-- TODO Make SSR compatible, currently hydration error -->
