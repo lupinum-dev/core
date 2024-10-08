@@ -93,7 +93,7 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
         ]"
         :style="headerStyle"
       >
-        <div class="flex items-center justify-between py-1.5">
+        <div class="mt-1.5 flex items-center justify-between sm:mt-1">
           <div class="flex h-full items-center">
             <slot name="left" />
           </div>
@@ -117,12 +117,13 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
               <Icon name="heroicons:magnifying-glass-20-solid" class="size-5" />
             </UiButton>
 
-            <UiColorModeDropdown variant="ghost" class="hidden lg:block" />
+            <div class="hidden lg:block">
+              <UiColorModeDropdown variant="ghost" />
 
-            <UiButton variant="ghost" size="sm" class="hidden  lg:block">
-              <Icon name="heroicons:language-20-solid" class="size-5" />
-            </UiButton>
-
+              <UiButton variant="ghost" size="sm" class="">
+                <UiElementsLanguageDropdown />
+              </UiButton>
+            </div>
             <UiButton variant="ghost" size="sm" class="lg:hidden" @click="toggleHeaderExpansion">
               <Icon
                 :name="isExpanded ? 'heroicons:x-mark-20-solid' : 'heroicons:bars-3-bottom-right-20-solid'"

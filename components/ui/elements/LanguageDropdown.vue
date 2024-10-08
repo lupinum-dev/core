@@ -28,9 +28,9 @@ const currentLocaleIcon = computed(() => getLocaleIcon(locale.value))
 </script>
 
 <template>
-  <LibDropdownMenu>
-    <LibDropdownMenuTrigger as-child>
-      <LibButton
+  <UiDropdownMenuRoot>
+    <UiDropdownMenuTrigger as-child>
+      <UiButton
         :size="props.displayType === 'icon' ? 'icon' : 'default'"
         :variant="props.variant"
       >
@@ -43,10 +43,10 @@ const currentLocaleIcon = computed(() => getLocaleIcon(locale.value))
           {{ currentLocaleText }}
           <Icon name="heroicons:chevron-down" class="ml-2 size-4" />
         </template>
-      </LibButton>
-    </LibDropdownMenuTrigger>
-    <LibDropdownMenuContent align="end">
-      <LibDropdownMenuItem
+      </UiButton>
+    </UiDropdownMenuTrigger>
+    <UiDropdownMenuContent align="end">
+      <UiDropdownMenuItem
         v-for="l in locales"
         :key="l.code"
         :class="{ 'bg-gray-i-1': locale === l.code }"
@@ -54,9 +54,9 @@ const currentLocaleIcon = computed(() => getLocaleIcon(locale.value))
       >
         <Icon :name="getLocaleIcon(l.code)" class="mr-2 size-4" />
         {{ l.name }}
-      </LibDropdownMenuItem>
-    </LibDropdownMenuContent>
-  </LibDropdownMenu>
+      </UiDropdownMenuItem>
+    </UiDropdownMenuContent>
+  </UiDropdownMenuRoot>
 </template>
 
 <i18n lang="yaml">

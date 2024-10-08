@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <UiCallout :title="props.title" type="warning">
+  <UiContentCallout :title="props.title" type="warning">
     <slot />
-  </UiCallout>
+  </UiContentCallout>
 </template>

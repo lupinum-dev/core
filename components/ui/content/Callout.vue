@@ -76,12 +76,12 @@ const typeMapped = computed(() => {
 
 <template>
   <div
-    class="group relative my-5 block rounded-lg border-l-4 pl-4 pr-6 text-sm/6 font-normal last:mb-0"
+    class="group relative block rounded-lg border-l-4 pl-4 pr-6 text-sm/6 font-normal last:mb-0"
     :class="[typeMapped.borderColor, typeMapped.bgColor]"
   >
-    <LibAccordion :default-value="props.closed ? undefined : 'item-1'" type="single" collapsible>
-      <LibAccordionItem value="item-1" class="border-none">
-        <LibAccordionTrigger
+    <UiAccordion :default-value="props.closed ? undefined : 'item-1'" type="single" collapsible size="zero" variant="ghost">
+      <UiAccordionItem value="item-1" class="border-none">
+        <UiAccordionTrigger
           class="flex w-full items-center justify-between"
           :class="typeMapped.textColor"
         >
@@ -89,13 +89,13 @@ const typeMapped = computed(() => {
             <Icon :name="typeMapped.icon" class="mr-2 size-5" />
             <span class="font-heading text-base sm:text-lg">{{ props.title }}</span>
           </div>
-        </LibAccordionTrigger>
-        <LibAccordionContent>
-          <div class="prose-primary prose max-w-none pb-4 dark:prose-invert">
+        </UiAccordionTrigger>
+        <UiAccordionContent>
+          <div class="prose-primary prose max-w-none  dark:prose-invert">
             <ContentSlot :use="$slots.default" unwrap="p" />
           </div>
-        </LibAccordionContent>
-      </LibAccordionItem>
-    </LibAccordion>
+        </UiAccordionContent>
+      </UiAccordionItem>
+    </UiAccordion>
   </div>
 </template>
