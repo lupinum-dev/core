@@ -1,4 +1,4 @@
-import type { MeilisearchHit } from '../types/search'
+import type { MeilisearchHit } from '../../types/search'
 
 export function truncateContent(content: string, searchQuery: string, maxLength = 250): string {
   const searchTerms = searchQuery.trim().split(/[\s+,]+/).filter(term => term.length > 0)

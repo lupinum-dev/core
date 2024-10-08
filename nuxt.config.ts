@@ -26,6 +26,10 @@ export default defineNuxtConfig({
     url: siteUrl,
   },
 
+  future: {
+    compatibilityVersion: 4,
+  },
+
   colorMode: {
     classPrefix: '',
     classSuffix: '',

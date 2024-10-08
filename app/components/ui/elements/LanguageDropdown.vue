@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getLocaleIcon, locales } from '../../../nuxt.config-utils'
+import { getLocaleIcon, locales } from '../../../../nuxt.config-utils'
 
 interface Props {
   variant?: 'default' | 'ghost' | 'link' | 'destructive' | 'outline' | 'secondary'

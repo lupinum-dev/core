@@ -1,5 +1,5 @@
 import { MeiliSearch } from 'meilisearch'
-import type { MeilisearchResponse } from '../types/search'
+import type { MeilisearchResponse } from '../../types/search'
 
 export function useMeiliSearch() {
   const client = ref<MeiliSearch>()
