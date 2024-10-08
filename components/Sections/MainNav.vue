@@ -3,59 +3,22 @@ import { useRoute } from 'vue-router'
 import { computed, inject, ref } from 'vue'
 import { useSubMenu } from '~/composables/useSubMenu'
 import { NuxtLink } from '#components'
+import { useAppConfig } from '#imports'
 
 interface NavLink {
   label: string
   href?: string
   icon?: string
+  type?: string
   childrenOpen?: boolean
-  childrenTrailing?: boolean
   children?: NavLink[]
   showSubmenu?: boolean
 }
-const navLinks = ref<NavLink[]>([
-  { label: 'Home', href: '/', icon: 'lucide:home' },
-  {
-    label: 'Wiki',
-    icon: 'lucide:book-open',
-    childrenOpen: true,
-    children: [
-      { label: 'Getting Started', href: '/wiki/fundamentals', showSubmenu: true },
-      { label: 'Core Concepts', href: '/wiki/intermediate', showSubmenu: true },
-      { label: 'Advanced Topics', href: '/wiki/queen-rearing', showSubmenu: true },
-    ],
-  },
-  {
-    label: 'Docs',
-    icon: 'lucide:file-text',
-    childrenOpen: true,
-    childrenTrailing: false,
-    children: [
-      { label: 'API Reference', href: '/docs/api' },
-      { label: 'Components', href: '/docs/components' },
-      { label: 'Guides', href: '/docs/guides' },
-    ],
-  },
-  {
-    label: 'Courses',
-    icon: 'lucide:graduation-cap',
-    children: [
-      { label: 'API Reference', href: '/docs/api' },
-      { label: 'Components', href: '/docs/components' },
-      { label: 'Guides', href: '/docs/guides' },
-    ],
-  },
-  { label: 'Videos', href: '/videos', icon: 'lucide:video' },
-  { label: 'Course', href: '/course', icon: 'lucide:book' },
-  { label: 'Blog', href: '/blog', icon: 'lucide:pen-tool', showSubmenu: true },
-  { label: 'Contact', href: '/contact', icon: 'lucide:mail' },
-])
 
-const socials = [
-  { icon: 'mdi:github', href: 'https://github.com', label: 'GitHub' },
-  { icon: 'mdi:twitter', href: 'https://twitter.com', label: 'Twitter' },
-  { icon: 'mdi:linkedin', href: 'https://linkedin.com', label: 'LinkedIn' },
-]
+const appConfig = useAppConfig()
+const navLinks = ref<NavLink[]>(appConfig.navigation.items)
+
+const socials = ref<NavLink[]>(appConfig.socials)
 
 const route = useRoute()
 const activeRoute = computed(() => route.path)
@@ -112,7 +75,7 @@ function handleItemClick(showSubmenu: boolean | undefined, href: string | undefi
                   >
                     {{ child.label }}
                     <Icon
-                      v-if="link.childrenTrailing !== false"
+                      v-if="link.type !== 'links'"
                       name="lucide:chevron-right"
                       class="ml-4 size-4"
                     />

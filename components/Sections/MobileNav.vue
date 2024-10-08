@@ -5,14 +5,6 @@ import { useSubMenu } from '~/composables/useSubMenu'
 
 const { currentSubmenuRoute, isSubmenuShown, closeSubmenu, openSubmenu } = useSubMenu()
 
-const selectedLanguage = ref('en')
-
-const languages = [
-  { code: 'en', label: 'English' },
-  { code: 'es', label: 'Español' },
-  { code: 'fr', label: 'Français' },
-]
-
 const subNavigations = [
   {
     label: 'Wiki',
@@ -91,24 +83,11 @@ function goBackToSubMenu() {
       </div>
     </UiScrollArea>
 
-    <footer class="mt-auto border-t border-border pb-3 pt-1">
+    <footer class="mt-auto border-t border-border pb-5 pt-4">
       <div class="flex items-center justify-between px-3">
         <UiColorModeDropdown />
 
-        <UiDropdownMenuRoot>
-          <UiDropdownMenuTrigger as-child>
-            <UiButton variant="ghost">
-              <Icon :name="`emojione:flag-for-${selectedLanguage === 'en' ? 'united-states' : selectedLanguage === 'es' ? 'spain' : 'france'}`" class="mr-2 size-5" />
-              {{ languages.find(lang => lang.code === selectedLanguage)?.label }}
-            </UiButton>
-          </UiDropdownMenuTrigger>
-          <UiDropdownMenuContent align="end">
-            <UiDropdownMenuItem v-for="lang in languages" :key="lang.code" @click="selectedLanguage = lang.code">
-              <Icon :name="`emojione:flag-for-${lang.code === 'en' ? 'united-states' : lang.code === 'es' ? 'spain' : 'france'}`" class="mr-2 size-4" />
-              {{ lang.label }}
-            </UiDropdownMenuItem>
-          </UiDropdownMenuContent>
-        </UiDropdownMenuRoot>
+        <UiElementsLanguageDropdown display-type="text" />
       </div>
     </footer>
   </nav>
