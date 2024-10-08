@@ -18,6 +18,8 @@ interface Props {
   rounded?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full' | 'none'
 }
 
+const appConfig = useAppConfig()
+
 const { isVisible } = useAdBannerVisibility()
 
 const isExpanded = ref(false)
@@ -27,7 +29,7 @@ const isExpanded = ref(false)
 const headerHeight = computed(() =>
   isExpanded.value
     ? '100dvh'
-    : '50px',
+    : appConfig.header.headerHeight,
 )
 
 const headerState = inject('headerState', ref(false))

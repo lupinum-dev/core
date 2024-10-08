@@ -9,7 +9,8 @@ const isMobileScreen = computed(() => width.value < 640)
 const isTabletScreen = computed(() => width.value < 1024)
 
 // Content Site Handling
-const contentRoutes = ['/wiki', '/blog', '/showcase']
+const contentRoutes = useAppConfig().navigation.contentRoutes
+
 const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.startsWith(path)))
 </script>
 

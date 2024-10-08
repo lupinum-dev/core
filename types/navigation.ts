@@ -1,10 +1,11 @@
-export interface NavItem {
-  title: string
-  _path: string
-  children?: NavItem[]
-  icon?: string
-  group?: string
-  firstLink?: string
+export interface NavigationItem {
+  label: string
+  href: string
+  type?: 'links' | 'wiki' | 'blog' | 'showcase'
+  contentSite?: boolean
+  children?: {
+    label: string
+    href: string
+    description?: string
+  }[]
 }
-
-export type Navigation = NavItem[]

@@ -32,12 +32,12 @@ const topPosition = computed(() => {
 
 <template>
   <div
-    class="sticky isolate z-10 overflow-hidden border-b border-gray-o-1 bg-gray-b-0 text-sm transition-all duration-300 xl:hidden"
+    class="sticky isolate z-10 overflow-hidden border-b border-border bg-background text-sm transition-all duration-300 xl:hidden"
     :style="{ top: topPosition }"
   >
     <UiPopover>
       <UiPopoverTrigger
-        class="inline-flex size-full items-center gap-2 text-nowrap px-4 py-2 text-left text-gray-t-2 md:px-3"
+        class="inline-flex size-full items-center gap-2 text-nowrap px-4 py-2 text-left text-muted-foreground md:px-3"
         aria-label="Table of Contents"
       >
         <Icon name="lucide:text" class="size-4 shrink-0" />
