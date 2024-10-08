@@ -28,6 +28,8 @@ watch(isScrolled, (newValue) => {
     delayedIsScrolled.value = false
   }
 })
+
+const { activeLink } = useSharedTocState()
 </script>
 
 <template>
@@ -40,10 +42,13 @@ watch(isScrolled, (newValue) => {
     <span
       class="font-heading-med max-w-[28ch] truncate text-xs transition-all duration-300"
     >
-
-      {{ currentText }}
-
+      <template v-if="activeLink">
+        {{ activeLink }}
+      </template>
+      <div v-else class="flex items-center gap-2">
+        On this page
+        <Icon name="heroicons:chevron-down" class=" size-4" />
+      </div>
     </span>
-    <Icon v-if="y === 0" name="heroicons:chevron-down" class=" size-4" />
   </UiButton>
 </template>
