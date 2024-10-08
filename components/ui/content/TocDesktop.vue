@@ -16,7 +16,9 @@ const container = ref<HTMLElement | null>(null)
 const marker = ref<HTMLElement | null>(null)
 
 const { setActiveLink, activeLink, initializeActiveLink } = useActiveAnchor(container, marker, props.links)
-const { setActiveLink: setSharedActiveLink } = useSharedTocState()
+const { setActiveLink: setSharedActiveLink, setTocItems } = useSharedTocState()
+
+setTocItems(props.links)
 
 let rafId: number | null = null
 
