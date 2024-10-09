@@ -23,7 +23,7 @@ const appConfig = useAppConfig()
 </script>
 
 <template>
-  <UiPopover>
+  <UiPopover v-if="tocItems.length > 0">
     <UiPopoverTrigger>
       <UiButton
         variant="ghost"

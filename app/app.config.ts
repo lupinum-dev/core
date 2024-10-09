@@ -19,22 +19,30 @@ export default defineAppConfig({
     },
     headerHeight: '50px',
     adBannerHeight: '--header-ad-height', // CHANGE IN CSS
-    hamburgerIcon: 'heroicons:bars-3-bottom-right-20-solid',
-    closeIcon: 'lucide:x',
+    hamburgerIcon: 'heroicons:bars-3-bottom-right-16-solid',
+    closeIcon: 'heroicons:x-mark-16-solid',
     toc: {
       showToc: true,
-      icon: 'lucide:book-open',
+      icon: 'heroicons:book-open-16-solid',
     },
+    searchIcon: 'heroicons:magnifying-glass-16-solid',
+    languageDropdownIcon: 'heroicons:language-16-solid',
+  },
+  colorMode: {
+    lightModeIcon: 'heroicons:sun-16-solid',
+    darkModeIcon: 'heroicons:moon-16-solid',
+    systemModeIcon: 'heroicons:cog-6-tooth-16-solid',
   },
   navigation: {
     contentRoutes: ['/references', '/wiki', '/blog', '/contact'],
+    chevronIcon: 'heroicons:chevron-down-16-solid',
     items: [
-      { label: 'Home', href: '/', icon: 'lucide:home' },
+      { label: 'Home', href: '/', icon: 'heroicons:home-16-solid' },
       {
         label: 'Services',
         href: '/services',
         type: 'links',
-        icon: 'lucide:file-text',
+        icon: 'heroicons:document-text-20-solid',
         childrenOpen: true,
         children: [
           { label: 'Web', href: '/services/web', description: 'Explore our web development services' },
@@ -42,12 +50,12 @@ export default defineAppConfig({
           { label: 'Design', href: '/services/design', description: 'Learn about our design services' },
         ],
       },
-      { label: 'References', type: 'showcase', href: '/references', icon: 'lucide:star' },
+      { label: 'References', type: 'showcase', href: '/references', icon: 'heroicons:star-20-solid' },
       {
         label: 'Wiki',
         href: '/wiki',
         type: 'wiki',
-        icon: 'lucide:book-open',
+        icon: 'heroicons:book-open-20-solid',
         childrenOpen: true,
         children: [
           { label: 'Web Development', href: '/wiki/web', description: 'Explore our web development services', showSubmenu: true },
@@ -59,14 +67,14 @@ export default defineAppConfig({
         label: 'Blog',
         type: 'blog',
         href: '/blog',
-        icon: 'lucide:pen-tool',
+        icon: 'heroicons:pencil-square-20-solid',
       },
-      { label: 'Contact', href: '/contact', icon: 'lucide:mail' },
+      { label: 'Contact', href: '/contact', icon: 'heroicons:envelope-20-solid' },
     ],
   },
   socials: [
-    { icon: 'mdi:github', href: 'https://github.com', label: 'GitHub' },
-    { icon: 'mdi:twitter', href: 'https://twitter.com', label: 'Twitter' },
-    { icon: 'mdi:linkedin', href: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: 'heroicons:code-bracket-square-20-solid', href: 'https://github.com', label: 'GitHub' },
+    { icon: 'heroicons:chat-bubble-left-right-20-solid', href: 'https://twitter.com', label: 'Twitter' },
+    { icon: 'heroicons:briefcase-20-solid', href: 'https://linkedin.com', label: 'LinkedIn' },
   ],
 })

@@ -17,17 +17,19 @@ const delegatedProps = computed(() => {
 })
 
 const forwardedProps = useForwardProps(delegatedProps)
+
+const appConfig = useAppConfig()
 </script>
 
 <template>
   <NavigationMenuTrigger
     v-bind="forwardedProps"
-    :class="cn(navigationMenuTriggerStyle(), 'group', props.class)"
+    :class="cn(navigationMenuTriggerStyle(), 'group flex items-center', props.class)"
   >
     <slot />
     <Icon
-      name="heroicons:chevron-down-20-solid"
-      class="relative top-px ml-1 size-3 transition duration-200 group-data-[state=open]:rotate-180"
+      :name="appConfig.navigation.chevronIcon"
+      class="relative  ml-1 size-3 transition duration-200 group-data-[state=open]:rotate-180"
       aria-hidden="true"
     />
   </NavigationMenuTrigger>

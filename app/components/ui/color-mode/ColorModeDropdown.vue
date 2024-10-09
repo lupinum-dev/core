@@ -25,6 +25,8 @@ const currentModeText = computed(() => {
     default: return 'System'
   }
 })
+
+const appConfig = useAppConfig()
 </script>
 
 <template>
@@ -36,8 +38,8 @@ const currentModeText = computed(() => {
         v-bind="$attrs"
       >
         <template v-if="props.displayType === 'icon'">
-          <Icon name="heroicons:moon" class="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Icon name="heroicons:sun" class="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Icon :name="appConfig.colorMode.darkModeIcon" class="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Icon :name="appConfig.colorMode.lightModeIcon" class="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span class="sr-only">Toggle theme</span>
         </template>
         <template v-else>
@@ -54,21 +56,21 @@ const currentModeText = computed(() => {
         :class="{ 'bg-accent text-accent-foreground': colorMode.preference === 'light' }"
         @click="setColorMode('light')"
       >
-        <Icon name="heroicons:sun" class="mr-2 size-4" />
+        <Icon :name="appConfig.colorMode.lightModeIcon" class="mr-2 size-4" />
         Light
       </UiDropdownMenuItem>
       <UiDropdownMenuItem
         :class="{ 'bg-accent text-accent-foreground': colorMode.preference === 'dark' }"
         @click="setColorMode('dark')"
       >
-        <Icon name="heroicons:moon" class="mr-2 size-4" />
+        <Icon :name="appConfig.colorMode.darkModeIcon" class="mr-2 size-4" />
         Dark
       </UiDropdownMenuItem>
       <UiDropdownMenuItem
         :class="{ 'bg-accent text-accent-foreground': colorMode.preference === 'system' }"
         @click="setColorMode('system')"
       >
-        <Icon name="heroicons:cog-6-tooth" class="mr-2 size-4" />
+        <Icon :name="appConfig.colorMode.systemModeIcon" class="mr-2 size-4" />
         System
       </UiDropdownMenuItem>
     </UiDropdownMenuContent>

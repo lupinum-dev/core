@@ -35,7 +35,7 @@ const currentLocaleIcon = computed(() => getLocaleIcon(locale.value))
         :variant="props.variant"
       >
         <template v-if="props.displayType === 'icon'">
-          <Icon name="heroicons:language-20-solid" class="size-[1.2rem]" />
+          <Icon :name="appConfig.header.languageDropdownIcon" class="size-[1.2rem]" />
           <span class="sr-only">{{ t('language_toggle') }}</span>
         </template>
         <template v-else>
