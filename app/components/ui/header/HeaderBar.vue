@@ -82,7 +82,7 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
         ]"
         :style="headerStyle"
       >
-        <div class="mt-1.5 flex items-center justify-between sm:mt-1">
+        <div class=" mt-1 flex items-center justify-between">
           <div class="flex h-full items-center">
             <slot name="left" />
           </div>

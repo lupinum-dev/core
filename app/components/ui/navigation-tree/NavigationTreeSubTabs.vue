@@ -15,8 +15,6 @@ const props = withDefaults(
   },
 )
 
-const router = useRouter()
-
 async function handleTabChange(value: string) {
   const selectedItem = props.navigation.find(item => item._path === value)
   if (selectedItem) {

@@ -25,6 +25,8 @@ const currentLocaleText = computed(() => {
 })
 
 const currentLocaleIcon = computed(() => getLocaleIcon(locale.value))
+
+const appConfig = useAppConfig()
 </script>
 
 <template>

@@ -66,9 +66,6 @@ onMounted(() => {
         <UiElementsFeedback />
       </div>
 
-      <!-- Add the Discussion component here -->
-      <UiElementsDiscussion />
-
       <!-- Spacer -->
       <div class="h-56" />
     </div>
