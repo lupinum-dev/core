@@ -48,7 +48,7 @@ export default defineNuxtConfig({
       exclude: ['vee-validate'],
     },
   },
-
+  
   // 3. Internationalization
   i18n: {
     detectBrowserLanguage: {

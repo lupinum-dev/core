@@ -13,6 +13,8 @@ const isOpen = ref(false)
 function closePopover() {
   isOpen.value = false
 }
+
+const appConfig = useAppConfig()
 </script>
 
 <template>
@@ -22,18 +24,18 @@ function closePopover() {
     >
       <div class="flex items-center gap-3">
         <div class="flex size-10 items-center justify-center rounded-md bg-secondary transition-colors duration-150 group-hover:bg-accent">
-          <Icon :name="currentNavItem.icon || 'i-heroicons-bars-3'" class="size-6 text-secondary-foreground transition-transform duration-150 group-hover:scale-110" />
+          <Icon :name="currentNavItem.icon || appConfig.header.toc.icon" class="size-6 text-secondary-foreground transition-transform duration-150 group-hover:scale-110" />
         </div>
         <div class="flex-1 text-left">
           <p class="font-heading transition-colors duration-150 group-hover:text-accent-foreground">
             {{ currentNavItem.title }}
           </p>
-          <p v-if="currentNavItem.description" class="font-pressura text-sm text-muted-foreground transition-colors duration-150 group-hover:text-accent-foreground">
+          <p v-if="currentNavItem.description && appConfig.wiki.select.showDescriptionText" class="font-pressura text-sm text-muted-foreground transition-colors duration-150 group-hover:text-accent-foreground">
             {{ currentNavItem.description ?? 'No description available' }}
           </p>
         </div>
       </div>
-      <Icon name="i-heroicons-chevron-down" class="size-5 text-muted-foreground transition-transform duration-150" />
+      <Icon :name="appConfig.wiki.select.chevronIcon" class="size-5 text-muted-foreground transition-transform duration-150" />
     </UiPopoverTrigger>
 
     <UiPopoverContent
@@ -62,13 +64,13 @@ function closePopover() {
             <div
               class="flex size-8 shrink-0 items-center justify-center rounded-md p-1.5"
             >
-              <Icon :name="item.icon || 'i-heroicons-bars-3'" class="size-6 text-primary" />
+              <Icon :name="item.icon || appConfig.header.toc.icon" class="size-6 text-primary" />
             </div>
             <div class="flex-1 text-left">
               <p class="font-heading text-sm">
                 {{ item.title }}
               </p>
-              <p v-if="item.description" class="font-pressura text-sm text-muted-foreground">
+              <p v-if="item.description && appConfig.wiki.select.showDescriptionText" class="font-pressura text-sm text-muted-foreground">
                 {{ item.description ?? 'Navigation item' }}
               </p>
             </div>

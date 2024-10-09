@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useScroll, useWindowSize } from '@vueuse/core'
+import { useAppConfig } from '#imports'
 
 const { y } = useScroll(window)
 const { width } = useWindowSize()
@@ -11,7 +12,10 @@ const isTabletScreen = computed(() => width.value < 1024)
 // Content Site Handling
 const appConfig = useAppConfig()
 const contentRoutes = appConfig.navigation.contentRoutes
+
 const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.startsWith(path)))
+
+
 </script>
 
 <template>
@@ -46,7 +50,10 @@ const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.
           <ClientOnly>
             <div
               v-if="appConfig.header.toc.showToc"
-              :class="{ 'left-0': isScrolled && isMobileScreen, 'left-9': !(isScrolled && isMobileScreen) }"
+              :class="[
+                isScrolled && isMobileScreen ? 'left-0' : appConfig.header.toc.offset,
+                appConfig.header.toc.offsetSm
+              ]"
               class="absolute mt-0.5 transition-all duration-300 sm:left-40"
             >
               <UiContentMobileToc v-if="isTabletScreen && isContentSite" />

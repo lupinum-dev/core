@@ -7,6 +7,8 @@ export default defineAppConfig({
     },
     select: {
       showDescriptionText: true,
+      defaultIcon: 'i-heroicons-bars-3',
+      chevronIcon: 'heroicons:chevron-down-16-solid',
     },
   },
   header: {
@@ -24,6 +26,8 @@ export default defineAppConfig({
     toc: {
       showToc: true,
       icon: 'heroicons:book-open-16-solid',
+      offset: 'left-9',
+      offsetSm: 'sm:left-40',
     },
     searchIcon: 'heroicons:magnifying-glass-16-solid',
     languageDropdownIcon: 'heroicons:language-16-solid',
