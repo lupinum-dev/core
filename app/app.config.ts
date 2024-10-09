@@ -10,11 +10,21 @@ export default defineAppConfig({
     },
   },
   header: {
-    variant: 'bar',
-    rounded: '2xl',
-    languageDropdown: 'true',
+    variant: 'bar', // 'bar' | 'default'
+    rounded: '2xl', // 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full' | 'none'
+    languageDropdown: true,
+    adBanner: {
+      showAdBanner: true,
+      adKey: 'banner',
+    },
     headerHeight: '50px',
     adBannerHeight: '--header-ad-height', // CHANGE IN CSS
+    hamburgerIcon: 'heroicons:bars-3-bottom-right-20-solid',
+    closeIcon: 'lucide:x',
+    toc: {
+      showToc: true,
+      icon: 'lucide:book-open',
+    },
   },
   navigation: {
     contentRoutes: ['/references', '/wiki', '/blog', '/contact'],
@@ -58,6 +68,5 @@ export default defineAppConfig({
     { icon: 'mdi:github', href: 'https://github.com', label: 'GitHub' },
     { icon: 'mdi:twitter', href: 'https://twitter.com', label: 'Twitter' },
     { icon: 'mdi:linkedin', href: 'https://linkedin.com', label: 'LinkedIn' },
-    
   ],
 })

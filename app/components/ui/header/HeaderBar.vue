@@ -3,20 +3,9 @@ import { computed, inject, ref } from 'vue'
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/lib/utils'
 
-const props = withDefaults(defineProps<Props>(), {
-  variant: 'default',
-  showAdBanner: true,
-  adKey: 'banner',
-  rounded: '2xl',
+defineOptions({
+  inheritAttrs: false,
 })
-
-interface Props {
-  class?: HTMLAttributes['class']
-  showAdBanner?: boolean
-  adKey?: string
-  variant?: 'default' | 'bar'
-  rounded?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full' | 'none'
-}
 
 const appConfig = useAppConfig()
 
@@ -44,7 +33,7 @@ const topStyle = computed(() => ({
   top: isVisible.value ? 'var(--header-ad-height)' : '0',
 }))
 const roundedClass = computed(() => {
-  if (props.variant === 'default')
+  if (appConfig.header.variant === 'default')
     return ''
 
   const roundedMap = {
@@ -58,7 +47,7 @@ const roundedClass = computed(() => {
     'none': '',
   }
 
-  return roundedMap[props.rounded] || ''
+  return roundedMap[appConfig.header.rounded] || ''
 })
 
 function toggleHeaderExpansion() {
@@ -73,14 +62,13 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
   <header
     :class="cn(
       'isolate fixed w-dvw transition-all duration-200 ',
-      props.variant === 'default' ? 'bg-background z-50 border-b' : 'z-30',
-      props.class,
+      appConfig.header.variant === 'default' ? 'bg-background z-50 border-b' : 'z-30', $attrs,
     )"
     :style="topStyle"
   >
     <div
       class="mx-auto transition-all duration-300" :class="[
-        props.variant === 'default'
+        appConfig.header.variant === 'default'
           ? 'flex items-center justify-between sm:container'
           : 'max-w-6xl md:mt-3 lg:px-6',
         isExpanded ? 'mt-0 rounded-none sm:px-0' : 'mt-2 px-3',
@@ -89,9 +77,8 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
       <div
         class="flex size-full flex-col"
         :class="[
-
-          { 'relative border bg-background/95 px-2 shadow-lg backdrop-blur-sm dark:shadow-foreground/10': props.variant !== 'default' },
-          isExpanded ? 'rounded-none ' : roundedClass,
+          { 'relative border  bg-background/95 px-2 shadow-lg backdrop-blur-sm dark:shadow-foreground/10': appConfig.header.variant !== 'default' },
+          isExpanded ? 'rounded-none border-none' : roundedClass,
         ]"
         :style="headerStyle"
       >
@@ -114,11 +101,11 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
             <div class="hidden lg:block">
               <UiColorModeDropdown variant="ghost" />
 
-              <UiElementsLanguageDropdown />
+              <UiElementsLanguageDropdown v-if="appConfig.header.languageDropdown" />
             </div>
             <UiButton variant="ghost" size="sm" class="lg:hidden" @click="toggleHeaderExpansion">
               <Icon
-                :name="isExpanded ? 'heroicons:x-mark-20-solid' : 'heroicons:bars-3-bottom-right-20-solid'"
+                :name="isExpanded ? appConfig.header.closeIcon : appConfig.header.hamburgerIcon"
                 class="size-5"
               />
             </UiButton>

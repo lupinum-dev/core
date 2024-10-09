@@ -9,8 +9,8 @@ const isMobileScreen = computed(() => width.value < 640)
 const isTabletScreen = computed(() => width.value < 1024)
 
 // Content Site Handling
-const contentRoutes = useAppConfig().navigation.contentRoutes
-
+const appConfig = useAppConfig()
+const contentRoutes = appConfig.navigation.contentRoutes
 const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.startsWith(path)))
 </script>
 
@@ -45,6 +45,7 @@ const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.
           <!-- TODO I need to be able to change the offset of the Logo -->
           <ClientOnly>
             <div
+              v-if="appConfig.header.toc.showToc"
               :class="{ 'left-0': isScrolled && isMobileScreen, 'left-9': !(isScrolled && isMobileScreen) }"
               class="absolute mt-0.5 transition-all duration-300 sm:left-40"
             >
