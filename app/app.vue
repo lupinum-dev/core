@@ -48,6 +48,7 @@ configure({
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <SectionsFooter />
     <ClientOnly>
       <UiSearchModal />
     </ClientOnly>
