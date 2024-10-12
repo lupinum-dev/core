@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { withoutTrailingSlash } from 'ufo'
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+import { removeLocalePrefix } from '~/utils/content'
 
 // const isSidebarOpen = inject<Ref<boolean>>('isSidebarOpen')
 
 // Add this import if not already present
-import UiElementsDiscussion from '~/components/ui/elements/Discussion.vue'
-// import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
+// import UiElementsDiscussion from '~/components/ui/elements/Discussion.vue'
 // import type { NavItem } from '@/types/navigation'
 // import { useUserTextConfig } from '~/composables/useUserTextConfig'
 
@@ -16,17 +17,31 @@ definePageMeta({
 const route = useRoute()
 
 const { locale } = useI18n()
-const prefixedPath = computed(() => {
-  const path = route.path
-  return path.startsWith(`/${locale.value}`) ? path : `/${locale.value}${path}`
+
+// Query with the page ID
+// route: /wiki/fundamentals/world-of-bees/overview-f45a32e2, take the last part of the route: f45a32e2
+// use this as the query parameter
+
+const pageId = computed(() => {
+  const lastSlug = route.params.slug?.[route.params.slug.length - 1] ?? ''
+  return lastSlug.split('-').pop() ?? ''
 })
 
-const { data: page } = await useAsyncData<ParsedContent | null>(prefixedPath.value, () => queryContent(prefixedPath.value).findOne())
+const { data: page } = await useAsyncData<ParsedContent | null>('page', () => queryContent(locale.value, 'wiki')
+  .where({ _path: { $contains: pageId.value } })
+  .findOne())
 
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () => queryContent('wiki')
-  .where({ _extension: 'md', navigation: { $ne: false } })
+// Fetch the surrounding content for context
+const { data: surround } = await useAsyncData(`${page.value?._path}-surround`, () => queryContent(locale.value, 'wiki')
+  .where({
+    _extension: 'md',
+    navigation: { $ne: false },
+    _file: { $not: { $regex: '/_dir\.md$' } }, // Exclude _dir.md files
+  })
   .only(['title', 'description', '_path'])
-  .findSurround(withoutTrailingSlash(route.path)))
+  .findSurround(withoutTrailingSlash(page.value?._path ?? '')))
+
+const surroundWithoutLocale = computed(() => surround.value?.map(item => item ? removeLocalePrefix(item, locale) : null))
 
 const isContentSite = inject<Ref<boolean>>('isContentSite', ref(false))
 isContentSite.value = true
@@ -67,7 +82,7 @@ onMounted(() => {
         <UiContentCTA2 />
       </ClientOnly>
 
-      <UiContentSurround :surround="surround ?? []" />
+      <UiContentSurround :surround="surroundWithoutLocale ?? []" />
       <div class="mt-2 flex justify-center">
         <UiElementsFeedback />
       </div>

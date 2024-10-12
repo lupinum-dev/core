@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { useScrollLock } from '@vueuse/core'
-import { onMounted, provide, ref, watch } from 'vue'
+import { computed, onMounted, provide, ref, watch } from 'vue'
 import { ConfigProvider } from 'radix-vue'
-
 import { configure } from 'vee-validate'
+import { removeLocalePrefix } from '~/utils/content'
 
 const headerState = ref(false)
 provide('headerState', headerState)
 
-const lockScroll = ref(null)
+const lockScroll = ref<ReturnType<typeof useScrollLock> | null>(null)
 
 onMounted(() => {
   lockScroll.value = useScrollLock(document.body)
@@ -24,23 +24,13 @@ const useIdFunction = () => useId()
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
 const { locale } = useI18n()
 
-function removeLocalePrefix(item: any): any {
-  const newItem = { ...item }
-  if (newItem._path) {
-    newItem._path = newItem._path.replace(new RegExp(`^/${locale.value}`), '')
-  }
-  if (newItem.children) {
-    newItem.children = newItem.children.map(removeLocalePrefix)
-  }
-  return newItem
-}
-
 const localizedNavigation = computed(() => {
   const localeNavigation = navigation.value?.find(item => item._path === `/${locale.value}`)?.children
-  return localeNavigation ? localeNavigation.map(removeLocalePrefix) : []
+  return localeNavigation ? localeNavigation.map(item => removeLocalePrefix(item, locale)) : []
 })
 
 provide('navigation', navigation)
+
 // TODO: Move folder definition to a separate file
 const wikiFolder = '/wiki'
 const navigationWiki = computed(() => {
