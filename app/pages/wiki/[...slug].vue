@@ -15,7 +15,13 @@ definePageMeta({
 
 const route = useRoute()
 
-const { data: page } = await useAsyncData<ParsedContent | null>(route.path, () => queryContent(route.path).findOne())
+const { locale } = useI18n()
+const prefixedPath = computed(() => {
+  const path = route.path
+  return path.startsWith(`/${locale.value}`) ? path : `/${locale.value}${path}`
+})
+
+const { data: page } = await useAsyncData<ParsedContent | null>(prefixedPath.value, () => queryContent(prefixedPath.value).findOne())
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => queryContent('wiki')
   .where({ _extension: 'md', navigation: { $ne: false } })

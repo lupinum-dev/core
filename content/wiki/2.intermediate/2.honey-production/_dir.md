@@ -1,3 +1,0 @@
----
-group: Honey Production
----
