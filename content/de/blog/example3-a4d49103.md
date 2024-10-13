@@ -1,7 +1,13 @@
 ---
-tite: Cost
+title: Example 2
+description: Description 2
+date_published: 2024-10-12
+date_modified: 2024-10-13
+category:
+  - Example
+  - Test
+highlight: true
 ---
-
 Happy Sunday, everyone!
 
 First, thank you for your continuous support and patience; the past couple of months have been extremely insightful. Once again, this community has proved to be an invaluable part of our journey.

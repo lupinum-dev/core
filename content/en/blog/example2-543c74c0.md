@@ -1,5 +1,12 @@
 ---
-tite: Cost
+title: Example 2
+description: Description 2
+date_published: 2024-10-12
+date_modified: 2024-10-13
+category:
+  - Example
+  - Test
+highlight: true
 ---
 
 Happy Sunday, everyone!
