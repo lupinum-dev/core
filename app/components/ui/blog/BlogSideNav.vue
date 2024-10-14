@@ -87,7 +87,7 @@ function goHome() {
       </div>
 
       <!-- Social Share -->
-      <div class="widget">
+      <div class="widget pb-16">
         <h4 class="mb-4 font-heading text-xl font-semibold text-foreground">
           Follow us
         </h4>

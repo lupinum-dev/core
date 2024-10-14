@@ -44,7 +44,7 @@ const formatDate = (date: string) => new Date(date).toLocaleDateString()
 
 <template>
   <div class="mx-auto max-w-5xl px-4 py-12">
-    <h2 class="mb-6 font-heading text-3xl font-bold text-foreground">
+    <h2 class="mb-6 font-heading text-xl font-bold text-foreground">
       Related Posts
     </h2>
     <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2">
@@ -85,7 +85,7 @@ const formatDate = (date: string) => new Date(date).toLocaleDateString()
       </aside>
     </div>
 
-    <h2 class="mb-6 mt-12 font-heading text-3xl font-bold text-foreground">
+    <h2 class="mb-6 mt-12 font-heading text-xl font-bold text-foreground">
       Highlights
     </h2>
     <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
