@@ -6,22 +6,23 @@ const { categories } = useBlogPosts()
 
 const router = useRouter()
 const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
+
 function updateCategory(category: string) {
   blogStore.setSelectedCategory(category)
   toggleHeaderExpansion()
-  updateQueryParams()
+  navigateToBlogIndex()
 }
 
-function updateQueryParams() {
+function navigateToBlogIndex() {
   const query: Record<string, string> = {}
   if (blogStore.selectedCategory)
     query.category = blogStore.selectedCategory
-  router.push({ query })
+  router.push({ path: '/blog', query })
 }
 
 function goHome() {
   blogStore.setSelectedCategory('')
-  updateQueryParams()
+  navigateToBlogIndex()
 }
 </script>
 
