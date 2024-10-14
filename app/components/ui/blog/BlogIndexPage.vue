@@ -20,7 +20,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const mostRecentPost = computed(() => props.posts.find(post => post.highlight) || props.posts[0])
-const todaysPicks = computed(() => props.posts.slice(0, 4))
+const todaysPicks = computed(() => props.posts.slice(0, 3))
 </script>
 
 <template>
