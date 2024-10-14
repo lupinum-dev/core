@@ -39,7 +39,7 @@ export default defineNuxtConfig({
 
   content: {
     navigation: {
-      fields: ['group', 'description', 'duration', 'icon', 'status'],
+      fields: ['group', 'description', 'duration', 'icon', 'status', 'date_published', 'date_modified', 'category', 'highlight', 'hero_image'],
     },
   },
   // https://github.com/nuxt/nuxt/issues/27544
@@ -48,7 +48,7 @@ export default defineNuxtConfig({
       exclude: ['vee-validate'],
     },
   },
-  
+
   // 3. Internationalization
   i18n: {
     detectBrowserLanguage: {
