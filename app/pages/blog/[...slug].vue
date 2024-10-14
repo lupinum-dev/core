@@ -68,7 +68,30 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container relative flex w-full flex-grow px-0">
+  <div class="relative flex w-full flex-grow px-0">
+    <div class="hidden lg:block lg:w-[260px] 2xl:w-[420px]">
+      <div class="sticky top-20">
+        <NuxtLink
+          :to="localePath('/blog')"
+          class="group sticky ml-auto mr-7 mt-36 flex size-10 items-center justify-center rounded-full bg-background shadow-md shadow-secondary/5 ring-1 ring-border transition dark:border dark:border-border/50 dark:bg-secondary dark:ring-0 dark:ring-ring/10 dark:hover:border-border dark:hover:ring-ring/20 lg:left-8 lg:top-8 2xl:mr-20"
+          aria-label="Go back to articles"
+        >
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+            class="size-4 stroke-muted-foreground transition group-hover:stroke-foreground dark:stroke-muted-foreground dark:group-hover:stroke-foreground"
+          >
+            <path
+              d="M7.25 11.25 3.75 8m0 0 3.5-3.25M3.75 8h8.5"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </NuxtLink>
+      </div>
+    </div>
     <div id="content" class="container left-0 top-0 mx-auto min-w-0 max-w-[700px] px-3 2xl:max-w-[800px]">
       <div
         class="prose-primary prose mt-24 w-full rounded-lg text-gray-t-2 dark:prose-invert"
@@ -86,6 +109,11 @@ onMounted(() => {
           <UiElementsFeedback />
         </div>
       </div>
+    </div>
+    <div id="toc" class="sticky top-20 mr-auto hidden h-[calc(100vh-5rem)] w-[300px] translate-x-3 overflow-y-auto px-3 py-6 lg:block 2xl:w-[420px] 2xl:translate-x-32 ">
+      <ClientOnly>
+        <UiContentTocDesktop :links="tocLinks" />
+      </ClientOnly>
     </div>
   </div>
 

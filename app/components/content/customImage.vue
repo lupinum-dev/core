@@ -43,7 +43,7 @@ const captionText = computed(() => props.caption || props.alt)
 </script>
 
 <template>
-  <figure class="-mx-6 mt-6 md:-mx-8 2xl:-mx-28">
+  <figure class=" mt-6 xl:-mx-16 2xl:-mx-28">
     <NuxtImg
       :src="refinedSrc"
       :alt="props.alt"

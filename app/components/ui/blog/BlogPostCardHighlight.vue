@@ -17,7 +17,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex items-center space-x-4 p-4">
+  <NuxtLink :to="post._path" class="flex items-center space-x-4 rounded-lg p-4 hover:bg-secondary">
     <div class="image-container group relative size-20 flex-shrink-0 overflow-hidden rounded-lg">
       <NuxtImg
         :src="post.hero_image || '/default-blog-image.jpg'"
@@ -27,14 +27,12 @@ defineProps<{
     </div>
     <div class="flex-grow">
       <div class="mb-1">
-        <span v-for="cat in post.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary hover:bg-primary hover:text-primary-foreground">
+        <span v-for="cat in post.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary">
           {{ cat }}
         </span>
       </div>
       <h3 class="mb-1 text-sm font-semibold text-foreground">
-        <NuxtLink :to="post._path" class="hover:text-primary hover:underline">
-          {{ post.title }}
-        </NuxtLink>
+        {{ post.title }}
       </h3>
       <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
         <ClientOnly>
@@ -43,7 +41,7 @@ defineProps<{
         <span>{{ post.readTime || '5 min read' }}</span>
       </div>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <style scoped>

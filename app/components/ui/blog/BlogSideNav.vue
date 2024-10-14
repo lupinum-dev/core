@@ -28,7 +28,7 @@ function goHome() {
 </script>
 
 <template>
-  <div id="sidenav" class="hidden w-[260px] border-r border-border bg-background p-8 lg:block 2xl:w-[370px]">
+  <div id="sidenav" class="hidden w-[320px] border-r border-border bg-background p-3 pl-5 lg:block 2xl:p-8">
     <div class="sticky top-24 flex flex-col gap-8">
       <!-- Categories -->
       <div class="widget">

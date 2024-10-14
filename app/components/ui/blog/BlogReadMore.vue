@@ -57,7 +57,7 @@ const highlightedPosts = computed(() =>
       Highlights
     </h2>
     <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      <UiBlogPostCard
+      <UiBlogPostCardHighlight
         v-for="post in highlightedPosts"
         :key="post._path"
         :post="post"

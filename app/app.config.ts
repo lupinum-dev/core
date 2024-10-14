@@ -38,7 +38,7 @@ export default defineAppConfig({
     systemModeIcon: 'heroicons:cog-6-tooth-16-solid',
   },
   navigation: {
-    contentRoutes: ['/references', '/wiki', '/blog', '/contact'],
+    contentRoutes: ['/references', '/wiki', '/blog/'],
     chevronIcon: 'heroicons:chevron-down-16-solid',
     items: [
       { label: 'Home', href: '/', icon: 'heroicons:home-16-solid' },
@@ -85,6 +85,6 @@ export default defineAppConfig({
     image: {
       showCaption: true,
       photographer: true,
-    }
-  }
+    },
+  },
 })
