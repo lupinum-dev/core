@@ -44,10 +44,23 @@ watch(() => route.path, () => {
 </script>
 
 <template>
-  <div class="mx-auto flex min-h-screen max-w-[1900px] flex-row justify-center bg-background">
-    <UiWikiSideNav />
-    <div class="mx-auto mt-24 flex w-full max-w-7xl flex-col justify-between px-4 sm:px-6 lg:px-8">
-      <slot />
+  <div id="sidenav" class="hidden w-[260px] border-r border-border bg-background p-8 lg:block 2xl:w-[370px]">
+    <div class="sticky top-24 flex flex-col gap-8">
+      <UiNavigationTreeSubTabs
+        v-if="showTabs"
+        :current-nav-item="currentNavItem"
+        :navigation="navigation"
+        :is-active-route="isActiveRoute"
+        :tab-count="appConfig.wiki.tabs.count"
+        :show-icons="appConfig.wiki.tabs.showIcons"
+      />
+      <UiNavigationTreeSubSelect
+        v-if="showSelect"
+        :current-nav-item="currentNavItem"
+        :navigation="navigation"
+        :is-active-route="isActiveRoute"
+      />
+      <UiNavigationTreeSidebar :navigation="currentNavItemChildren" />
     </div>
   </div>
 </template>

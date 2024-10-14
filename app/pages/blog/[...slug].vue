@@ -88,9 +88,8 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <ClientOnly>
-    <UiBlogReadMore v-if="currentPost && allPosts" :current-post="currentPost" :all-posts="allPosts" />
-  </ClientOnly>
+
+  <UiBlogReadMore v-if="currentPost && allPosts" :current-post="currentPost" :all-posts="allPosts" />
 </template>
 
 <style>
