@@ -5,9 +5,10 @@ const blogStore = useBlogStore()
 const { categories } = useBlogPosts()
 
 const router = useRouter()
-
+const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
 function updateCategory(category: string) {
   blogStore.setSelectedCategory(category)
+  toggleHeaderExpansion()
   updateQueryParams()
 }
 

@@ -49,7 +49,7 @@ if (route.query.category) {
       @update:search-query="blogStore.setSearchQuery"
     />
 
-    <div class="mx-auto mt-24 flex w-full max-w-7xl flex-col justify-between px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto mt-24 flex w-full max-w-7xl flex-col justify-between  sm:px-6 lg:px-8">
       <template v-if="blogPosts">
         <div v-if="isHome">
           <UiBlogIndexPage :posts="filteredPosts" />
