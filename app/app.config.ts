@@ -81,4 +81,10 @@ export default defineAppConfig({
     { icon: 'heroicons:chat-bubble-left-right-20-solid', href: 'https://twitter.com', label: 'Twitter' },
     { icon: 'heroicons:briefcase-20-solid', href: 'https://linkedin.com', label: 'LinkedIn' },
   ],
+  content: {
+    image: {
+      showCaption: true,
+      photographer: true,
+    }
+  }
 })

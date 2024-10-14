@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NavigationItem } from '@/types/navigation'
+import { NuxtLink } from '#components'
 
 const appConfig = useAppConfig()
 const navItems = appConfig.navigation.items as NavigationItem[]
@@ -45,7 +46,7 @@ const navItems = appConfig.navigation.items as NavigationItem[]
             </ul>
           </UiNavigationMenuContent>
         </template>
-        <UiNavigationMenuLink v-else :href="item.href" class="nav-link">
+        <UiNavigationMenuLink v-else :as="NuxtLink" :to="item.href" class="nav-link">
           {{ item.label }}
         </UiNavigationMenuLink>
       </UiNavigationMenuItem>

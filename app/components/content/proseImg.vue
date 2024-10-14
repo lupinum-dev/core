@@ -33,12 +33,11 @@ const refinedSrc = computed(() => {
 </script>
 
 <template>
-  <div class="-mx-6 mt-6 md:-mx-8 2xl:-mx-28">
-    <NuxtImg
-      :src="refinedSrc"
-      :alt="props.alt"
-      :width="props.width"
-      :height="props.height"
-    />
-  </div>
+  <NuxtImg
+    :src="refinedSrc"
+    :alt="props.alt"
+    :width="props.width"
+    :height="props.height"
+    class="w-full rounded-lg"
+  />
 </template>

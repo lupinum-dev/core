@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
 const ctaTexts = [
   {
     question: 'You learn better visually with Videos?',
@@ -29,7 +27,11 @@ const ctaTexts = [
   },
 ]
 
-const randomCTA = computed(() => ctaTexts[Math.floor(Math.random() * ctaTexts.length)])
+const randomCTA = ref(ctaTexts[0]) // Default to the first item for SSR
+
+onMounted(() => {
+  randomCTA.value = ctaTexts[Math.floor(Math.random() * ctaTexts.length)]
+})
 </script>
 
 <template>
