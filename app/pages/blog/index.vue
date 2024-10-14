@@ -11,6 +11,7 @@ interface BlogPost {
   highlight?: boolean
   image?: string
   readTime?: string
+  hero_image?: string
 }
 
 const route = useRoute()
@@ -68,7 +69,7 @@ function updateQueryParams() {
       @update:selected-category="updateCategory"
       @update:search-query="searchQuery = $event"
     />
-    <div class="mx-auto flex w-full max-w-7xl flex-col justify-between px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto mt-24 flex w-full max-w-7xl flex-col justify-between px-4 sm:px-6 lg:px-8">
       <template v-if="blogPosts">
         <div v-if="isHome">
           <UiBlogIndexPage :posts="blogPosts" />
