@@ -1,13 +1,15 @@
 ---
 title: Example 2
 description: Description 2
-date_published: 2024-10-12
-date_modified: 2024-10-13
+date_published: 2024-10-12T00:00:00.000Z
+date_modified: 2024-10-13T00:00:00.000Z
 category:
   - Example
   - Test
 highlight: true
+hero_image: /_assets/screenshot.png
 ---
+:custom-image{src="/_assets/screenshot.png" alt=", Alt text"}
 
 Happy Sunday, everyone!
 

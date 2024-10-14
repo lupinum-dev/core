@@ -92,7 +92,7 @@ onMounted(() => {
     </div>
 
     <!-- TOC on the right side, sticky -->
-    <div id="toc" class="sticky top-20 mr-auto hidden h-[calc(100vh-5rem)] w-[300px] overflow-y-auto px-3 py-6 lg:block xl:max-w-[420px] ">
+    <div id="toc" class="sticky top-20 mr-auto hidden h-[calc(100vh-5rem)] w-[260px] translate-x-3 overflow-y-auto px-3 py-6 lg:block 2xl:w-[420px] 2xl:translate-x-32 ">
       <ClientOnly>
         <UiContentTocDesktop :links="tocLinks" />
       </ClientOnly>

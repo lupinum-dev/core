@@ -1,13 +1,16 @@
 ---
-title: Example 2
-description: Description 2
-date_published: 2024-10-12
-date_modified: 2024-10-13
+title: Example 4
+description: Description 4
+date_published: 2024-10-12T00:00:00.000Z
+date_modified: 2024-10-13T00:00:00.000Z
 category:
   - Example
   - Test
 highlight: true
+hero_image: /_assets/schoitel/SCR-20241006-gfqt.png
 ---
+
+:custom-image{src="/_assets/schoitel/SCR-20241006-gfqt.png" alt=""}
 Happy Sunday, everyone!
 
 First, thank you for your continuous support and patience; the past couple of months have been extremely insightful. Once again, this community has proved to be an invaluable part of our journey.

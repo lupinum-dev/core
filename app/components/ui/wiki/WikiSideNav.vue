@@ -44,7 +44,7 @@ watch(() => route.path, () => {
 </script>
 
 <template>
-  <div id="sidenav" class="hidden w-[260px] border-r border-border bg-background p-8 lg:block 2xl:w-[370px]">
+  <div id="sidenav" class="hidden w-[320px] border-r border-border bg-background pl-2 lg:block">
     <div class="sticky top-24 flex flex-col gap-8">
       <UiNavigationTreeSubTabs
         v-if="showTabs"
@@ -60,7 +60,9 @@ watch(() => route.path, () => {
         :navigation="navigation"
         :is-active-route="isActiveRoute"
       />
-      <UiNavigationTreeSidebar :navigation="currentNavItemChildren" />
+      <UiScrollArea class="h-[calc(100vh-20rem)]">
+        <UiNavigationTreeSidebar :navigation="currentNavItemChildren" />
+      </UiScrollArea>
     </div>
   </div>
 </template>
