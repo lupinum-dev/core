@@ -9,8 +9,8 @@ interface BlogPost {
   date_modified: string
   category: string[]
   highlight?: boolean
-  image?: string
   readTime?: string
+  hero_image?: string
 }
 
 interface Props {
@@ -19,57 +19,57 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const featuredPost = computed(() => props.posts.find(post => post.highlight) || props.posts[0])
-const todaysPicks = computed(() => props.posts.slice(0, 3))
+const mostRecentPost = computed(() => props.posts.find(post => post.highlight) || props.posts[0])
+const todaysPicks = computed(() => props.posts.slice(0, 4))
 </script>
 
 <template>
   <div class="mx-auto max-w-7xl px-4 py-12">
     <div class="grid gap-8 sm:grid-cols-1 lg:grid-cols-3">
       <!-- Featured Post -->
-      <aside v-if="featuredPost" class="lg:col-span-2">
+      <aside v-if="mostRecentPost" class="lg:col-span-2">
         <h2 class="mb-6 font-heading text-3xl font-bold text-foreground">
-          Featured Post
+          Latest Post
         </h2>
         <div class="group relative flex w-full flex-col gap-y-6">
-          <div class="pointer-events-none relative aspect-[16/9] w-full overflow-hidden rounded-lg ring-1 ring-gray-o-1">
+          <div class="pointer-events-none relative aspect-[16/9] w-full overflow-hidden rounded-lg ring-1 ring-border">
             <NuxtImg
-              :src="featuredPost.hero_image || '/default-blog-image.jpg'"
-              :alt="featuredPost.title"
+              :src="mostRecentPost.hero_image || '/default-blog-image.jpg'"
+              :alt="mostRecentPost.title"
               class="size-full transform object-cover object-top transition-transform duration-200 group-hover:scale-105"
             />
           </div>
           <div class="flex flex-1 flex-col justify-between">
             <div class="flex-1">
               <div class="mb-3">
-                <span v-for="cat in featuredPost.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-prime-c-1 ring-1 ring-inset ring-prime-c-1 hover:scale-[102%]">
+                <span v-for="cat in mostRecentPost.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary hover:bg-primary hover:text-primary-foreground">
                   {{ cat }}
                 </span>
               </div>
-              <NuxtLink :to="featuredPost._path" class="focus:outline-none" :aria-label="featuredPost.title" tabindex="-1">
+              <NuxtLink :to="mostRecentPost._path" class="focus:outline-none" :aria-label="mostRecentPost.title" tabindex="-1">
                 <div class="group">
                   <div class="flex flex-row space-x-2">
-                    <h3 class="font-heading text-2xl text-gray-t-1 transition-colors duration-200 group-hover:text-gray-t-2 group-hover:underline">
-                      {{ featuredPost.title }}
+                    <h3 class="font-heading text-2xl text-foreground transition-colors duration-200 group-hover:text-primary group-hover:underline">
+                      {{ mostRecentPost.title }}
                     </h3>
                     <div class="flex flex-col justify-center">
-                      <span class="iconify i-scribbles-arrow-right h-3 w-4 group-hover:rotate-2 group-hover:scale-105" aria-hidden="true" />
+                      <span class="iconify i-scribbles-arrow-right h-3 w-4 text-muted-foreground group-hover:rotate-2 group-hover:scale-105" aria-hidden="true" />
                     </div>
                   </div>
-                  <p class="mt-1 line-clamp-4 text-base text-gray-t-3">
-                    {{ featuredPost.description }}
+                  <p class="mt-1 line-clamp-4 text-base text-muted-foreground">
+                    {{ mostRecentPost.description }}
                   </p>
                 </div>
               </NuxtLink>
             </div>
             <div class="relative mt-4 flex items-center justify-between">
               <div class="flex items-center space-x-4">
-                <time :datetime="featuredPost.date_published" class="relative text-sm font-medium text-gray-t-3 after:absolute after:ml-1.5 after:text-gray-t-3 after:content-['•']">
-                  {{ new Date(featuredPost.date_published).toLocaleDateString() }}
+                <time :datetime="mostRecentPost.date_published" class="relative text-sm font-medium text-muted-foreground after:absolute after:ml-1.5 after:text-muted-foreground after:content-['•']">
+                  {{ new Date(mostRecentPost.date_published).toLocaleDateString() }}
                 </time>
-                <span class="text-[15px] font-medium text-gray-t-3">{{ featuredPost.readTime || '5 min read' }}</span>
+                <span class="text-[15px] font-medium text-muted-foreground">{{ mostRecentPost.readTime || '5 min read' }}</span>
               </div>
-              <NuxtLink :to="featuredPost._path" class="text-primary hover:text-primary/80">
+              <NuxtLink :to="mostRecentPost._path" class="text-primary hover:text-primary/80">
                 Read More
                 <Icon name="mdi:chevron-right" class="ml-1 size-4" />
               </NuxtLink>
@@ -81,7 +81,7 @@ const todaysPicks = computed(() => props.posts.slice(0, 3))
       <!-- Today's Picks -->
       <aside>
         <h2 class="mb-6 font-heading text-3xl font-bold text-foreground">
-          Today's Picks
+          Highlights
         </h2>
         <div class="space-y-4">
           <div
@@ -98,12 +98,12 @@ const todaysPicks = computed(() => props.posts.slice(0, 3))
             </div>
             <div class="flex-grow">
               <div class="mb-1">
-                <span v-for="cat in item.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-prime-c-1 ring-1 ring-inset ring-prime-c-1 hover:scale-[102%]">
+                <span v-for="cat in item.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary hover:bg-primary hover:text-primary-foreground">
                   {{ cat }}
                 </span>
               </div>
               <h3 class="mb-1 text-sm font-semibold text-foreground">
-                <NuxtLink :to="item._path" class="hover:underline">
+                <NuxtLink :to="item._path" class="hover:text-primary hover:underline">
                   {{ item.title }}
                 </NuxtLink>
               </h3>
@@ -119,14 +119,11 @@ const todaysPicks = computed(() => props.posts.slice(0, 3))
 
     <!-- Recent Posts -->
     <div class="mt-12">
-      <h2 class="mb-6 font-heading text-3xl font-bold text-foreground">
-        Recent Posts
-      </h2>
       <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <aside v-for="post in posts" :key="post._path" class="group relative flex w-full flex-col gap-y-6">
-          <div class="pointer-events-none relative aspect-[16/9] w-full overflow-hidden rounded-lg ring-1 ring-gray-o-1">
+          <div class="pointer-events-none relative aspect-[16/9] w-full overflow-hidden rounded-lg ring-1 ring-border">
             <NuxtImg
-              :src="post.image || '/default-blog-image.jpg'"
+              :src="post.hero_image || '/default-blog-image.jpg'"
               :alt="post.title"
               class="size-full transform object-cover object-top transition-transform duration-200 group-hover:scale-105"
             />
@@ -134,21 +131,21 @@ const todaysPicks = computed(() => props.posts.slice(0, 3))
           <div class="flex flex-1 flex-col justify-between">
             <div class="flex-1">
               <div class="mb-3">
-                <span v-for="cat in post.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-prime-c-1 ring-1 ring-inset ring-prime-c-1 hover:scale-[102%]">
+                <span v-for="cat in post.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary hover:bg-primary hover:text-primary-foreground">
                   {{ cat }}
                 </span>
               </div>
               <NuxtLink :to="post._path" class="focus:outline-none" :aria-label="post.title" tabindex="-1">
                 <div class="group">
                   <div class="flex flex-row space-x-2">
-                    <h3 class="font-heading text-xl text-gray-t-1 transition-colors duration-200 group-hover:text-gray-t-2 group-hover:underline">
+                    <h3 class="font-heading text-xl text-foreground transition-colors duration-200 group-hover:text-primary group-hover:underline">
                       {{ post.title }}
                     </h3>
                     <div class="flex flex-col justify-center">
-                      <span class="iconify i-scribbles-arrow-right h-3 w-4 group-hover:rotate-2 group-hover:scale-105" aria-hidden="true" />
+                      <span class="iconify i-scribbles-arrow-right h-3 w-4 text-muted-foreground group-hover:rotate-2 group-hover:scale-105" aria-hidden="true" />
                     </div>
                   </div>
-                  <p class="mt-1 line-clamp-4 text-base text-gray-t-3">
+                  <p class="mt-1 line-clamp-4 text-base text-muted-foreground">
                     {{ post.description }}
                   </p>
                 </div>
@@ -156,10 +153,10 @@ const todaysPicks = computed(() => props.posts.slice(0, 3))
             </div>
             <div class="relative mt-4 flex items-center gap-x-3">
               <div class="flex items-center space-x-4">
-                <time :datetime="post.date_published" class="relative text-sm font-medium text-gray-t-3 after:absolute after:ml-1.5 after:text-gray-t-3 after:content-['•']">
+                <time :datetime="post.date_published" class="relative text-sm font-medium text-muted-foreground after:absolute after:ml-1.5 after:text-muted-foreground after:content-['•']">
                   {{ new Date(post.date_published).toLocaleDateString() }}
                 </time>
-                <span class="text-[15px] font-medium text-gray-t-3">{{ post.readTime || '5 min read' }}</span>
+                <span class="text-[15px] font-medium text-muted-foreground">{{ post.readTime || '5 min read' }}</span>
               </div>
             </div>
           </div>

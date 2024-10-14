@@ -9,7 +9,6 @@ interface BlogPost {
   date_modified: string
   category: string[]
   highlight?: boolean
-  image?: string
   readTime?: string
   hero_image?: string
 }
@@ -60,7 +59,7 @@ function updateQueryParams() {
 </script>
 
 <template>
-  <div class="mx-auto flex min-h-screen max-w-[1900px] flex-row justify-center bg-gray-b-0">
+  <div class="mx-auto flex min-h-screen max-w-[1900px] flex-row justify-center bg-background">
     <UiBlogSideNav
       :selected-category="selectedCategory"
       :search-query="searchQuery"
@@ -75,12 +74,12 @@ function updateQueryParams() {
           <UiBlogIndexPage :posts="blogPosts" />
         </div>
         <div v-else class="container mx-auto px-4 py-8">
-          <h2 class="mb-6 text-2xl font-bold">
+          <h2 class="mb-6 font-heading text-3xl text-foreground">
             {{ selectedCategory }} Posts
           </h2>
           <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             <aside v-for="post in filteredPosts" :key="post._path" class="group relative flex w-full flex-col gap-y-6">
-              <div class="pointer-events-none relative aspect-[16/9] w-full overflow-hidden rounded-lg ring-1 ring-gray-o-1">
+              <div class="pointer-events-none relative aspect-[16/9] w-full overflow-hidden rounded-lg ring-1 ring-border">
                 <NuxtImg
                   :src="post.hero_image || '/default-blog-image.jpg'"
                   :alt="post.title"
@@ -90,21 +89,21 @@ function updateQueryParams() {
               <div class="flex flex-1 flex-col justify-between">
                 <div class="flex-1">
                   <div class="mb-3">
-                    <span v-for="cat in post.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-prime-c-1 ring-1 ring-inset ring-prime-c-1 hover:scale-[102%]">
+                    <span v-for="cat in post.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary hover:bg-primary hover:text-primary-foreground">
                       {{ cat }}
                     </span>
                   </div>
                   <NuxtLink :to="post._path" class="focus:outline-none" :aria-label="post.title" tabindex="-1">
                     <div class="group">
                       <div class="flex flex-row space-x-2">
-                        <h2 class="font-heading text-xl text-gray-t-1 transition-colors duration-200 group-hover:text-gray-t-2 group-hover:underline">
+                        <h2 class="font-heading text-xl text-foreground transition-colors duration-200 group-hover:text-primary group-hover:underline">
                           {{ post.title }}
                         </h2>
                         <div class="flex flex-col justify-center">
-                          <span class="iconify i-scribbles-arrow-right h-3 w-4 group-hover:rotate-2 group-hover:scale-105" aria-hidden="true" />
+                          <span class="iconify i-scribbles-arrow-right h-3 w-4 text-muted-foreground group-hover:rotate-2 group-hover:scale-105" aria-hidden="true" />
                         </div>
                       </div>
-                      <p class="mt-1 line-clamp-4 text-base text-gray-t-3">
+                      <p class="mt-1 line-clamp-4 text-base text-muted-foreground">
                         {{ post.description }}
                       </p>
                     </div>
@@ -112,10 +111,10 @@ function updateQueryParams() {
                 </div>
                 <div class="relative mt-4 flex items-center gap-x-3">
                   <div class="flex items-center space-x-4">
-                    <time :datetime="post.date_published" class="relative text-sm font-medium text-gray-t-3 after:absolute after:ml-1.5 after:text-gray-t-3 after:content-['•']">
+                    <time :datetime="post.date_published" class="relative text-sm font-medium text-muted-foreground after:absolute after:ml-1.5 after:text-muted-foreground after:content-['•']">
                       {{ new Date(post.date_published).toLocaleDateString() }}
                     </time>
-                    <span class="text-[15px] font-medium text-gray-t-3">{{ post.readTime || '5 min read' }}</span>
+                    <span class="text-[15px] font-medium text-muted-foreground">{{ post.readTime || '5 min read' }}</span>
                   </div>
                 </div>
               </div>
