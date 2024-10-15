@@ -64,7 +64,5 @@ configure({
 </template>
 
 <style>
-.bg-svg {
-  background-color: red;
-}
+
 </style>
