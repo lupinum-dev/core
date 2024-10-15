@@ -44,7 +44,7 @@ watch(() => route.path, () => {
 </script>
 
 <template>
-  <div id="sidenav" class="bg-svg dark:bg-svg-dark hidden w-[320px] border-r border-border pl-2 lg:block">
+  <div id="sidenav" class="bg-svg dark:bg-svg-dark hidden w-[320px] rounded-br-2xl border-r border-border pl-2 lg:block">
     <div class="sticky top-24 flex flex-col gap-8">
       <UiNavigationTreeSubTabs
         v-if="showTabs"

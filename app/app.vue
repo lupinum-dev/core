@@ -62,3 +62,9 @@ configure({
     </ClientOnly>
   </ConfigProvider>
 </template>
+
+<style>
+.bg-svg {
+  background-color: red;
+}
+</style>
