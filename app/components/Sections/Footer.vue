@@ -6,11 +6,11 @@ const appConfig = useAppConfig()
 const currentYear = new Date().getFullYear()
 
 const footerLinks = [
-  { label: 'About', href: '/about' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Privacy', href: '/privacy' },
-  { label: 'Terms', href: '/terms' },
+  { label: 'About', href: '/' },
+  { label: 'Blog', href: '/' },
+  { label: 'Contact', href: '/' },
+  { label: 'Privacy', href: '/' },
+  { label: 'Terms', href: '/' },
 ]
 
 const socialLinks = [
