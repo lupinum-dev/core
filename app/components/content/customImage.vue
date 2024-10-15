@@ -40,10 +40,12 @@ const refinedSrc = computed(() => {
 })
 
 const captionText = computed(() => props.caption || props.alt)
+
+const route = useRoute()
 </script>
 
 <template>
-  <figure class=" mt-6 xl:-mx-16 2xl:-mx-28">
+  <figure :class="{ 'mt-6 xl:-mx-16 2xl:-mx-28': !route.path.includes('wiki'), 'mt-6 xl:-mx-8 2xl:-mx-16': route.path.includes('wiki') }">
     <NuxtImg
       :src="refinedSrc"
       :alt="props.alt"

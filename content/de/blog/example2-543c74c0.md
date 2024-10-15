@@ -21,6 +21,8 @@ Today, I would like to discuss three things:
 2. Early preview and the next beta
 3. High-level timeline for the rest of the year
 
+:img-row
+
 ## Key Learnings and Changes
 
 After extensive discussions, feedback, and email reports, two significant themes emerged:
@@ -35,6 +37,9 @@ Considering this feedback, we realized that the two most significant needs are o
 
 The team has been working extremely hard on the next iteration. While it's still in progress, we want to be transparent and provide early access to this version for the beta group. This version will give you a first look at our new direction, even though the feature set isn't fully complete yet.
 
+::img-left
+![](https://images.unsplash.com/photo-1682687982185-531d09ec56fc)
+
 Key points about this beta:
 
 - It will be different in terms of completeness
@@ -46,6 +51,7 @@ Key points about this beta:
 **Important changes:**
 - Objects lists will no longer appear in the sidebar
 - You may need to rearrange some of your content
+::
 
 We understand this might cause some extra work, but it's a necessary step toward building a stronger, more focused experience for everyone. We believe documents are the heart of the Craft experience, and we want to reinforce this.
 
@@ -53,10 +59,15 @@ We understand this might cause some extra work, but it's a necessary step toward
 
 After deciding to split Task Management and Collections (in-doc Objects) into two separate entities, we considered two potential directions:
 
+::img-right
+![](https://images.unsplash.com/photo-1682687982185-531d09ec56fc)
+
 1. Wait until next spring to share both features in a more complete, polished version
 2. Release an early version as soon as possible and start gathering feedback immediately
 
 We chose the second option because your insights are invaluable. We believe the end of the year is the perfect time to collaborate with you, as many of you use this time to reflect on your workflows.
+
+::
 
 What to expect:
 

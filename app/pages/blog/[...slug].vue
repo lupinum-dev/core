@@ -69,11 +69,11 @@ onMounted(() => {
 
 <template>
   <div class="relative flex w-full flex-grow px-0">
-    <div class="hidden lg:block lg:w-[260px] 2xl:w-[420px]">
-      <div class="sticky top-20">
+    <div class="hidden w-[75px]  lg:block 2xl:w-[420px]">
+      <div class="sticky top-40">
         <NuxtLink
           :to="localePath('/blog')"
-          class="group sticky ml-auto mr-7 mt-36 flex size-10 items-center justify-center rounded-full bg-background shadow-md shadow-secondary/5 ring-1 ring-border transition dark:border dark:border-border/50 dark:bg-secondary dark:ring-0 dark:ring-ring/10 dark:hover:border-border dark:hover:ring-ring/20 lg:left-8 lg:top-8 2xl:mr-20"
+          class="group sticky ml-auto mr-3  flex size-10 items-center justify-center rounded-full bg-background shadow-md shadow-secondary/5 ring-1 ring-border transition dark:border dark:border-border/50 dark:bg-secondary dark:ring-0 dark:ring-ring/10 dark:hover:border-border dark:hover:ring-ring/20  "
           aria-label="Go back to articles"
         >
           <svg
@@ -110,10 +110,12 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div id="toc" class="sticky top-20 mr-auto hidden h-[calc(100vh-5rem)] w-[300px] translate-x-3 overflow-y-auto px-3 py-6 lg:block 2xl:w-[420px] 2xl:translate-x-32 ">
-      <ClientOnly>
-        <UiContentTocDesktop :links="tocLinks" />
-      </ClientOnly>
+    <div class="hidden lg:block lg:w-[260px] 2xl:w-[420px]">
+      <div class="sticky top-32">
+        <ClientOnly>
+          <UiContentTocDesktop :links="tocLinks" />
+        </ClientOnly>
+      </div>
     </div>
   </div>
 
