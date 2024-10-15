@@ -68,8 +68,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative flex w-full flex-grow px-0">
-    <div class="hidden w-[75px]  lg:block 2xl:w-[420px]">
+  <div class="relative flex w-full flex-grow  px-0">
+    <div class="bg-svg dark:bg-svg-dark  hidden w-[75px] lg:block 2xl:w-[420px]">
       <div class="sticky top-40">
         <NuxtLink
           :to="localePath('/blog')"
@@ -92,7 +92,7 @@ onMounted(() => {
         </NuxtLink>
       </div>
     </div>
-    <div id="content" class="container left-0 top-0 mx-auto min-w-0 max-w-[700px] px-3 2xl:max-w-[800px]">
+    <div id="content" class="container left-0 top-0 mx-auto min-w-0 max-w-[700px] bg-background px-3 2xl:max-w-[800px]">
       <div
         class="prose-primary prose mt-24 w-full rounded-lg text-gray-t-2 dark:prose-invert"
       >
@@ -110,7 +110,7 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div class="hidden lg:block lg:w-[260px] 2xl:w-[420px]">
+    <div class="bg-svg dark:bg-svg-dark hidden lg:block lg:w-[260px] 2xl:w-[420px]">
       <div class="sticky top-32">
         <ClientOnly>
           <UiContentTocDesktop :links="tocLinks" />
