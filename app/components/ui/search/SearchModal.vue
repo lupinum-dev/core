@@ -9,6 +9,9 @@ defineShortcuts({
     handler: openDialog,
   },
 })
+
+// Change Layout to https://full-stack-global-search-demo.vercel.app/
+// https://github.com/Mat4m0/full-stack-global-search-demo
 </script>
 
 <template>
