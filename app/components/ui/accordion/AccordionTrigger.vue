@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { AccordionHeader, AccordionTrigger, type AccordionTriggerProps } from 'radix-vue'
-import { ChevronDown } from 'lucide-vue-next'
+
 import { cn } from '@/lib/utils'
 
 const props = defineProps<AccordionTriggerProps & { class?: string }>()
@@ -23,7 +23,7 @@ const delegatedProps = computed(() => {
     >
       <slot />
       <slot name="icon">
-        <ChevronDown class="size-4 shrink-0 transition-transform duration-200" />
+        <Icon name="lucide:chevron-down" class="size-4 shrink-0 transition-transform duration-200" />
       </slot>
     </AccordionTrigger>
   </AccordionHeader>

@@ -9,7 +9,6 @@ import {
   DialogPortal,
   useForwardPropsEmits,
 } from 'radix-vue'
-import { X } from 'lucide-vue-next'
 import { cn } from '@/lib/utils'
 
 const props = defineProps<DialogContentProps & { class?: HTMLAttributes['class'] }>()
@@ -50,7 +49,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         <DialogClose
           class="absolute right-3 top-3 rounded-md p-0.5 transition-colors hover:bg-secondary"
         >
-          <X class="size-4" />
+          <Icon name="lucide:x" class="size-4" />
           <span class="sr-only">Close</span>
         </DialogClose>
       </DialogContent>
