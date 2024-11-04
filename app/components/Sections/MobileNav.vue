@@ -50,11 +50,26 @@ function goToMainMenu() {
 function goBackToSubMenu() {
   openSubMenuIfNeeded(route.path)
 }
+
+const { t } = useI18n({
+  scope: 'scoped',
+})
 </script>
+
+<i18n lang="yaml">
+en:
+  backToMain: "Back to Main Menu"
+  backTo: "Back to"
+  menu: "Menu"
+de:
+  backToMain: "Zurück zum Hauptmenü"
+  backTo: "Zurück zum"
+  menu: "Menü"
+</i18n>
 
 <template>
   <nav class="flex h-[98%] flex-col transition-colors duration-300">
-    <div v-if="!showMainNav || currentSubNav" class=" flex items-center justify-between border-b border-border px-6 py-1">
+    <div v-if="!showMainNav || currentSubNav" class="flex items-center justify-between border-b border-border px-6 py-1">
       <UiButton
         v-if="!showMainNav"
         variant="link"
@@ -62,7 +77,7 @@ function goBackToSubMenu() {
         @click="goToMainMenu"
       >
         <Icon name="heroicons:chevron-left" class="mr-2 size-3" />
-        Back to Main Menu
+        {{ t('backToMain') }}
       </UiButton>
       <UiButton
         v-if="showMainNav && currentSubNav"
@@ -70,7 +85,7 @@ function goBackToSubMenu() {
         class="flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
         @click="goBackToSubMenu"
       >
-        Back to {{ currentSubNav.label }} Menu
+        {{ t('backTo') }} {{ t(currentSubNav.label) }} {{ t('menu') }}
         <Icon name="heroicons:chevron-right" class="ml-2 size-3" />
       </UiButton>
     </div>
@@ -81,15 +96,14 @@ function goBackToSubMenu() {
         <SectionsMainNav v-if="showMainNav" key="main-nav" />
         <component :is="currentSubNav?.component" v-else :key="currentSubNav?.label" />
       </div>
-    </UiScrollArea>
-
-    <footer class="mt-auto border-t border-border pb-5 pt-4">
-      <div class="flex items-center justify-between px-3">
+      <div class="flex items-center justify-between px-3 max-w-sm mx-auto">
         <UiColorModeDropdown />
 
         <UiElementsLanguageDropdown display-type="text" />
       </div>
-    </footer>
+    </UiScrollArea>
+
+
   </nav>
 </template>
 
@@ -112,3 +126,4 @@ function goBackToSubMenu() {
   border-radius: 4px;
 }
 </style>
+

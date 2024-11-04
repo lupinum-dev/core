@@ -45,6 +45,8 @@ function handleItemClick(showSubmenu: boolean | undefined, href: string | undefi
     handleLinkClick()
   }
 }
+
+
 </script>
 
 <template>
@@ -56,7 +58,7 @@ function handleItemClick(showSubmenu: boolean | undefined, href: string | undefi
             <UiAccordionTrigger class="px-4">
               <div class="flex items-center  py-0 text-base font-medium text-foreground">
                 <Icon :name="link.icon || ''" class="mr-3 size-5" />
-                {{ link.label }}
+                {{ $t(link.label) }}
               </div>
             </UiAccordionTrigger>
             <UiAccordionContent>
@@ -73,7 +75,7 @@ function handleItemClick(showSubmenu: boolean | undefined, href: string | undefi
                     ]"
                     @click="() => handleItemClick(child.showSubmenu, child.href)"
                   >
-                    {{ child.label }}
+                    {{ $t(child.label) }}
                     <Icon
                       v-if="link.type !== 'links'"
                       name="lucide:chevron-right"
@@ -100,7 +102,7 @@ function handleItemClick(showSubmenu: boolean | undefined, href: string | undefi
         @click="() => handleItemClick(link.showSubmenu, link.href)"
       >
         <Icon :name="link.icon || ''" class="mr-3 size-5" />
-        {{ link.label }}
+        {{ $t(link.label) }} 
       </component>
     </li>
   </ul>
@@ -115,8 +117,9 @@ function handleItemClick(showSubmenu: boolean | undefined, href: string | undefi
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Icon :name="social.icon" class="size-6" />
+        <Icon :name="social.icon || ''" class="size-6" />
       </a>
     </div>
   </div>
 </template>
+
