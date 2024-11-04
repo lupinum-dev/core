@@ -96,12 +96,12 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
               <slot name="right" />
             </div>
 
-            <UiSearchButton />
+            <UiSearchButton v-if="appConfig.header.showSearch" />
 
             <div class="hidden lg:block">
-              <UiColorModeDropdown variant="ghost" />
+              <UiColorModeDropdown v-if="appConfig.header.showLanguageDropdown" variant="ghost" />
 
-              <UiElementsLanguageDropdown v-if="appConfig.header.languageDropdown" />
+              <UiElementsLanguageDropdown v-if="appConfig.header.showLanguageDropdown" />
             </div>
             <UiButton variant="ghost" size="sm" class="lg:hidden" @click="toggleHeaderExpansion">
               <Icon

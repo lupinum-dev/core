@@ -14,7 +14,9 @@ export default defineAppConfig({
   header: {
     variant: 'bar', // 'bar' | 'default'
     rounded: '2xl', // 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full' | 'none'
-    languageDropdown: true,
+    showLanguageDropdown: true,
+    showColorModeDropdown: true,
+    showSearch: false,
     adBanner: {
       showAdBanner: true,
       adKey: 'banner',
@@ -29,6 +31,7 @@ export default defineAppConfig({
       offset: 'left-9',
       offsetSm: 'sm:left-40',
     },
+
     searchIcon: 'heroicons:magnifying-glass-16-solid',
     languageDropdownIcon: 'heroicons:language-16-solid',
   },
@@ -77,9 +80,9 @@ export default defineAppConfig({
     ],
   },
   socials: [
-    { icon: 'heroicons:code-bracket-square-20-solid', href: 'https://github.com', label: 'GitHub' },
-    { icon: 'heroicons:chat-bubble-left-right-20-solid', href: 'https://twitter.com', label: 'Twitter' },
-    { icon: 'heroicons:briefcase-20-solid', href: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: 'simple-icons:github', href: 'https://github.com', label: 'GitHub' },
+    { icon: 'simple-icons:twitter', href: 'https://twitter.com', label: 'Twitter' },
+    { icon: 'simple-icons:linkedin', href: 'https://linkedin.com', label: 'LinkedIn' },
   ],
   content: {
     image: {
