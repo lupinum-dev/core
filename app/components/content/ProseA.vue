@@ -16,10 +16,11 @@ const props = defineProps({
 const { locale } = useI18n()
 const localePath = useLocalePath()
 
-// Check if URL is external
+// Check if URL is external or uses a protocol
 const isExternalUrl = computed(() => {
   const url = props.href.toLowerCase()
-  return url.startsWith('http') || url.startsWith('www.')
+  const protocols = ['http', 'www.', 'mailto:', 'tel:', 'sms:', 'ftp:', 'file:']
+  return protocols.some(protocol => url.startsWith(protocol))
 })
 
 // Only fetch data for internal URLs
