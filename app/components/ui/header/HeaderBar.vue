@@ -79,10 +79,14 @@ const roundedClass = computed(() => {
 
               <UiSheetContent>
                 <UiSheetHeader>
-                  <UiSheetTitle class="flex items-center justify-between">
-                    <img class="h-7" src="/logo_light.svg">
+                  <UiSheetTitle class="flex items-center gap-4">
                     <UiColorModeDropdown v-if="appConfig.header.showLanguageDropdown" variant="ghost" />
                     <UiElementsLanguageDropdown display-type="text" />
+                    <UiDialogClose
+        class="absolute right-5 flex  rounded-sm item-center ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
+      >
+        <Icon name="heroicons:x-mark" class="size-5 text-muted-foreground" />
+      </UiDialogClose>
                   </UiSheetTitle>
                   <UiSheetDescription>
                     <ClientOnly>
