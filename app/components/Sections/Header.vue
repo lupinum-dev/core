@@ -64,10 +64,10 @@ const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.
       <template #center>
         <SectionsNav />
       </template>
-      <template #right />
-      <template #mobile>
-        <SectionsMobileNav />
+      <template #right>
+       
       </template>
+
     </UiHeaderBar>
   </UiHeaderWrapper>
 </template>

@@ -59,29 +59,20 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
 </script>
 
 <template>
-  <header
-    :class="cn(
-      'isolate fixed w-dvw transition-all duration-200 ',
-      appConfig.header.variant === 'default' ? 'bg-background z-50 border-b' : 'z-30', $attrs,
-    )"
-    :style="topStyle"
-  >
-    <div
-      class="mx-auto transition-all duration-300" :class="[
-        appConfig.header.variant === 'default'
-          ? 'flex items-center justify-between sm:container'
-          : 'max-w-6xl md:mt-3 lg:px-6',
-        isExpanded ? 'mt-0 rounded-none sm:px-0' : 'mt-2 px-3',
-      ]"
-    >
-      <div
-        class="flex size-full flex-col"
-        :class="[
-          { 'relative border  bg-background/95 px-2 shadow-lg backdrop-blur-sm dark:shadow-foreground/10': appConfig.header.variant !== 'default' },
-          isExpanded ? 'rounded-none border-none' : roundedClass,
-        ]"
-        :style="headerStyle"
-      >
+  <header :class="cn(
+    'isolate fixed w-dvw transition-all duration-200 ',
+    appConfig.header.variant === 'default' ? 'bg-background z-50 border-b' : 'z-30', $attrs,
+  )" :style="topStyle">
+    <div class="mx-auto transition-all duration-300" :class="[
+      appConfig.header.variant === 'default'
+        ? 'flex items-center justify-between sm:container'
+        : 'max-w-6xl md:mt-3 lg:px-6',
+      isExpanded ? 'mt-0 rounded-none sm:px-0' : 'mt-2 px-3',
+    ]">
+      <div class="flex size-full flex-col" :class="[
+        { 'relative border  bg-background/95 px-2 shadow-lg backdrop-blur-sm dark:shadow-foreground/10': appConfig.header.variant !== 'default' },
+        isExpanded ? 'rounded-none border-none' : roundedClass,
+      ]" :style="headerStyle">
         <div class=" lg:mt-1 mt-1.5 flex items-center justify-between">
           <div class="flex h-full items-center">
             <slot name="left" />
@@ -103,28 +94,28 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
 
               <UiElementsLanguageDropdown v-if="appConfig.header.showLanguageDropdown" />
             </div>
-            <UiButton variant="ghost" size="sm" class="lg:hidden" @click="toggleHeaderExpansion">
-              <Icon
-                :name="isExpanded ? appConfig.header.closeIcon : appConfig.header.hamburgerIcon"
-                class="size-5"
-              />
-            </UiButton>
+            <UiSheet>
+              <UiSheetTrigger>
+                <UiButton variant="ghost" size="sm" class="lg:hidden">
+                  <Icon :name="appConfig.header.hamburgerIcon" class="size-5" />
+                </UiButton>
+              </UiSheetTrigger>
+              <UiSheetContent>
+                <UiSheetHeader>
+                  <UiSheetTitle class="bg-red-400">Are you absolutely sure??</UiSheetTitle>
+                  <UiSheetDescription>
+        
+                  </UiSheetDescription>
+                </UiSheetHeader>
+              </UiSheetContent>
+              <ClientOnly>
+                      <SectionsMobileNav />
+                    </ClientOnly>
+            </UiSheet>
+
           </div>
         </div>
 
-        <Transition
-          enter-active-class="transition ease-out duration-200"
-          enter-from-class="opacity-0 -translate-y-1"
-          enter-to-class="opacity-100 translate-y-0"
-          leave-active-class="transition ease-in duration-150"
-          leave-from-class="opacity-100 translate-y-0"
-          leave-to-class="opacity-0 -translate-y-1"
-        >
-          <nav v-if="isExpanded" class="flex-grow overflow-y-auto">
-            <div class="h-px w-full bg-border" />
-            <slot name="mobile" />
-          </nav>
-        </Transition>
       </div>
     </div>
   </header>
