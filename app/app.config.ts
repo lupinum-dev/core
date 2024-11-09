@@ -76,7 +76,7 @@ export default defineAppConfig({
         href: '/blog',
         icon: 'heroicons:pencil-square-20-solid',
       },
-      { label: 'Contact', href: '/', icon: 'heroicons:envelope-20-solid' },
+      { label: 'Contact', href: '/', icon: 'heroicons:envelope-20-solid', cta: true },
     ],
   },
   socials: [

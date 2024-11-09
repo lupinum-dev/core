@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import type { NavigationItem } from '@/types/navigation'
 import { NuxtLink } from '#components'
+import { useRoute } from 'vue-router'
 
 const appConfig = useAppConfig()
 const navItems = appConfig.navigation.items as NavigationItem[]
+
+const route = useRoute()
+const activeRoute = computed(() => route.path)
 </script>
 
 <template>
@@ -33,7 +37,12 @@ const navItems = appConfig.navigation.items as NavigationItem[]
               </li>
               <li v-for="child in item.children" :key="child.label">
                 <UiNavigationMenuLink as-child>
-                  <NuxtLink :href="child.href">
+                  <NuxtLink 
+                    :href="child.href"
+                    :class="[
+                      activeRoute === child.href ? 'font-bold bg-accent ' : '',
+                    ]"
+                  >
                     <div class="font-heading text-sm leading-none">
                       {{ child.label }}
                     </div>
@@ -46,7 +55,16 @@ const navItems = appConfig.navigation.items as NavigationItem[]
             </ul>
           </UiNavigationMenuContent>
         </template>
-        <UiNavigationMenuLink v-else :as="NuxtLink" :to="item.href" class="nav-link">
+        <UiNavigationMenuLink 
+          v-else 
+          :as="NuxtLink" 
+          :to="item.href" 
+          class="nav-link" 
+          :class="[
+            item.cta ? 'bg-teal-500 text-accent-foreground hover:bg-teal-500/90' : '',
+            activeRoute === item.href ? 'font-bold  bg-accent' : ''
+          ]"
+        >
           {{ item.label }}
         </UiNavigationMenuLink>
       </UiNavigationMenuItem>
