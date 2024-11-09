@@ -94,28 +94,40 @@ provide('toggleHeaderExpansion', toggleHeaderExpansion)
 
               <UiElementsLanguageDropdown v-if="appConfig.header.showLanguageDropdown" />
             </div>
+            
             <UiSheet>
               <UiSheetTrigger>
                 <UiButton variant="ghost" size="sm" class="lg:hidden">
                   <Icon :name="appConfig.header.hamburgerIcon" class="size-5" />
                 </UiButton>
               </UiSheetTrigger>
+
               <UiSheetContent>
                 <UiSheetHeader>
-                  <UiSheetTitle class="bg-red-400">Are you absolutely sure??</UiSheetTitle>
+                  <UiSheetTitle class=" flex items-center justify-between">             <img class="h-7" src="/logo_light.svg"> <UiColorModeDropdown v-if="appConfig.header.showLanguageDropdown" variant="ghost" />
+
+                    <UiElementsLanguageDropdown display-type="text" /></UiSheetTitle>
                   <UiSheetDescription>
-        
+                    <ClientOnly>
+                      <SectionsMobileNav />
+                    </ClientOnly>
                   </UiSheetDescription>
                 </UiSheetHeader>
               </UiSheetContent>
-              <ClientOnly>
-                      <SectionsMobileNav />
-                    </ClientOnly>
+
             </UiSheet>
 
           </div>
         </div>
 
+        <Transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 -translate-y-1"
+          enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150"
+          leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 -translate-y-1">
+          <nav v-if="isExpanded" class="flex-grow overflow-y-auto">
+            <div class="h-px w-full bg-border" />
+            <slot name="mobile" />
+          </nav>
+        </Transition>
       </div>
     </div>
   </header>

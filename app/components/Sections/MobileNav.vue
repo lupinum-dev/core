@@ -96,11 +96,7 @@ de:
         <SectionsMainNav v-if="showMainNav" key="main-nav" />
         <component :is="currentSubNav?.component" v-else :key="currentSubNav?.label" />
       </div>
-      <div class="flex items-center justify-between px-3 max-w-sm mx-auto">
-        <UiColorModeDropdown />
 
-        <UiElementsLanguageDropdown display-type="text" />
-      </div>
     </UiScrollArea>
 
 
