@@ -36,7 +36,7 @@ const roundedClass = computed(() => {
 <template>
   <header :class="cn(
     'isolate fixed w-dvw transition-all duration-200 ',
-    appConfig.header.variant === 'default' ? 'bg-background z-50 border-b' : 'z-30', 
+    appConfig.header.variant === 'default' ? 'bg-background z-50 border-b' : 'z-30',
     $attrs,
   )" :style="topStyle">
     <div class="mx-auto transition-all duration-300" :class="[
@@ -69,13 +69,15 @@ const roundedClass = computed(() => {
               <UiColorModeDropdown v-if="appConfig.header.showLanguageDropdown" variant="ghost" />
               <UiElementsLanguageDropdown v-if="appConfig.header.showLanguageDropdown" />
             </div>
-            
+
+
             <UiSheet>
-              <UiSheetTrigger>
+              <UiSheetTrigger asChild>
                 <UiButton variant="ghost" size="sm" class="lg:hidden">
                   <Icon :name="appConfig.header.hamburgerIcon" class="size-5" />
                 </UiButton>
               </UiSheetTrigger>
+
 
               <UiSheetContent>
                 <UiSheetHeader>
@@ -83,10 +85,9 @@ const roundedClass = computed(() => {
                     <UiColorModeDropdown v-if="appConfig.header.showLanguageDropdown" variant="ghost" />
                     <UiElementsLanguageDropdown display-type="text" />
                     <UiDialogClose
-        class="absolute right-5 flex  rounded-sm item-center ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
-      >
-        <Icon name="heroicons:x-mark" class="size-5 text-muted-foreground" />
-      </UiDialogClose>
+                      class="absolute right-5 flex  rounded-sm item-center ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+                      <Icon name="heroicons:x-mark" class="size-5 text-muted-foreground" />
+                    </UiDialogClose>
                   </UiSheetTitle>
                   <UiSheetDescription>
                     <ClientOnly>
@@ -95,7 +96,10 @@ const roundedClass = computed(() => {
                   </UiSheetDescription>
                 </UiSheetHeader>
               </UiSheetContent>
+
             </UiSheet>
+
+
           </div>
         </div>
       </div>
