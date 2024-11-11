@@ -5,6 +5,13 @@ import { ConfigProvider } from 'radix-vue'
 import { configure } from 'vee-validate'
 import { removeLocalePrefix } from '~/utils/content'
 
+const i18nHead = useLocaleHead()
+useHead({
+  htmlAttrs: {
+    lang: i18nHead.value.htmlAttrs!.lang
+  },
+
+})
 const headerState = ref(false)
 provide('headerState', headerState)
 

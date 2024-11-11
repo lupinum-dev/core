@@ -73,7 +73,7 @@ const roundedClass = computed(() => {
 
             <UiSheet>
               <UiSheetTrigger asChild>
-                <UiButton variant="ghost" size="sm" class="lg:hidden">
+                <UiButton variant="ghost" size="sm" class="lg:hidden" aria-label="Open Mobile Menu">
                   <Icon :name="appConfig.header.hamburgerIcon" class="size-5" />
                 </UiButton>
               </UiSheetTrigger>
