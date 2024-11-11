@@ -56,21 +56,12 @@ dependencies:
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
-  cloudflare-video-element:
-    specifier: ^1.1.6
-    version: 1.1.6
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
   culori:
     specifier: ^4.0.1
     version: 4.0.1
-  hls-video-element:
-    specifier: ^1.2.8
-    version: 1.2.8
-  media-chrome:
-    specifier: ^4.2.3
-    version: 4.2.3
   meilisearch:
     specifier: 0.40.0
     version: 0.40.0
@@ -83,9 +74,6 @@ dependencies:
   pinia:
     specifier: ^2.2.6
     version: 2.2.6(typescript@5.6.3)(vue@3.5.12)
-  player.style:
-    specifier: ^0.0.11
-    version: 0.0.11
   playwright:
     specifier: ^1.48.2
     version: 1.48.2
@@ -4249,10 +4237,6 @@ packages:
     engines: {node: '>=0.8'}
     dev: false
 
-  /cloudflare-video-element@1.1.6:
-    resolution: {integrity: sha512-7jUQEfBhC3pHewbCRegakzN5rtwz+P4WafTnIlRiU5iOXo0IMOMiE9r/Xvf6BkFyyclvVjprDz4M3fQUaK+y0g==}
-    dev: false
-
   /clsx@2.0.0:
     resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
     engines: {node: '>=6'}
@@ -4619,10 +4603,6 @@ packages:
   /culori@4.0.1:
     resolution: {integrity: sha512-LSnjA6HuIUOlkfKVbzi2OlToZE8OjFi667JWN9qNymXVXzGDmvuP60SSgC+e92sd7B7158f7Fy3Mb6rXS5EDPw==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-    dev: false
-
-  /custom-media-element@1.3.2:
-    resolution: {integrity: sha512-nDyMobZgoAVqz7mA8rsn7i1/6bjH6N9ab2Ge7LyyNxrvxAq7zQJPg8i3u2VH7wEB+Y1T1+C3/h1G774/D+ZLag==}
     dev: false
 
   /db0@0.2.1:
@@ -6124,18 +6104,6 @@ packages:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
     dev: false
 
-  /hls-video-element@1.2.8:
-    resolution: {integrity: sha512-B5BULXTEKvt2naZt9nNzYJuPPquEgoABecsLRZY+iKruv+C2SYD2p8LULa6E/zEL1LjQCax/19n99R4Qdz95GA==}
-    dependencies:
-      custom-media-element: 1.3.2
-      hls.js: 1.5.17
-      media-tracks: 0.3.3
-    dev: false
-
-  /hls.js@1.5.17:
-    resolution: {integrity: sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==}
-    dev: false
-
   /hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
 
@@ -7094,14 +7062,6 @@ packages:
 
   /mdurl@2.0.0:
     resolution: {integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==}
-    dev: false
-
-  /media-chrome@4.2.3:
-    resolution: {integrity: sha512-gzwFy2b+RLsEtnPzUzqzf2L5XkaTLQr8POOyLOcoebWSAWg31cPy2vfXNiUnd93sc5IxwJ8OAwkKxnaJNZ8Gjg==}
-    dev: false
-
-  /media-tracks@0.3.3:
-    resolution: {integrity: sha512-9P2FuUHnZZ3iji+2RQk7Zkh5AmZTnOG5fODACnjhCVveX1McY3jmCRHofIEI+yTBqplz7LXy48c7fQ3Uigp88w==}
     dev: false
 
   /media-typer@0.3.0:
@@ -8339,12 +8299,6 @@ packages:
       confbox: 0.1.8
       mlly: 1.7.2
       pathe: 1.1.2
-
-  /player.style@0.0.11:
-    resolution: {integrity: sha512-L8hLvltTkiz6ti37vt4GPwLgOKTI2gCBzVVs9+xF4qCfgQvRpVLqkU/q8OCTxEMCe0lyvacOP3nIDs9Q75XGvQ==}
-    dependencies:
-      media-chrome: 4.2.3
-    dev: false
 
   /playwright-core@1.48.2:
     resolution: {integrity: sha512-sjjw+qrLFlriJo64du+EK0kJgZzoQPsabGF4lBvsid+3CNIZIYLgnMj9V6JY5VhM2Peh20DJWIVpVljLLnlawA==}

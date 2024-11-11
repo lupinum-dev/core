@@ -8,6 +8,3 @@
 </template>
 
 
-<script setup>
-
-</script>

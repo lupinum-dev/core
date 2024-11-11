@@ -58,6 +58,7 @@ const showLogo = computed(() => !isContentSite.value)
             :src="props.icon"
             alt="Logo Icon"
             class="h-7 sm:hidden"
+            
           />
           <UiColorModeImage
             v-else-if="!isContentSite"

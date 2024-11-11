@@ -57,9 +57,9 @@ configure({
       <NuxtPage />
     </NuxtLayout>
     <SectionsFooter />
-    <ClientOnly>
+    <!-- <ClientOnly>
       <UiSearchModal />
-    </ClientOnly>
+    </ClientOnly> -->
   </ConfigProvider>
 </template>
 
