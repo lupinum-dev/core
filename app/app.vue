@@ -55,6 +55,12 @@ configure({
   validateOnInput: false,
   validateOnModelUpdate: false,
 })
+
+const crisp = useScriptCrisp({
+  id: '8c02513f-167b-41ac-9612-a40d88a7c0ee'
+})
+crisp.set('user:nickname', 'Matthias')
+
 </script>
 
 <template>

@@ -46,13 +46,15 @@ provide('isContentSite', isContentSite)
 
 const showIcon = computed(() => isContentSite.value && !!props.icon)
 const showLogo = computed(() => !isContentSite.value)
+
+const localePath = useLocalePath()
 </script>
 
 <template>
   <div class="ml-2">
     <ClientOnly>
       <Transition name="fade-slide" class="sm:hidden">
-        <NuxtLink  to="/" class="flex items-center">
+        <NuxtLink :to="localePath('/')" class="flex items-center">
           <NuxtImg
            v-if="!isScrolled && isContentSite"
             :src="props.icon"
@@ -70,6 +72,7 @@ const showLogo = computed(() => !isContentSite.value)
         </NuxtLink>
       </Transition>
       <div class="hidden sm:block">
+        <NuxtLink :to="localePath('/')" class="flex items-center">
         <UiColorModeImage
           :light="props.srcLight"
           :dark="props.srcDark"
@@ -81,10 +84,11 @@ const showLogo = computed(() => !isContentSite.value)
           alt="Logo Icon"
           class="hidden h-7"
         />
+      </NuxtLink>
       </div>
 
       <template #fallback>
-        <NuxtLink to="/" class="flex items-center">
+        <NuxtLink :to="localePath('/')" class="flex items-center">
           <NuxtImg
             v-if="showIcon"
             :src="icon"

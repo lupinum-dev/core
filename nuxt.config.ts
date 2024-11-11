@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt',
     '@nuxtjs/color-mode',
     '@nuxt/test-utils/module',
+    '@nuxt/scripts',
   ],
 
   site: {
