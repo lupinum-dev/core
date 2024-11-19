@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/test-utils/module',
     '@nuxt/scripts',
+    'nuxt-delay-hydration',
   ],
 
   site: {
