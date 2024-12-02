@@ -1,4 +1,4 @@
-export type BlogPost = {
+type BlogPost = {
   _path: string
   title: string
   description: string
@@ -14,7 +14,7 @@ export type BlogPost = {
   }
 }
 
-export type TocItem = {
+type TocItem = {
   id: string
   depth: number
   text: string
