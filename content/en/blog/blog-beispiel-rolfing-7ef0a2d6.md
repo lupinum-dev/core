@@ -34,7 +34,7 @@ Through a combination of strong and mindful mobilisation of the fascia, awarenes
 ::
 
 ::info
-::img-left
+::img-left{size="xl"}
 ![Rolfing](https://directus.lupinum.com/assets/5855fa21-ca81-4e08-b5ab-6c0ef64df101)
 
 Rolfing can also be seen as an opportunity for life change. As a process-orientated form of bodywork, Rolfing supports personal development and the unfolding of one's own potential.

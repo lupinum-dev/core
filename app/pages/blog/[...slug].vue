@@ -68,12 +68,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative flex w-full flex-grow  px-0">
-    <div class="bg-svg dark:bg-svg-dark  hidden w-[75px] lg:block 2xl:w-[420px]">
-      <div class="sticky top-40">
+  <div class="relative flex w-full flex-grow">
+    <!-- Left sidebar - Back button -->
+    <div class="hidden w-[300px] bg-svg dark:bg-svg-dark lg:block">
+      <div class="sticky top-40 flex justify-end pr-8">
         <NuxtLink
           :to="localePath('/blog')"
-          class="group sticky ml-auto mr-3  flex size-10 items-center justify-center rounded-full bg-background shadow-md shadow-secondary/5 ring-1 ring-border transition dark:border dark:border-border/50 dark:bg-secondary dark:ring-0 dark:ring-ring/10 dark:hover:border-border dark:hover:ring-ring/20  "
+          class="group flex size-10 items-center justify-center rounded-full bg-background shadow-md shadow-secondary/5 ring-1 ring-border transition dark:border dark:border-border/50 dark:bg-secondary dark:ring-0 dark:ring-ring/10 dark:hover:border-border dark:hover:ring-ring/20"
           aria-label="Go back to articles"
         >
           <svg
@@ -92,10 +93,10 @@ onMounted(() => {
         </NuxtLink>
       </div>
     </div>
-    <div id="content" class="container left-0 top-0 mx-auto min-w-0 max-w-[700px] bg-background px-3 2xl:max-w-[800px]">
-      <div
-        class="prose-primary prose mt-24 w-full rounded-lg text-gray-t-2 dark:prose-invert"
-      >
+
+    <!-- Main content -->
+    <div class="mx-auto flex min-w-0 max-w-[700px] flex-col px-4">
+      <div class="prose-primary prose mt-24 w-full rounded-lg text-gray-t-2 dark:prose-invert">
         <UiContentHeader :title="page?.title ?? ''" :description="page?.description ?? ''" />
 
         <UiContentCTA />
@@ -110,8 +111,10 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div class="bg-svg dark:bg-svg-dark hidden lg:block lg:w-[260px] 2xl:w-[420px]">
-      <div class="sticky top-32">
+
+    <!-- Right sidebar - TOC -->
+    <div class="hidden w-[300px] bg-svg dark:bg-svg-dark lg:block">
+      <div class="sticky top-32 pl-8">
         <ClientOnly>
           <UiContentTocDesktop :links="tocLinks" />
         </ClientOnly>
