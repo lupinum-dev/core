@@ -80,26 +80,26 @@ onMounted(() => {
 
 <template>
   <div
-    class="not-prose mb-8 mt-6 flex w-full flex-col items-center rounded-2xl bg-card p-4 ring-1 ring-border sm:flex-row sm:items-center sm:justify-between sm:space-x-6 sm:p-5 md:space-x-10"
+    class="not-prose mb-8 mt-6 flex w-full flex-col items-center rounded-2xl  p-4 bg-foreground dark:bg-background ring-1 ring-ring sm:flex-row sm:items-center sm:justify-between sm:space-x-6 sm:p-5 md:space-x-10"
   >
     <Icon
       :name="selectedCTA.icon"
-      class="mb-4 size-8 flex-shrink-0 text-primary sm:mb-0 sm:size-10"
+      class="mb-4 size-8 flex-shrink-0 text-lupinumTeal sm:mb-0 sm:size-8"
     />
 
     <div
-      class="flex flex-1 flex-col items-center space-y-4 text-center sm:flex-row sm:items-center sm:justify-between sm:space-y-0 sm:text-left lg:pr-1"
+      class="flex flex-1 flex-col items-center  space-y-4 text-center sm:flex-row sm:items-center sm:justify-between sm:space-y-0 sm:text-left lg:pr-1"
     >
       <div class="flex flex-col space-y-0.5">
         <div class="font-heading-med text-sm text-lupinumTeal">
           {{ selectedCTA.question }}
         </div>
-        <div class="font-heading text-base text-foreground xl:text-lg">
+        <div class="font-heading text-base text-background dark:text-foreground xl:text-lg">
           {{ selectedCTA.statement }}
         </div>
       </div>
 
-      <UiButton variant="default" class="ml-3 bg-lupinumTeal hover:bg-lupinumTeal/80 mt-2 w-full sm:mt-0 sm:w-auto rounded-full">
+      <UiButton variant="default" class="ml-3 bg-lupinumTeal hover:bg-lupinumTeal/80 text-foreground dark:text-background mt-2 w-full sm:mt-0 sm:w-auto rounded-full">
         {{ selectedCTA.action }}
       </UiButton>
     </div>
