@@ -102,13 +102,16 @@ onMounted(() => {
         <UiContentCTA />
 
         <ContentRenderer v-if="page?.body" :value="page" />
-        <div class="mt-12">
+        <!-- divider: -->
+        <div class="border-t-2 mt-12 w-full border-border"></div>
+        <div class=" mt-12 flex justify-center">
+          <UiElementsFeedback />
+        </div>
+        <div class="py-24">
           <UiContentCTA />
         </div>
 
-        <div class="mb-24 mt-4 flex justify-center">
-          <UiElementsFeedback />
-        </div>
+
       </div>
     </div>
 
