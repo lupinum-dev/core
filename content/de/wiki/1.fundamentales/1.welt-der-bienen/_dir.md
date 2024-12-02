@@ -1,4 +1,0 @@
----
-group: Welt der Bienen
----
-

@@ -93,8 +93,6 @@ After we've piqued visitors' interest, it's about comprehensively answering thei
   - Targeted keyword placement for better ranking in relevant search queries
   - Optimization of loading times for a better user experience
 
-:custom-image{src="/_assets/references/0d3e5423/Pasted-image-20241020114045.png" alt="Google search entry of one of the main services “Schaumbeton Unter Estrich”, Glösmann Bau Service comes first with rich snippet"}
-  
 ### Website Performance
 
 Thanks to our advanced tech stack, we achieve not only an appealing design but also outstanding performance values:

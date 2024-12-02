@@ -1,24 +1,42 @@
 ---
-title: 'Blog Beispiel: Rolfing'
-description: >-
-  Entdecken Sie die faszinierende Welt der Imkerei. Wir zeigen Ihnen, wie
-  einfach es ist, Bilder zu verwenden, um Texte informativer und ansprechender
-  zu gestalten. Skalieren Sie Ihre Bilder auf jede beliebige Größe und
-  platzieren Sie sie links oder rechts neben Ihrem Text.
-date_published: 2023-01-01T00:00:00.000Z
-date_modified: 2024-10-13T00:00:00.000Z
-category:
-  - Example
-  - Body
-hero_image: /_assets/blog/c4dce995/Matthias-as-beekeeper.png
+title: "Blog-Beispiel: Was ist Rolfing®?"
+description: Rolfing ist eine Form der Körperarbeit, die speziell mit den Faszien arbeitet. Hebe bestimmte Teile deines Textes mit Info-, Tipp-, Gefahren- oder benutzerdefinierten Callout-Boxen hervor.
+date_published: 2023-01-01
+date_modified: 2024-10-13
+category_blog:
+  - Blog Examples
+published: true
 ---
+## Was ist Rolfing®?
 
-:custom-image{src="/_assets/blog/c4dce995/Matthias-as-beekeeper.png" alt=", This is the Alt text"}
+Eine Einführung in die Methode des Rolfing, ihre Zielsetzung und den Fokus auf das Fasziensystem des Körpers.
 
-Neben unserer Arbeit in der digitalen Welt sind wir auch leidenschaftliche Imker und betreuen durchschnittlich 15-20 Bienenvölker. Es ist uns sehr wichtig, unsere Begeisterung für die Natur zu teilen und das Bewusstsein für die wichtige Rolle der Biodiversität, nachhaltiger und regionaler (Landwirtschafts-)Wirtschaft und den sorgsamen Umgang mit Ressourcen zu schärfen. In diesem Blogbeitrag tauchen wir ein in die faszinierende Welt der Imkerei.
+::img-left{size="lg"}
+![Rolfing](https://directus.lupinum.com/assets/3f1b7ee1-d525-46af-a7de-f87e988c2d1f)
 
-## Honigbiene (Apis mellifera)
-++img-left
-:custom-image{src="/_assets/Buckfast-on-honeycomb.jpg" alt="Buckfast-Bienen (Apis mellifera Buckfast) sitzen auf einer mit Honig gefüllten Honigwabe, gelbes Wachs, hochauflösend"}
-Im Mittelpunkt der Imkerei steht die **Honigbiene**, ein bemerkenswertes Insekt, das für seine komplexe Sozialstruktur und seinen Fleiß bekannt ist. Honigbienen gehören zur Gattung *Apis*, wobei die am häufigsten gezüchtete Art *Apis mellifera* ist. Diese Insekten haben einzigartige Anpassungen entwickelt, wie die Fähigkeit, durch komplexe Tänze und Pheromone zu kommunizieren, was ihnen ermöglicht, effizient in einer Kolonie zusammenzuarbeiten.
-++
+### Die Methode
+Rolfing ist eine Form von manueller Körperarbeit und Bewegungsschulung, die durch ein tiefwirkendes und zielgerichtetes Ausbalancieren des körperweiten Fasziennetzes auf mühelose Aufrichtung, Bewegungsfreiheit, persönliches Wohlbefinden und das Lösen chronischer Belastungen abzielt. Sie wurde Mitte der 90er Jahre von Dr. Ida Rolf entwickelt.
+::
+
+::info
+::img-right
+![Rolfing](https://directus.lupinum.com/assets/361edb50-797d-42c1-b420-bdd473cec104)
+
+Das Fasziennetz ist ein sehr anpassungsfähiges Gewebe, das stark auf die Art und Weise der Beanspruchung reagiert. Faszien werden beispielsweise geformt durch Stress, intensive Lebenssituationen, Unfälle, Operationen, Narben, Krankheiten, eine unausgewogene Ernährung, aber auch durch Sport und Gewohnheiten wie zum Beispiel die Art zu atmen, zu essen oder zu sitzen.
+::
+::
+
+::img-left{size="lg"}
+![Rolfing](https://directus.lupinum.com/assets/87eeaba0-6a79-4155-9931-3e6cce768da6)
+
+### Die Techniken
+Durch eine Kombination aus kräftiger und achtsamer Mobilisierung der Faszien, Wahrnehmungsübungen und Bewegungsschulung können chronische Spannungsmuster gelöst, Gelenke entlastet und der gesamte Körper ausbalanciert werden. Es wird oftmals als ein Gefühl von mehr Raum, Leichtigkeit und fließender Bewegungen beschrieben. Außerdem werden Durchblutung, Wahrnehmung, Koordination, Stabilität und Beweglichkeit im Alltag und Sport gesteigert.
+::
+
+::info
+::img-right
+![Rolfing](https://directus.lupinum.com/assets/5855fa21-ca81-4e08-b5ab-6c0ef64df101)
+
+Rolfing kann auch als Möglichkeit für Veränderungen im Leben gesehen werden. Als prozessorientierte Form der Körperarbeit unterstützt Rolfing die persönliche Entwicklung und die Entfaltung des eigenen Potenzials.
+::
+::

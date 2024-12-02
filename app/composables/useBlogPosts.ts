@@ -1,36 +1,25 @@
 import { useAsyncData } from '#app'
 import { computed } from 'vue'
+import type { BlogPost } from '~/types/blog'
 
-export function useBlogPosts() {
+export const useBlogPosts = () => {
   const { locale } = useI18n()
-  const localePath = useLocalePath()
 
-  const { data: posts } = useAsyncData('posts', () =>
+  const { data: blogPosts } = useAsyncData<BlogPost[]>('blog-posts', () =>
     queryContent(locale.value, 'blog')
       .where({ _partial: false, _draft: false })
-      .only(['title', 'description', '_path', 'category', 'date_published', 'date_modified', 'readTime', 'hero_image'])
+      .only(['title', 'description', '_path', 'category_blog', 'date_published', 'date_modified'])
       .sort({ date_published: -1 })
       .find()
   )
 
-  const blogPosts = computed(() => {
-    return (posts.value?.map((post) => {
-      const pathParts = post._path?.split('/').filter(Boolean) ?? []
-      if (pathParts[0] === 'en') {
-        pathParts.shift()
-      }
-      const newPath = localePath(`/${pathParts.join('/')}`)
-      return {
-        ...post,
-        _path: newPath,
-      }
-    }) ?? [])
+  const categories = computed(() => {
+    const allCategories = blogPosts.value?.flatMap(post => post.category_blog) ?? []
+    return [...new Set(allCategories)]
   })
 
-  const categories = computed(() => [...new Set(blogPosts.value.flatMap(post => post.category))])
-
   return {
-    blogPosts,
-    categories,
+    blogPosts: computed(() => blogPosts.value ?? []),
+    categories
   }
 }

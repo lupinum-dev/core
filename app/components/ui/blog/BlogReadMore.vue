@@ -1,17 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
-interface BlogPost {
-  _path: string
-  title: string
-  description: string
-  date_published: string
-  date_modified: string
-  category: string[]
-  highlight?: boolean
-  readTime?: string
-  hero_image?: string
-}
+import { computed } from '#imports'
+import type { BlogPost } from '~/types/blog'
 
 const props = defineProps<{
   currentPost: BlogPost
@@ -20,14 +9,20 @@ const props = defineProps<{
 
 const relatedPosts = computed(() =>
   props.allPosts
-    .filter(post => post._path !== props.currentPost._path && post.category.some(cat => props.currentPost.category.includes(cat)))
+    .filter((post: BlogPost) => 
+      post._path !== props.currentPost._path && 
+      post.category_blog.some(cat => props.currentPost.category_blog.includes(cat))
+    )
     .slice(0, 2),
 )
 
 const recentPosts = computed(() => {
   const additionalPosts = relatedPosts.value.length < 2
     ? props.allPosts
-      .filter(post => post._path !== props.currentPost._path && !relatedPosts.value.includes(post))
+      .filter((post: BlogPost) => 
+        post._path !== props.currentPost._path && 
+        !relatedPosts.value.includes(post)
+      )
       .slice(0, 2 - relatedPosts.value.length)
     : []
   return [...relatedPosts.value, ...additionalPosts]
@@ -35,7 +30,10 @@ const recentPosts = computed(() => {
 
 const highlightedPosts = computed(() =>
   props.allPosts
-    .filter(post => post.highlight && post._path !== props.currentPost._path)
+    .filter((post: BlogPost) => 
+      post.published && 
+      post._path !== props.currentPost._path
+    )
     .slice(0, 3),
 )
 </script>
@@ -54,10 +52,10 @@ const highlightedPosts = computed(() =>
     </div>
 
     <h2 class="mb-6 mt-12 font-heading text-xl font-bold text-foreground">
-      Highlights
+      Latest Posts
     </h2>
     <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      <UiBlogPostCardHighlight
+      <UiBlogPostCard
         v-for="post in highlightedPosts"
         :key="post._path"
         :post="post"

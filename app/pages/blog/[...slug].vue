@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserTextConfig } from '~/composables/useUserTextConfig'
+import type { BlogPost } from '~/types/blog'
 
 const route = useRoute()
 
@@ -16,17 +17,17 @@ const pageId = computed(() => {
   return lastSlug.split('-').pop() ?? ''
 })
 
-const { data: page } = await useAsyncData('page', () => queryContent(locale.value, 'blog')
+const { data: page } = await useAsyncData<BlogPost>('page', () => queryContent(locale.value, 'blog')
   .where({ _path: { $contains: pageId.value } })
   .findOne())
 
-const { data } = await useAsyncData('allPosts', () => queryContent(locale.value, 'blog')
+const { data } = await useAsyncData<BlogPost[]>('allPosts', () => queryContent(locale.value, 'blog')
   .where({ _partial: false, _draft: false })
-  .only(['title', 'description', '_path', 'category', 'date_published', 'date_modified', 'readTime', 'hero_image', 'highlight'])
+  .only(['title', 'description', '_path', 'category_blog', 'date_published', 'date_modified'])
   .sort({ date_published: -1 })
   .find())
 
-const allPosts = computed(() => {
+const allPosts = computed((): BlogPost[] => {
   return (data.value?.map((post) => {
     const pathParts = post._path?.split('/').filter(Boolean) ?? []
     if (pathParts[0] === 'en') {
@@ -40,7 +41,7 @@ const allPosts = computed(() => {
   }) ?? [])
 })
 
-const currentPost = computed(() => {
+const currentPost = computed((): BlogPost | null => {
   if (page.value) {
     return {
       _path: page.value._path,
@@ -48,19 +49,18 @@ const currentPost = computed(() => {
       description: page.value.description,
       date_published: page.value.date_published,
       date_modified: page.value.date_modified,
-      category: page.value.category,
-      highlight: page.value.highlight,
-      readTime: page.value.readTime,
-      hero_image: page.value.hero_image,
+      category_blog: page.value.category_blog,
+      published: page.value.published,
+      body: page.value.body,
     }
   }
   return null
 })
 
-const tocLinks = ref<Array<{ id: string, text: string, target: Ref<HTMLElement | null> }>>([])
+const tocLinks = ref<Array<{ id: string; text: string; depth: number; target: Ref<HTMLElement | null> }>>([])
 
 onMounted(() => {
-  tocLinks.value = page.value?.body?.toc?.links?.map((link: any) => ({
+  tocLinks.value = page.value?.body?.toc?.links?.map((link) => ({
     ...link,
     target: ref(document.getElementById(link.id)),
   })) ?? []
@@ -119,7 +119,7 @@ onMounted(() => {
     </div>
   </div>
 
-  <UiBlogReadMore v-if="currentPost && allPosts" :current-post="currentPost" :all-posts="allPosts" />
+  <!-- <UiBlogReadMore v-if="currentPost && allPosts" :current-post="currentPost" :all-posts="allPosts" /> -->
 </template>
 
 <style>

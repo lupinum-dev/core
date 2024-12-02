@@ -1,4 +1,0 @@
----
-group: World of Bees
----
-

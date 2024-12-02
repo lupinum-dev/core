@@ -1,23 +1,42 @@
 ---
-title: 'Blog-Beispiel:  Rolfing'
-description: >-
-  Entdecken Sie die faszinierende Welt der Imkerei. Wir zeigen Ihnen, wie
-  einfach es ist, Bilder zu verwenden, um Texte informativer und ansprechender
-  zu gestalten. Skalieren Sie Ihre Bilder auf jede beliebige Größe und
-  platzieren Sie sie links oder rechts neben Ihrem Text.
-date_published: 2024-10-11T00:00:00.000Z
-date_modified: 2024-10-13T00:00:00.000Z
-category:
-  - Example
-  - Body
-hero_image: /_assets/blog/c4dce995/Matthias-as-beekeeper.png
+title: "Blog-Example: What is Rolfing®?"
+description: Rolfing is a form of bodywork that specifically addresses fascia. Highlight specific parts of your text with info, tip, hazard or custom callout boxes.
+date_published: 2024-10-11
+date_modified: 2024-10-13
+category_blog:
+  - Blog Examples
+published: true
 ---
-:custom-image{src="/_assets/blog/c4dce995/Matthias-as-beekeeper.png" alt=", Alt text"}
+## What is Rolfing®?
 
-Neben unserer Arbeit in der digitalen Welt sind wir auch leidenschaftliche Imker und betreuen durchschnittlich 15-20 Bienenvölker. Es ist uns sehr wichtig, unsere Begeisterung für die Natur zu teilen und das Bewusstsein für die wichtige Rolle der Biodiversität, nachhaltiger und regionaler (Landwirtschafts-)Wirtschaft und den sorgsamen Umgang mit Ressourcen zu schärfen. In diesem Blogbeitrag tauchen wir ein in die faszinierende Welt der Imkerei.
+An introduction to the Rolfing method, its objectives and the focus on the fascial system of the body.
 
-## Honigbiene (Apis mellifera)
-++img-left
-:custom-image{src="/_assets/Buckfast-on-honeycomb.jpg" alt="Buckfast-Bienen (Apis mellifera Buckfast) sitzen auf einer mit Honig gefüllten Honigwabe, gelbes Wachs, hochauflösend"}
-Im Mittelpunkt der Imkerei steht die **Honigbiene**, ein bemerkenswertes Insekt, das für seine komplexe Sozialstruktur und seinen Fleiß bekannt ist. Honigbienen gehören zur Gattung *Apis*, wobei die am häufigsten gezüchtete Art *Apis mellifera* ist. Diese Insekten haben einzigartige Anpassungen entwickelt, wie die Fähigkeit, durch komplexe Tänze und Pheromone zu kommunizieren, was ihnen ermöglicht, effizient in einer Kolonie zusammenzuarbeiten.
-++[blog-example-beekeeping__en](/blog-example-beekeeping__en.md/blog-example-beekeeping__en)
+::img-left{size="lg"}
+![Rolfing](https://directus.lupinum.com/assets/3f1b7ee1-d525-46af-a7de-f87e988c2d1f)
+
+### The method
+Rolfing is a form of manual bodywork and movement training that aims to achieve effortless straightening, freedom of movement, personal well-being and the release of chronic stress through deep and targeted balancing of the body-wide fascial network. It was developed by Dr Ida Rolf in the mid-1990s.
+::
+
+::info
+::img-right
+![Rolfing](https://directus.lupinum.com/assets/361edb50-797d-42c1-b420-bdd473cec104)
+
+The fascial network is a very adaptable tissue that reacts strongly to the way it is stressed. Fasciae are shaped, for example, by stress, intense life situations, accidents, operations, scars, illnesses, an unbalanced diet, but also by sport and habits such as the way we breathe, eat or sit.
+::
+::
+
+::img-right{size="lg"}
+![Rolfing](https://directus.lupinum.com/assets/87eeaba0-6a79-4155-9931-3e6cce768da6)
+
+### The techniques
+Through a combination of strong and mindful mobilisation of the fascia, awareness exercises and movement training, chronic tension patterns can be released, joints relieved and the entire body balanced. It is often described as a feeling of more space, lightness and flowing movements. It also improves circulation, perception, coordination, stability and mobility in everyday life and sport.
+::
+
+::info
+::img-left
+![Rolfing](https://directus.lupinum.com/assets/5855fa21-ca81-4e08-b5ab-6c0ef64df101)
+
+Rolfing can also be seen as an opportunity for life change. As a process-orientated form of bodywork, Rolfing supports personal development and the unfolding of one's own potential.
+::
+::
