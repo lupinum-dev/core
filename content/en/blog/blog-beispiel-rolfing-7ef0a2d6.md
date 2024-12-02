@@ -11,7 +11,7 @@ published: true
 
 An introduction to the Rolfing method, its objectives and the focus on the fascial system of the body.
 
-::img-left{size="lg"}
+::img-left{size="xl"}
 ![Rolfing](https://directus.lupinum.com/assets/3f1b7ee1-d525-46af-a7de-f87e988c2d1f)
 
 ### The method

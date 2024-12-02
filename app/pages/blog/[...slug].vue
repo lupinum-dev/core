@@ -95,8 +95,8 @@ onMounted(() => {
     </div>
 
     <!-- Main content -->
-    <div class="mx-auto flex min-w-0 max-w-[700px] flex-col px-4 bg-svg dark:bg-svg-dark">
-      <div class="prose-primary prose mt-24 w-full rounded-lg text-gray-t-2 dark:prose-invert">
+    <div class="mx-auto flex min-w-0 max-w-[850px] flex-col px-4 bg-svg dark:bg-svg-dark ">
+      <div class="prose-primary prose mt-24 w-full px-12 rounded-lg text-gray-t-2 dark:prose-invert">
         <UiContentHeader :title="page?.title ?? ''" :description="page?.description ?? ''" />
 
         <UiContentCTA />
