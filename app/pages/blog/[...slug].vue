@@ -70,7 +70,7 @@ onMounted(() => {
 <template>
   <div class="relative flex w-full flex-grow">
     <!-- Left sidebar - Back button -->
-    <div class="hidden w-[300px] bg-svg dark:bg-svg-dark lg:block">
+    <div class="hidden w-[300px]  lg:block">
       <div class="sticky top-40 flex justify-end pr-8">
         <NuxtLink
           :to="localePath('/blog')"
@@ -95,7 +95,7 @@ onMounted(() => {
     </div>
 
     <!-- Main content -->
-    <div class="mx-auto flex min-w-0 max-w-[700px] flex-col px-4">
+    <div class="mx-auto flex min-w-0 max-w-[700px] flex-col px-4 bg-svg dark:bg-svg-dark">
       <div class="prose-primary prose mt-24 w-full rounded-lg text-gray-t-2 dark:prose-invert">
         <UiContentHeader :title="page?.title ?? ''" :description="page?.description ?? ''" />
 
