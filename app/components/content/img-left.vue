@@ -48,7 +48,9 @@ const processedSlots = computed(() => {
 function renderContent() {
   const sizeConfig = sizes[props.size] || sizes.lg
   return h('div', { class: `lg:grid grid-cols-10 lg:gap-10 flex flex-col ` }, [
-    h('div', { class: `${sizeConfig.imgCols} not-prose place-content-center mx-auto h-full` }, processedSlots.value.imgSlot),
+    // Image
+    h('div', { class: `${sizeConfig.imgCols} not-prose place-content-center mx-auto w-full h-fit` }, processedSlots.value.imgSlot),
+    // Content
     h('div', { class: `${sizeConfig.otherCols}  xl:mr-16 2xl:mr-28` }, processedSlots.value.remainderSlot),
   ])
 }

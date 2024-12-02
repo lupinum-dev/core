@@ -113,7 +113,7 @@ onMounted(() => {
     </div>
 
     <!-- Right sidebar - TOC -->
-    <div class="hidden w-[300px] bg-svg dark:bg-svg-dark lg:block">
+    <div class="hidden w-[300px] lg:block">
       <div class="sticky top-32 pl-8">
         <ClientOnly>
           <UiContentTocDesktop :links="tocLinks" />
