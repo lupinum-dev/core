@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useUserTextConfig } from '~/composables/useUserTextConfig'
-
 const route = useRoute()
 
 definePageMeta({
@@ -22,7 +20,7 @@ const { data: page } = await useAsyncData('page-references', () => queryContent(
 
 const { data } = await useAsyncData('posts-references', () => queryContent(locale.value, 'references')
   .where({ _partial: false, _draft: false })
-  .only(['title', 'description', '_path', 'category', 'date_published', 'date_modified', 'readTime', 'hero_image', 'highlight'])
+  .only(['title', 'description', '_path', 'category_references', 'date_published', 'date_modified', 'readTime', 'hero_image', 'highlight'])
   .sort({ date_published: -1 })
   .find())
 
@@ -48,7 +46,7 @@ const currentPost = computed(() => {
       description: page.value.description,
       date_published: page.value.date_published,
       date_modified: page.value.date_modified,
-      category: page.value.category,
+      category_references: page.value.category_references,
       highlight: page.value.highlight,
       readTime: page.value.readTime,
       hero_image: page.value.hero_image,
@@ -88,9 +86,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <ClientOnly>
-    <UiBlogReadMore v-if="currentPost && allPosts" :current-post="currentPost" :all-posts="allPosts" />
-  </ClientOnly>
+
 </template>
 
 <style>
