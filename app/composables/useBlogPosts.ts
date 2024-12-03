@@ -5,7 +5,7 @@ export function useBlogPosts() {
   const { locale } = useI18n()
   const localePath = useLocalePath()
 
-  const { data: posts } = useAsyncData('posts', () =>
+  const { data: blogPosts } = useAsyncData('posts', () =>
     queryContent(locale.value, 'blog')
       .where({ _partial: false, _draft: false })
       .only(['title', 'description', '_path', 'category', 'date_published', 'date_modified', 'readTime', 'hero_image'])
@@ -13,18 +13,8 @@ export function useBlogPosts() {
       .find()
   )
 
-  const blogPosts = computed(() => {
-    return (posts.value?.map((post) => {
-      const pathParts = post._path?.split('/').filter(Boolean) ?? []
-      if (pathParts[0] === 'en') {
-        pathParts.shift()
-      }
-      const newPath = localePath(`/${pathParts.join('/')}`)
-      return {
-        ...post,
-        _path: newPath,
-      }
-    }) ?? [])
+  blogPosts.value?.forEach((ref) => {
+    ref._path = "/blog/" +ref._path?.split('/').slice(2).join('/')
   })
 
   const categories = computed(() => [...new Set(blogPosts.value.flatMap(post => post.category))])
