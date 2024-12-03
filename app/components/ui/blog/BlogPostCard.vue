@@ -5,7 +5,8 @@ interface BlogPost {
   description: string
   date_published: string
   date_modified: string
-  category: string[]
+  category_references: string[]
+  category_text: string[]
   highlight?: boolean
   readTime?: string
   hero_image?: string
@@ -32,7 +33,7 @@ const postPath = computed(() => "/" + props.post._path.split('/').slice(2).join(
     </div>
     <div class="flex flex-1 flex-col justify-between">
       <div class="flex-1">
-        <div class="mb-3">
+        <div class="mb-3" v-if="post.category_text">
           <span  class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary hover:bg-primary hover:text-primary-foreground">
             {{ post.category_text }}
           </span>

@@ -59,7 +59,7 @@ if (route.query.category) {
       <div class="mx-auto mt-24 flex w-full max-w-7xl flex-col justify-between sm:px-6 lg:px-8">
         <template v-if="blogPosts">
           <div v-if="isHome">
-            <UiBlogIndexPage :posts="filteredPosts" />
+            <UiBlogIndexPage :posts="filteredPosts" type="blog" />
           </div>
           <div v-else class="container mx-auto px-4 py-8">
             <h2 class="mb-6 font-heading text-3xl text-foreground">
