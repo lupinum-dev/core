@@ -33,8 +33,8 @@ const postPath = computed(() => "/" + props.post._path.split('/').slice(2).join(
     <div class="flex flex-1 flex-col justify-between">
       <div class="flex-1">
         <div class="mb-3">
-          <span v-for="cat in post.category" :key="cat" class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary hover:bg-primary hover:text-primary-foreground">
-            {{ cat }}
+          <span  class="mr-2 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary hover:bg-primary hover:text-primary-foreground">
+            {{ post.category_text }}
           </span>
         </div>
         <NuxtLink :to="localePath(postPath)" class="focus:outline-none" :aria-label="post.title" tabindex="-1">

@@ -24,6 +24,10 @@ function goHome() {
   blogStore.setSelectedCategory('')
   navigateToBlogIndex()
 }
+
+const appConfig = useAppConfig()
+
+
 </script>
 
 <template>
@@ -57,19 +61,19 @@ function goHome() {
       <div class="widget rounded-lg border border-border bg-card p-5">
         <div class="flex flex-col items-center justify-between space-y-4 text-center">
           <p class="text-sm text-muted-foreground">
-            You learn better visually with Videos?
+            Free Website Audit
           </p>
           <p class="font-heading text-lg text-card-foreground">
-            Get access to our In-depth Video Course
+            Get a free website audit and learn how to improve your website.
           </p>
           <UiButton variant="default">
-            Enroll now
+            Get Started
           </UiButton>
         </div>
       </div>
 
       <!-- Newsletter -->
-      <div class="widget">
+      <!-- <div class="widget">
         <h4 class="mb-4 font-heading text-xl font-semibold text-foreground">
           Newsletter
         </h4>
@@ -82,7 +86,7 @@ function goHome() {
             Subscribe
           </UiButton>
         </form>
-      </div>
+      </div> -->
 
       <!-- Social Share -->
       <div class="widget pb-16">
@@ -90,18 +94,19 @@ function goHome() {
           Follow us
         </h4>
         <div class="flex gap-4">
-          <a href="#" class="text-muted-foreground hover:text-foreground">
-            <Icon name="mdi:facebook" class="size-6" />
-          </a>
-          <a href="#" class="text-muted-foreground hover:text-foreground">
-            <Icon name="mdi:twitter" class="size-6" />
-          </a>
-          <a href="#" class="text-muted-foreground hover:text-foreground">
-            <Icon name="mdi:linkedin" class="size-6" />
-          </a>
-          <a href="#" class="text-muted-foreground hover:text-foreground">
-            <Icon name="mdi:pinterest" class="size-6" />
-          </a>
+          <NuxtLink
+            v-for="icon in appConfig.socials"
+            :key="icon.icon"
+            :href="icon.href"
+            aria-label="Follow us on {{ icon.label }}"
+            class="text-muted-foreground hover:text-foreground"
+          >
+            <Icon
+              :key="icon.icon"
+              :name="icon.icon"
+              class="size-6"  
+            />
+          </NuxtLink>
         </div>
       </div>
     </div>
