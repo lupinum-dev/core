@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useBlogStore } from '~/stores/blog'
 
+const { t } = useI18n({
+  useScope: 'local',
+})
+
 const blogStore = useBlogStore()
 const { categories } = useBlogPosts()
 
@@ -26,8 +30,6 @@ function goHome() {
 }
 
 const appConfig = useAppConfig()
-
-
 </script>
 
 <template>
@@ -35,7 +37,7 @@ const appConfig = useAppConfig()
     <div class="mx-auto max-w-xl space-y-8">
       <div class="widget">
         <h4 class="mb-4 font-heading text-xl font-semibold text-foreground">
-          Categories
+          {{ t('categories') }}
         </h4>
         <div class="flex flex-col gap-2">
           <UiButton
@@ -43,7 +45,7 @@ const appConfig = useAppConfig()
             size="sm"
             @click="goHome"
           >
-            Home
+            {{ t('home') }}
           </UiButton>
           <UiButton
             v-for="category in categories"
@@ -61,13 +63,13 @@ const appConfig = useAppConfig()
       <div class="widget rounded-lg border border-border bg-card p-5">
         <div class="flex flex-col items-center justify-between space-y-4 text-center">
           <p class="text-sm text-muted-foreground">
-            Free Website Audit
+            {{ t('free_audit') }}
           </p>
           <p class="font-heading text-lg text-card-foreground">
-            Get a free website audit and learn how to improve your website.
+            {{ t('audit_description') }}
           </p>
           <UiButton variant="default">
-            Get Started
+            {{ t('get_started') }}
           </UiButton>
         </div>
       </div>
@@ -75,15 +77,15 @@ const appConfig = useAppConfig()
       <!-- Newsletter -->
       <!-- <div class="widget">
         <h4 class="mb-4 font-heading text-xl font-semibold text-foreground">
-          Newsletter
+          {{ t('newsletter') }}
         </h4>
         <form class="flex flex-col gap-2" @submit.prevent>
           <UiInput
             type="email"
-            placeholder="Your email address"
+            :placeholder="t('email_placeholder')"
           />
           <UiButton type="submit" variant="outline">
-            Subscribe
+            {{ t('subscribe') }}
           </UiButton>
         </form>
       </div> -->
@@ -91,7 +93,7 @@ const appConfig = useAppConfig()
       <!-- Social Share -->
       <div class="widget pb-16">
         <h4 class="mb-4 font-heading text-xl font-semibold text-foreground">
-          Follow us
+          {{ t('follow_us') }}
         </h4>
         <div class="flex gap-4">
           <NuxtLink
@@ -112,3 +114,26 @@ const appConfig = useAppConfig()
     </div>
   </UiScrollArea>
 </template>
+
+<i18n lang="yaml">
+en:
+  categories: "Categories"
+  home: "Home"
+  free_audit: "Free Website Audit"
+  audit_description: "Learn how to improve your website"
+  get_started: "Get Started"
+  follow_us: "Follow us"
+  newsletter: "Newsletter"
+  email_placeholder: "Your email address"
+  subscribe: "Subscribe"
+de:
+  categories: "Kategorien"
+  home: "Startseite"
+  free_audit: "Kostenlose Website-Analyse"
+  audit_description: "Erfahre wie du deine Website verbessern kannst"
+  get_started: "Jetzt starten"
+  follow_us: "Folgen Sie uns"
+  newsletter: "Newsletter"
+  email_placeholder: "Ihre E-Mail-Adresse"
+  subscribe: "Abonnieren"
+</i18n>
