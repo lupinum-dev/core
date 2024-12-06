@@ -20,6 +20,11 @@ interface Props {
 
 const props = defineProps<Props>()
 
+// remove the first part of the _path e.g. /en/blog/ -> /blog/ 
+props.posts.forEach(post => {
+  post._path = post._path.split('/').slice(2).join('/')
+})
+
 const mostRecentPost = computed(() => props.posts.find(post => post.highlight) || props.posts[0])
 const highlights = computed(() => props.posts.slice(0, 3))
 
@@ -32,6 +37,7 @@ const sectionTitles = computed(() => ({
   highlights: props.type === 'references' ? t('highlight_references') : t('highlight_posts'),
   recent: props.type === 'references' ? t('recent_references') : t('recent_posts'),
 }))
+
 </script>
 
 <template>

@@ -17,9 +17,8 @@ const props = defineProps<{
 }>()
 
 const localePath = useLocalePath()
-// remove the first part of the path e.g. /en/blog/ -> /blog/
 
-const postPath = computed(() => "/" + props.post._path.split('/').slice(2).join('/'));
+
 </script>
 
 <template>
@@ -38,7 +37,7 @@ const postPath = computed(() => "/" + props.post._path.split('/').slice(2).join(
             {{ post.category_text }}
           </span>
         </div>
-        <NuxtLink :to="localePath(postPath)" class="focus:outline-none" :aria-label="post.title" tabindex="-1">
+        <NuxtLink :to="localePath(post._path)" class="focus:outline-none" :aria-label="post.title" tabindex="-1">
           <div class="group">
             <div class="flex flex-row space-x-2">
               <h3 class="font-heading text-xl text-foreground transition-colors duration-200 group-hover:text-primary group-hover:underline">
