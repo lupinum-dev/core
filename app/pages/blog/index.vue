@@ -46,6 +46,7 @@ if (route.query.category) {
 <template>
   <div class="bg-svg dark:bg-svg-dark">
     <div class="mx-auto flex min-h-screen max-w-[1900px] flex-row justify-center bg-background">
+
       <UiBlogSideNav
         :selected-category="blogStore.selectedCategory"
         :search-query="blogStore.searchQuery"
@@ -55,6 +56,10 @@ if (route.query.category) {
         @update:selected-category="updateCategory"
         @update:search-query="blogStore.setSearchQuery"
       />
+      <div class="mt-36">
+        {{ categories }}
+      </div>
+
 
       <div class="mx-auto mt-24 flex w-full max-w-7xl flex-col justify-between sm:px-6 lg:px-8">
         <template v-if="blogPosts">

@@ -7,7 +7,7 @@ interface BlogPost {
   description: string
   date_published: string
   date_modified: string
-  category: string[]
+  category_blog: string[]
   highlight?: boolean
   readTime?: string
   hero_image?: string
