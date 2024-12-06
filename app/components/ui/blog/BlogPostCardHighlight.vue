@@ -38,7 +38,7 @@ defineProps<{
         <ClientOnly>
           <span>{{ new Date(post.date_published).toLocaleDateString() }}</span>
         </ClientOnly>
-        <span>{{ post.readTime || '5 min read' }}</span>
+        <!-- <span>{{ post.readTime || '5 min read' }}</span> -->
       </div>
     </div>
   </NuxtLink>

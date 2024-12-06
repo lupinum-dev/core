@@ -130,7 +130,7 @@ function updateQueryParams() {
                     <time :datetime="post.date_published" class="relative text-sm font-medium text-muted-foreground after:absolute after:ml-1.5 after:text-muted-foreground after:content-['•']">
                       {{ new Date(post.date_published).toLocaleDateString() }}
                     </time>
-                    <span class="text-[15px] font-medium text-muted-foreground">{{ post.readTime || '5 min read' }}</span>
+                    <!-- <span class="text-[15px] font-medium text-muted-foreground">{{ post.readTime || '5 min read' }}</span> -->
                   </div>
                 </div>
               </div>

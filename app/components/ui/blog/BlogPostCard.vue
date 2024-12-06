@@ -61,7 +61,7 @@ const postPath = computed(() => "/" + props.post._path.split('/').slice(2).join(
               {{ new Date(post.date_published).toLocaleDateString() }}
             </ClientOnly>
           </time>
-          <span class="text-[15px] font-medium text-muted-foreground">{{ post.readTime || '5 min read' }}</span>
+          <!-- <span class="text-[15px] font-medium text-muted-foreground">{{ post.readTime || '5 min read' }}</span> -->
         </div>
       </div>
     </div>
