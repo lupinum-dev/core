@@ -56,7 +56,7 @@ const postPath = computed(() => "/" + props.post._path.split('/').slice(2).join(
       </div>
       <div class="relative mt-4 flex items-center gap-x-3">
         <div class="flex items-center space-x-4">
-          <time :datetime="post.date_published" class="relative text-sm font-medium text-muted-foreground after:absolute after:ml-1.5 after:text-muted-foreground after:content-['•']">
+          <time :datetime="post.date_published" class="relative text-sm font-medium text-muted-foreground after:absolute after:ml-1.5 after:text-muted-foreground ">
             <ClientOnly>
               {{ new Date(post.date_published).toLocaleDateString() }}
             </ClientOnly>
