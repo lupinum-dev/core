@@ -1,22 +1,10 @@
-type BlogPost = {
+export type BlogPost = {
   _path: string
   title: string
   description: string
   date_published: string
   date_modified: string
   category_blog: string[]
-  published: boolean
+  readTime?: string
   hero_image?: string
-  body: {
-    toc?: {
-      links: TocItem[]
-    }
-  }
-}
-
-type TocItem = {
-  id: string
-  depth: number
-  text: string
-  children?: TocItem[]
 } 
