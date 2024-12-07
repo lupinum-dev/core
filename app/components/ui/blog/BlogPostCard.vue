@@ -17,8 +17,16 @@ const props = defineProps<{
 }>()
 
 const localePath = useLocalePath()
+const { t } = useI18n({
+  useScope: 'local'
+})
 
-
+const formattedDate = computed(() => {
+  const date = new Date(props.post.date_published)
+  const month = date.toLocaleString(useNuxtApp().$i18n.locale.value, { month: 'short' })
+  const year = date.getFullYear()
+  return `${month}. ${year}`
+})
 </script>
 
 <template>
@@ -55,10 +63,8 @@ const localePath = useLocalePath()
       </div>
       <div class="relative mt-4 flex items-center gap-x-3">
         <div class="flex items-center space-x-4">
-          <time :datetime="post.date_published" class="relative text-sm font-medium text-muted-foreground after:absolute after:ml-1.5 after:text-muted-foreground ">
-            <ClientOnly>
-              {{ new Date(post.date_published).toLocaleDateString() }}
-            </ClientOnly>
+          <time :datetime="post.date_published" class="relative text-sm font-medium text-muted-foreground after:absolute after:ml-1.5 after:text-muted-foreground">
+            {{ formattedDate }}
           </time>
           <!-- <span class="text-[15px] font-medium text-muted-foreground">{{ post.readTime || '5 min read' }}</span> -->
         </div>
@@ -66,3 +72,32 @@ const localePath = useLocalePath()
     </div>
   </aside>
 </template>
+
+<i18n lang="yaml">
+en:
+  jan: "Jan"
+  feb: "Feb"
+  mar: "Mar"
+  apr: "Apr"
+  may: "May"
+  jun: "Jun"
+  jul: "Jul"
+  aug: "Aug"
+  sep: "Sep"
+  oct: "Oct"
+  nov: "Nov"
+  dec: "Dec"
+de:
+  jan: "Jan"
+  feb: "Feb"
+  mär: "Mär"
+  apr: "Apr"
+  mai: "Mai"
+  jun: "Jun"
+  jul: "Jul"
+  aug: "Aug"
+  sep: "Sep"
+  okt: "Okt"
+  nov: "Nov"
+  dez: "Dez"
+</i18n>
