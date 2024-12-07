@@ -65,7 +65,7 @@ crisp.set('user:nickname', 'Matthias')
 
 <template>
   <ConfigProvider :use-id="useIdFunction">
-    <div>
+
       <SectionsHeader />
       <NuxtLayout>
         <NuxtPage />
@@ -74,7 +74,7 @@ crisp.set('user:nickname', 'Matthias')
       <!-- <ClientOnly>
       <UiSearchModal />
     </ClientOnly> -->
-    </div>
+
   </ConfigProvider>
 </template>
 
