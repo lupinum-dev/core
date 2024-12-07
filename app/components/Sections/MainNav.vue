@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { computed, inject, ref } from 'vue'
+import { computed, inject, ref, watch, watchEffect } from 'vue'
 import { useSubMenu } from '~/composables/useSubMenu'
 import { NuxtLink } from '#components'
 import { useAppConfig } from '#imports'
@@ -21,7 +21,21 @@ const navLinks = ref<NavLink[]>(appConfig.navigation.items)
 const socials = ref<NavLink[]>(appConfig.socials)
 
 const route = useRoute()
-const activeRoute = computed(() => route.path)
+const activeRoute = computed(() => {
+  console.log('Current route path:', route.path)
+  console.log('Full route object:', route)
+  return route.path
+})
+
+watch(route, (newRoute) => {
+  console.log('Route changed:', {
+    path: newRoute.path,
+    fullPath: newRoute.fullPath,
+    name: newRoute.name,
+    params: newRoute.params,
+    query: newRoute.query
+  })
+}, { deep: true })
 
 const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
 
@@ -38,6 +52,7 @@ function handleOpenSubmenu(href: string | undefined) {
 }
 
 function handleItemClick(showSubmenu: boolean | undefined, href: string | undefined) {
+  console.log('handleItemClick:', { showSubmenu, href })
   if (showSubmenu) {
     handleOpenSubmenu(href)
   }
@@ -46,6 +61,9 @@ function handleItemClick(showSubmenu: boolean | undefined, href: string | undefi
   }
 }
 
+watchEffect(() => {
+  console.log('Current navLinks:', navLinks.value)
+})
 
 </script>
 
@@ -73,6 +91,9 @@ function handleItemClick(showSubmenu: boolean | undefined, href: string | undefi
                         ? 'font-bold underline'
                         : 'text-foreground hover:bg-accent hover:text-accent-foreground',
                     ]"
+                    :data-active="activeRoute === child.href"
+                    :data-href="child.href"
+                    :data-current-route="activeRoute"
                     @click="() => handleItemClick(child.showSubmenu, child.href)"
                   >
                     {{ $t(child.label) }}
@@ -99,6 +120,9 @@ function handleItemClick(showSubmenu: boolean | undefined, href: string | undefi
             ? 'font-bold underline'
             : 'text-foreground hover:bg-accent hover:text-accent-foreground',
         ]"
+        :data-active="activeRoute === link.href"
+        :data-href="link.href"
+        :data-current-route="activeRoute"
         @click="() => handleItemClick(link.showSubmenu, link.href)"
       >
         <Icon :name="link.icon || ''" class="mr-3 size-5" />
