@@ -13,12 +13,13 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
-    'nuxt-og-image', 
+    'nuxt-og-image',
     '@vee-validate/nuxt',
     '@vueuse/motion/nuxt',
     '@nuxtjs/color-mode',
     '@nuxt/test-utils/module',
     '@nuxt/scripts',
+    '@pinia/nuxt',
   ],
 
   site: {
