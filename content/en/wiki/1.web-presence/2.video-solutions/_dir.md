@@ -1,4 +1,0 @@
----
-group: Video Solutions
----
-

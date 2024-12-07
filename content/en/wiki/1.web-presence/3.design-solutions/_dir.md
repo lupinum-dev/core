@@ -1,4 +1,0 @@
----
-group: Design Lösungen
----
-
