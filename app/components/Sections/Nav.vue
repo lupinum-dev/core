@@ -8,6 +8,8 @@ const navItems = appConfig.navigation.items as NavigationItem[]
 
 const route = useRoute()
 const activeRoute = computed(() => route.path)
+
+console.log('activeRoute', activeRoute.value)
 </script>
 
 <template>
@@ -65,7 +67,7 @@ const activeRoute = computed(() => route.path)
             activeRoute === item.href ? 'font-bold  bg-accent' : ''
           ]"
         >
-          {{ item.label }}
+          {{ item.href }}
         </UiNavigationMenuLink>
       </UiNavigationMenuItem>
     </UiNavigationMenuList>

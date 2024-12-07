@@ -65,17 +65,17 @@ crisp.set('user:nickname', 'Matthias')
 
 <template>
   <ConfigProvider :use-id="useIdFunction">
-    <SectionsHeader />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-    <SectionsFooter />
-    <!-- <ClientOnly>
+    <div>
+      <SectionsHeader />
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+      <SectionsFooter />
+      <!-- <ClientOnly>
       <UiSearchModal />
     </ClientOnly> -->
+    </div>
   </ConfigProvider>
 </template>
 
-<style>
-
-</style>
+<style></style>
