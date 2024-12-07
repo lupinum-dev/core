@@ -6,7 +6,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   modules: [
-    '@formkit/auto-animate/nuxt',
     '@nuxt/content',
     '@nuxt/fonts',
     '@nuxt/icon',
@@ -21,7 +20,6 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/test-utils/module',
     '@nuxt/scripts',
-    'nuxt-delay-hydration',
   ],
 
   site: {
