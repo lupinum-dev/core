@@ -54,7 +54,7 @@ const route = useRoute()
       class="w-full rounded-lg shadow-md"
     />
     <figcaption v-if="showCaption && alt" class="mt-2 w-full text-center text-sm text-muted-foreground">
-      {{ captionText }}
+      <!-- {{ captionText }} -->
       <div v-if="showPhotographer && props.photographer" class="mt-1 text-xs font-medium uppercase text-muted-foreground/80">
         Photo by {{ props.photographer }}
       </div>
