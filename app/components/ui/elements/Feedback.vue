@@ -6,6 +6,11 @@ import { FormField } from '@/components/ui/form'
 
 const isDialogOpen = ref(false)
 const selectedEmoji = ref<number | null>(null)
+const isSubmitting = ref(false)
+const formMessage = ref('')
+
+const route = useRoute()
+const { locale } = useI18n()
 
 const emojiIcons = [
   'i-bi-hand-thumbs-up-fill',
@@ -14,7 +19,6 @@ const emojiIcons = [
 
 const formSchema = toTypedSchema(z.object({
   feedback: z.string().min(1, { message: 'feedback_validation_feedback_required' }),
-  files: z.array(z.any()).optional(),
   shouldContact: z.boolean().default(false),
   name: z.string().optional(),
   email: z.string().email({ message: 'feedback_validation_email_invalid' }).optional(),
@@ -25,9 +29,42 @@ const { handleSubmit, resetForm, values } = useForm({
   validationSchema: formSchema,
 })
 
-const onSubmit = handleSubmit((_values) => {
-  isDialogOpen.value = false
-  resetForm()
+const onSubmit = handleSubmit(async (values) => {
+  try {
+    isSubmitting.value = true
+    formMessage.value = ''
+    
+    const formData = new FormData()
+    // Add all form values to FormData
+    Object.entries(values).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        formData.append(key, value.toString())
+      }
+    })
+    
+    // Add emoji feedback type and metadata
+    formData.append('feedbackType', selectedEmoji.value === 0 ? 'positive' : 'negative')
+    formData.append('currentRoute', route.path)
+    formData.append('language', locale.value)
+
+    const response = await fetch('https://usebasin.com/f/754a945a80d7', {
+      method: 'POST',
+      body: formData
+    })
+    
+    if (response.ok) {
+      isDialogOpen.value = false
+      resetForm()
+    } else {
+      const data = await response.json()
+      formMessage.value = data.error || t('feedback_error_generic')
+    }
+  } catch (error) {
+    console.error('Form submission error:', error)
+    formMessage.value = t('feedback_error_generic')
+  } finally {
+    isSubmitting.value = false
+  }
 })
 
 function openDialog(emojiIndex: number) {
@@ -107,17 +144,6 @@ const { t } = useI18n({
             </UiFormItem>
           </FormField>
 
-          <FormField v-slot="{ componentField }" name="files">
-            <UiFormItem>
-              <UiFormLabel class="text-foreground">
-                {{ t('feedback_form_files_label') }}
-              </UiFormLabel>
-              <UiFormControl>
-                <UiInput type="file" v-bind="componentField" multiple class="border-input bg-background" />
-              </UiFormControl>
-            </UiFormItem>
-          </FormField>
-
           <FormField v-slot="{ value, handleChange }" name="shouldContact">
             <UiFormItem class="flex flex-row items-center justify-between rounded-lg border border-border p-4">
               <div class="space-y-0.5">
@@ -182,9 +208,17 @@ const { t } = useI18n({
             </FormField>
           </div>
 
+          <p v-if="formMessage" class="text-sm text-destructive">
+            {{ formMessage }}
+          </p>
+
           <UiDialogFooter>
-            <UiButton type="submit" class="bg-primary text-primary-foreground hover:bg-primary/90">
-              {{ t('feedback_form_submit') }}
+            <UiButton 
+              type="submit" 
+              class="bg-primary text-primary-foreground hover:bg-primary/90"
+              :disabled="isSubmitting"
+            >
+              {{ isSubmitting ? t('feedback_form_submitting') : t('feedback_form_submit') }}
             </UiButton>
           </UiDialogFooter>
         </form>
@@ -201,7 +235,6 @@ en:
   feedback_description: "We appreciate your feedback. Thank you for sharing your thoughts with us."
   feedback_form_feedback_label: "Feedback"
   feedback_form_feedback_placeholder: "Your Feedback"
-  feedback_form_files_label: "Upload Files"
   feedback_form_contact_label: "Should we get back to you?"
   feedback_form_name_label: "Name"
   feedback_form_name_placeholder: "Your Name"
@@ -211,6 +244,8 @@ en:
   feedback_form_submit: "Submit Feedback"
   feedback_validation_feedback_required: "Feedback is required"
   feedback_validation_email_invalid: "Please enter a valid email address"
+  feedback_error_generic: "Something went wrong. Please try again."
+  feedback_form_submitting: "Submitting..."
 de:
   feedback_question: "Was denkst du?"
   feedback_emoji_aria: "Emoji {index} auswählen"
@@ -218,7 +253,6 @@ de:
   feedback_description: "Wir schätzen dein Feedback. Vielen Dank, dass du deine Gedanken mit uns teilst."
   feedback_form_feedback_label: "Feedback"
   feedback_form_feedback_placeholder: "Dein Feedback"
-  feedback_form_files_label: "Dateien hochladen"
   feedback_form_contact_label: "Sollen wir uns bei dir melden?"
   feedback_form_name_label: "Name"
   feedback_form_name_placeholder: "Dein Name"
@@ -228,4 +262,6 @@ de:
   feedback_form_submit: "Feedback senden"
   feedback_validation_feedback_required: "Feedback ist erforderlich"
   feedback_validation_email_invalid: "Bitte gib eine gültige E-Mail-Adresse ein"
+  feedback_error_generic: "Etwas ist schief gelaufen. Bitte versuche es erneut."
+  feedback_form_submitting: "Wird gesendet..."
 </i18n>
