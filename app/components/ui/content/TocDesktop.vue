@@ -56,13 +56,15 @@ onUnmounted(() => {
 })
 
 const Circle = h('div', { class: 'flex size-4 xl:text-xs items-center justify-center text-primary-foreground rounded-full bg-primary mr-2' }, '1')
+
+const { t } = useI18n()
 </script>
 
 <template>
   <nav
     ref="container"
     aria-labelledby="doc-outline-aria-label"
-    class="relative py-3 lg:py-6"
+    class="relative py-3 lg:py-6 mr-6 xl:mr-12 2xl:mr-24"
     :class="{ block: props.links.length > 0, hidden: !props.links.length }"
   >
     <h3
@@ -73,7 +75,7 @@ const Circle = h('div', { class: 'flex size-4 xl:text-xs items-center justify-ce
     <div class="relative pl-4">
       <div ref="marker" class="outline-marker" />
       <div class="vertical-line" />
-      <ul v-if="props.links.length" class="space-y-1  text-sm">
+      <ul v-if="props.links.length" class="space-y-1 text-xs xl:text-sm">
         <li v-for="link in props.links" :key="link.id">
           <div class="flex items-center">
             <!-- TODO: With steps component the circle should be shown like Clerk Docs -->
@@ -108,7 +110,7 @@ const Circle = h('div', { class: 'flex size-4 xl:text-xs items-center justify-ce
     <div class="mt-4">
       <UiButton variant="link" class="flex items-center text-muted-foreground opacity-75" @click="scrollToTop">
         <Icon name="i-heroicons-chevron-up" class="mr-1" />
-        Back to Top
+        {{ t('backToTop') }}
       </UiButton>
     </div>
   </nav>
@@ -127,6 +129,13 @@ const Circle = h('div', { class: 'flex size-4 xl:text-xs items-center justify-ce
     opacity 0.25s;
 }
 .active {
-  @apply text-primary font-semibold;
+  @apply text-teal-500 dark:text-teal-400;
 }
 </style>
+
+<i18n lang="yaml">
+  en:
+    backToTop: Back to Top
+  de:
+    backToTop: Nach oben
+</i18n>

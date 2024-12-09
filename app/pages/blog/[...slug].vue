@@ -59,7 +59,7 @@ onMounted(() => {
     </div>
 
     <!-- Left sidebar - Back button -->
-    <div class="hidden w-[300px]  lg:block">
+    <div class="hidden w-[200px] xl:w-[450px]  lg:block">
       <div class="sticky top-40 flex justify-end pr-8">
         <NuxtLink :to="localePath('/blog')"
           class="group flex size-10 items-center justify-center rounded-full bg-background shadow-md shadow-secondary/5 ring-1 ring-border transition dark:border dark:border-border/50 dark:bg-secondary dark:ring-0 dark:ring-ring/10 dark:hover:border-border dark:hover:ring-ring/20"
@@ -95,7 +95,7 @@ onMounted(() => {
     </div>
 
     <!-- Right sidebar - TOC -->
-    <div class="hidden w-[300px] lg:block">
+    <div class="hidden w-[350px] xl:w-[450px]  lg:block">
       <div class="sticky top-32 pl-8">
         <ClientOnly>
           <UiContentTocDesktop :links="tocLinks" />
