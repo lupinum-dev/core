@@ -17,15 +17,13 @@ const props = withDefaults(defineProps<Props>(), {
   cookieKey: 'header-ad',
 })
 
-const { isVisible, setAdBannerVisibility, setHideOnScroll, setCookieKey } = useAdBannerVisibility()
+const { isVisible, setHideOnScroll } = useAdBannerVisibility()
 
 // Set the initial values based on props
 setHideOnScroll(props.scrollHide)
-setCookieKey(props.cookieKey)
 
-function closeAdBanner() {
-  setAdBannerVisibility(false)
-}
+
+
 </script>
 
 <template>
@@ -36,18 +34,6 @@ function closeAdBanner() {
     >
       <div class="flex w-full justify-center text-center">
         <slot />
-      </div>
-      <div class="right-0 top-0 justify-end">
-        <slot name="icon">
-          <button
-            v-if="props.letClose"
-            class="flex items-center justify-center"
-            aria-label="Close banner"
-            @click="closeAdBanner"
-          >
-            <Icon :name="props.closingIcon" class="size-5" />
-          </button>
-        </slot>
       </div>
     </div>
   </Transition>
