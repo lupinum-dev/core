@@ -1,52 +1,63 @@
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useScroll } from '@vueuse/core'
 
 const useSharedAdBannerVisible = () => useState('adBannerVisible', () => true)
 const useSharedHideOnScroll = () => useState('hideOnScroll', () => true)
+const useSharedCookieKey = () => useState('adBannerCookieKey', () => 'header-ad')
 
 export function useAdBannerVisibility() {
   const isAdBannerVisible = useSharedAdBannerVisible()
   const hideOnScroll = useSharedHideOnScroll()
+  const cookieKey = useSharedCookieKey()
 
-  // Initialize with null for SSG compatibility
-  const scrollY = ref(0)
-
-  // Only setup scroll watching on client-side
-  if (process.client) {
-    const { y } = useScroll(window, { 
-      throttle: 300,
-    })
-    
-    watch(y, (newY) => {
-      scrollY.value = newY
-    }, { immediate: true })
-  }
+  // Use a computed for scrollY to ensure it's only accessed on the client-side
+  const scrollY = computed(() => {
+    if (process.client) {
+      const { y } = useScroll(window)
+      return y.value
+    }
+    return 0
+  })
 
   const threshold = 50
 
+  const adDismissed = useCookie<boolean>(cookieKey.value, {
+    maxAge: 60 * 60 * 24 * 30,
+  })
+
   const isVisible = computed(() => {
-    // For SSG/SSR, default to visible if no scroll handling
-    if (!process.client)
-      return isAdBannerVisible.value
-
-    // Client-side scroll handling
-    if (hideOnScroll.value)
+    if (adDismissed.value) {
+      isAdBannerVisible.value = false
+      return false
+    }
+    if (hideOnScroll.value) {
       return isAdBannerVisible.value && scrollY.value <= threshold
-
+    }
     return isAdBannerVisible.value
   })
 
   const setAdBannerVisibility = (value: boolean) => {
     isAdBannerVisible.value = value
+    if (!value) {
+      adDismissed.value = true
+    }
   }
 
   const setHideOnScroll = (value: boolean) => {
     hideOnScroll.value = value
   }
 
+  const setCookieKey = (value: string) => {
+    cookieKey.value = value
+    adDismissed.value = useCookie<boolean>(value, {
+      maxAge: 60 * 60 * 24 * 30,
+    }).value
+  }
+
   return {
     isVisible,
     setAdBannerVisibility,
     setHideOnScroll,
+    setCookieKey,
   }
 }
