@@ -3,7 +3,7 @@
 // MIT Licensed
 
 import type { Ref } from 'vue'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 interface TocItem {
   id: string
@@ -18,8 +18,12 @@ export function useActiveAnchor(
   links: TocItem[],
 ) {
   const activeLink = ref<TocItem | null>(null)
-  const flatLinks = computed(() => links.flatMap(link => [link, ...(link.children || [])]))
+  const tocLinks = ref<TocItem[]>(links)
+  const flatLinks = computed(() => tocLinks.value.flatMap(link => [link, ...(link.children || [])]))
 
+  watch(() => links, (newLinks) => {
+    tocLinks.value = newLinks
+  }, { immediate: true, deep: true })
 
   const setActiveLink = () => {
     if (!container.value || !marker.value)
@@ -34,22 +38,18 @@ export function useActiveAnchor(
     if (scrollY === 0) {
       active = undefined
     }
-    else if (isBottom) {
+    else if (isBottom && flatLinks.value.length) {
       active = flatLinks.value[flatLinks.value.length - 1]
     }
     else {
-      
       for (let i = flatLinks.value.length - 1; i >= 0; i--) {
         const link = flatLinks.value[i]
         if (!link) continue
         
         const element = document.getElementById(link.id)
-        if (element) {
-          console.log(`Element "${link.id}" offsetTop:`, element.offsetTop)
-          if (element.offsetTop <= scrollY + 200) {
-            active = link
-            break
-          }
+        if (element && element.offsetTop <= scrollY + 200) {
+          active = link
+          break
         }
       }
     }
@@ -57,22 +57,18 @@ export function useActiveAnchor(
     updateActiveLink(active)
   }
 
-  /**
-   * Updates the active link's class and calls updateMarker
-   * @param active - The currently active TocItem
-   */
   const updateActiveLink = (active: TocItem | undefined) => {
-    const newActiveLink = active
-      ? container.value?.querySelector(
-        `a[href="#${active.id}"],
-         a[href$="#${active.id}"],
-         a[href="#${encodeURIComponent(active.id)}"],
-         a[href$="${encodeURIComponent(active.id)}"]`
-      ) as HTMLAnchorElement | null
-      : null
+    if (!active) {
+      activeLink.value = null
+      return
+    }
+
+    const selector = `a[href="#${active.id}"], a[href$="#${active.id}"], a[href="#${encodeURIComponent(active.id)}"], a[href$="${encodeURIComponent(active.id)}"]`
+
+    const newActiveLink = container.value?.querySelector(selector) as HTMLAnchorElement | null
 
     if (newActiveLink) {
-      activeLink.value = active || null
+      activeLink.value = active
       container.value?.querySelectorAll('a').forEach(a => a.classList.remove('active'))
       newActiveLink.classList.add('active')
       updateMarker(newActiveLink)
@@ -82,10 +78,6 @@ export function useActiveAnchor(
     }
   }
 
-  /**
-   * Updates the marker's position and visibility
-   * @param link - The active HTMLAnchorElement
-   */
   const updateMarker = (link: HTMLAnchorElement | null) => {
     if (!marker.value)
       return
@@ -122,3 +114,4 @@ export function useActiveAnchor(
 
   return { setActiveLink, activeLink, initializeActiveLink }
 }
+
