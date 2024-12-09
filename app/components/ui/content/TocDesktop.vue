@@ -71,41 +71,43 @@ const { t } = useI18n()
       id="doc-outline-aria-label"
       class="mb-3 text-sm font-semibold text-foreground"
     />
-
-    <div class="relative pl-4">
-      <div ref="marker" class="outline-marker" />
-      <div class="vertical-line" />
-      <ul v-if="props.links.length" class="space-y-1 text-xs xl:text-sm">
-        <li v-for="link in props.links" :key="link.id">
-          <div class="flex items-center">
+<UiScrollArea class="relative lg:max-h-[400px] xl:max-h-[700px] 2xl:max-h-[900px] overflow-y-auto" type="auto">
+  <div class="relative pl-4">
+    <div ref="marker" class="outline-marker" />
+    <div class="vertical-line" />
+    <ul v-if="props.links.length" class="space-y-1 text-xs xl:text-sm">
+      <li v-for="link in props.links" :key="link.id">
+        <div class="flex items-center">
+          <!-- TODO: With steps component the circle should be shown like Clerk Docs -->
+          <Circle v-if="false" />
+          <NuxtLink
+            :href="`#${link.id}`"
+            class="block py-1 text-muted-foreground transition-colors duration-200 hover:text-foreground hover:underline"
+            :class="{ active: activeLink?.id === link.id }"
+          >
+            {{ link.text }}
+          </NuxtLink>
+        </div>
+        <ul v-if="link.children?.length" class="mt-1 space-y-1 pl-4">
+          <li v-for="child in link.children" :key="child.id">
             <!-- TODO: With steps component the circle should be shown like Clerk Docs -->
-            <Circle v-if="false" />
-            <NuxtLink
-              :href="`#${link.id}`"
-              class="block py-1 text-muted-foreground transition-colors duration-200 hover:text-foreground hover:underline"
-              :class="{ active: activeLink?.id === link.id }"
-            >
-              {{ link.text }}
-            </NuxtLink>
-          </div>
-          <ul v-if="link.children?.length" class="mt-1 space-y-1 pl-4">
-            <li v-for="child in link.children" :key="child.id">
-              <!-- TODO: With steps component the circle should be shown like Clerk Docs -->
-              <div class="flex items-center">
-                <Circle v-if="false" />
-                <NuxtLink
-                  :href="`#${child.id}`"
-                  class="block py-1 text-muted-foreground transition-colors duration-200 hover:text-foreground hover:underline"
-                  :class="{ active: activeLink?.id === child.id }"
-                >
-                  {{ child.text }}
-                </NuxtLink>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+            <div class="flex items-center">
+              <Circle v-if="false" />
+              <NuxtLink
+                :href="`#${child.id}`"
+                class="block py-1 text-muted-foreground transition-colors duration-200 hover:text-foreground hover:underline"
+                :class="{ active: activeLink?.id === child.id }"
+              >
+                {{ child.text }}
+              </NuxtLink>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</UiScrollArea>
+
 
     <div class="mt-4">
       <UiButton variant="link" class="flex items-center text-muted-foreground opacity-75" @click="scrollToTop">

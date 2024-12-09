@@ -21,6 +21,7 @@ module.exports = {
       },
       screens: {
         '2xl': '1540px',
+        '3xl': '1650px',
       },
       colors: {
         'border': 'hsl(var(--border))',
