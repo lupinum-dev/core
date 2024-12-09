@@ -11,7 +11,7 @@ type CTAItem = {
 // Move CTA items to i18n section
 const { t } = useI18n()
 
-const ctaItems = computed(() => [
+const ctaItems = computed<CTAItem[]>(() => [
   {
     question: t('1_question'),
     statement: t('1_statement'),
@@ -74,10 +74,10 @@ const ctaItems = computed(() => [
   },
 ])
 
-const selectedCTA = ref<CTAItem>(ctaItems.value[0])
+const selectedCTA = ref<CTAItem>(ctaItems.value[0]!)
 
 onMounted(() => {
-  selectedCTA.value = ctaItems.value[Math.floor(Math.random() * ctaItems.value.length)]
+  selectedCTA.value = ctaItems.value[Math.floor(Math.random() * ctaItems.value.length)]!
 })
 
 const localePath = useLocalePath()
@@ -114,7 +114,7 @@ const localePath = useLocalePath()
 
 <i18n lang="yaml">
 en:
-  1_question: "Looking for a website that actually converts?"
+  1_question: "Looking for a website that actually persuades?"
   1_statement: "Let us design a site that drives results for your business."
   1_action: "Get Started"
   2_question: "Need a video that tells your story?"
@@ -146,34 +146,34 @@ en:
   10_action: "Work With Us"
 
 de:
-  1_question: "Suchen Sie eine Website, die wirklich konvertiert?"
-  1_statement: "Wir gestalten eine Website, die Ergebnisse für Ihr Unternehmen liefert."
+  1_question: "Suchst du eine Website, die wirklich überzeugt?"
+  1_statement: "Wir gestalten eine Website, die Ergebnisse für dein Unternehmen liefert."
   1_action: "Jetzt starten"
-  2_question: "Brauchen Sie ein Video, das Ihre Geschichte erzählt?"
-  2_statement: "Wir erstellen Videos, die Ihr Publikum ansprechen und zum Handeln inspirieren."
+  2_question: "Brauchst du ein Video, das deine Geschichte erzählt?"
+  2_statement: "Wir erstellen Videos, die dein Publikum ansprechen und zum Handeln inspirieren."
   2_action: "Jetzt starten"
-  3_question: "Fehlt Ihrer Marke eine klare Identität?"
-  3_statement: "Unsere Design-Experten helfen Ihnen, sich mit einer überzeugenden Markenidentität abzuheben."
+  3_question: "Fehlt deiner Marke eine klare Identität?"
+  3_statement: "Unsere Design-Experten helfen dir, dich mit einer überzeugenden Markenidentität abzuheben."
   3_action: "Jetzt starten"
-  4_question: "Bereit, Ihre Online-Präsenz zu steigern?"
+  4_question: "Bereit, deine Online-Präsenz zu steigern?"
   4_statement: "Wir kombinieren Web, Video und Design für wirkungsvolle Lösungen."
   4_action: "Jetzt durchstarten"
-  5_question: "Fehlt Ihrer Marketingstrategie etwas?"
-  5_statement: "Wir entwickeln einen maßgeschneiderten Plan, um Ihre Ziele zu erreichen."
-  5_action: "Sprechen Sie mit uns"
-  6_question: "Brauchen Sie eine Website, wissen aber nicht, wo Sie anfangen sollen?"
-  6_statement: "Wir begleiten Sie durch jeden Schritt und erstellen eine Website, die Sie lieben werden."
+  5_question: "Fehlt deiner Marketingstrategie etwas?"
+  5_statement: "Wir entwickeln einen maßgeschneiderten Plan, um deine Ziele zu erreichen."
+  5_action: "Sprich mit uns"
+  6_question: "Brauchst du eine Website, weißt aber nicht, wo du anfangen sollst?"
+  6_statement: "Wir begleiten dich durch jeden Schritt und erstellen eine Website, die du lieben wirst."
   6_action: "Projekt starten"
-  7_question: "Möchten Sie Videos, die wirklich Aufmerksamkeit generieren?"
+  7_question: "Möchtest du Videos, die wirklich Aufmerksamkeit generieren?"
   7_statement: "Wir produzieren fesselnde Inhalte, die Aufmerksamkeit erregen."
   7_action: "Lass uns drehen"
-  8_question: "Bringt Ihr Design nicht die gewünschten Ergebnisse?"
-  8_statement: "Verbessern Sie Ihre Visuals mit Designs, die Wirkung zeigen."
+  8_question: "Bringt dein Design nicht die gewünschten Ergebnisse?"
+  8_statement: "Verbessere deine Visuals mit Designs, die Wirkung zeigen."
   8_action: "Jetzt starten"
-  9_question: "Kämpfen Sie damit, online aufzufallen?"
-  9_statement: "Unsere maßgeschneiderten Lösungen helfen Ihnen, sich von der Masse abzuheben."
-  9_action: "Werden Sie unvergesslich"
-  10_question: "Suchen Sie einen Partner, der Ihre Vision versteht?"
-  10_statement: "Wir sind hier, um Ihre Ideen zum Leben zu erwecken."
+  9_question: "Kämpfst du damit, online aufzufallen?"
+  9_statement: "Unsere maßgeschneiderten Lösungen helfen dir, dich von der Masse abzuheben."
+  9_action: "Werde unvergesslich"
+  10_question: "Suchst du einen Partner, der deine Vision versteht?"
+  10_statement: "Wir sind hier, um deine Ideen zum Leben zu erwecken."
   10_action: "Mit uns arbeiten"
 </i18n>

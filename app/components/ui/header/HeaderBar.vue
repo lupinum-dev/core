@@ -81,7 +81,7 @@ const roundedClass = computed(() => {
 
 
               <UiSheetContent>
-      
+        
                       <SectionsMobileNav />
    
               </UiSheetContent>
