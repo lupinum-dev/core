@@ -71,7 +71,7 @@ const Circle = h('div', { class: 'flex size-4 xl:text-xs items-center justify-ce
     <div class="relative pl-4">
       <div ref="marker" class="outline-marker" />
       <div class="vertical-line" />
-
+      {{ activeLink }}
       <ul v-if="props.links.length" class="space-y-1  text-sm">
         <li v-for="link in props.links" :key="link.id">
           <div class="flex items-center">
