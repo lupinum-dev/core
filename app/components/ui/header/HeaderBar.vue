@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/lib/utils'
 
@@ -9,10 +9,7 @@ defineOptions({
 
 const appConfig = useAppConfig()
 const { isVisible } = useAdBannerVisibility()
-
-const topStyle = computed(() => ({
-  top: isVisible.value ? 'var(--header-ad-height)' : '0px',
-}))
+const isSheetOpen = ref(false)
 
 const roundedClass = computed(() => {
   if (appConfig.header.variant === 'default')
@@ -31,6 +28,10 @@ const roundedClass = computed(() => {
 
   return roundedMap[appConfig.header.rounded as keyof typeof roundedMap] || ''
 })
+
+const handleSheetClose = () => {
+  isSheetOpen.value = false
+}
 </script>
 
 <template>
@@ -72,22 +73,17 @@ const roundedClass = computed(() => {
             </div>
 
 
-            <UiSheet>
+            <UiSheet v-model:open="isSheetOpen">
               <UiSheetTrigger asChild>
                 <UiButton variant="ghost" size="sm" class="lg:hidden" aria-label="Open Mobile Menu">
                   <Icon :name="appConfig.header.hamburgerIcon" class="size-5" />
                 </UiButton>
               </UiSheetTrigger>
 
-
-              <UiSheetContent class=" p-0">
-        
-                      <SectionsMobileNav />
-   
+              <UiSheetContent class="p-0">
+                <SectionsMobileNav @navigate="handleSheetClose" />
               </UiSheetContent>
-
             </UiSheet>
-
 
           </div>
         </div>
