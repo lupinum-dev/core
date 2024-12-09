@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/lib/utils'
 
@@ -10,6 +10,15 @@ defineOptions({
 const appConfig = useAppConfig()
 const { isVisible } = useAdBannerVisibility()
 const isSheetOpen = ref(false)
+const route = useRoute()
+
+// Watch for route changes to close the sheet
+watch(
+  () => route.path,
+  () => {
+    isSheetOpen.value = false
+  }
+)
 
 const roundedClass = computed(() => {
   if (appConfig.header.variant === 'default')
@@ -81,7 +90,7 @@ const handleSheetClose = () => {
               </UiSheetTrigger>
 
               <UiSheetContent class="p-0">
-                <SectionsMobileNav @navigate="handleSheetClose" />
+                <SectionsMobileNav />
               </UiSheetContent>
             </UiSheet>
 
