@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<Props>(), {
   srcDark: '',
   srcLight: '',
   icon: '',
-  contentRoutes: () => ['/wiki', '/blog', '/showcase'],
+  contentRoutes: () => ['/wiki', '/blog', '/references'],
 })
 
 const { y } = useScroll(window)
