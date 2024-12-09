@@ -28,6 +28,8 @@
         return '0'
       }
     })
+
+    const { t } = useI18n()
 </script>
 
 <template>
@@ -40,7 +42,7 @@
         class="inline-flex size-full items-center gap-2 text-nowrap px-4 py-2 text-left text-muted-foreground md:px-3"
         aria-label="Table of Contents">
         <Icon name="lucide:text" class="size-4 shrink-0" />
-        <span class="font-pressura">On this page</span>
+        <span class="font-pressura">{{ t('onThisPage') }}</span>
 
         <Icon name="lucide:chevron-right" class="-mx-1.5 size-4 shrink-0" />
         <span class="font-heading-med truncate text-[13px]">{{ activeLink || (props.links[0]?.text ?? '') }}</span>
@@ -51,3 +53,10 @@
     </UiPopover>
   </div>
 </template>
+
+<i18n lang="yaml">
+  en:
+    onThisPage: On this page
+  de:
+    onThisPage: Inhaltsverzeichnis
+</i18n>
