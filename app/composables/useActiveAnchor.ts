@@ -34,10 +34,6 @@ export function useActiveAnchor(
     console.groupEnd()
   }
 
-  /**
-   * Determines the active link based on the current scroll position
-   * and updates the marker position accordingly.
-   */
   const setActiveLink = () => {
     if (!container.value || !marker.value)
       return
@@ -84,7 +80,12 @@ export function useActiveAnchor(
    */
   const updateActiveLink = (active: TocItem | undefined) => {
     const newActiveLink = active
-      ? container.value?.querySelector(`a[href="#${active.id}"], a[href$="#${active.id}"]`) as HTMLAnchorElement | null
+      ? container.value?.querySelector(
+        `a[href="#${active.id}"],
+         a[href$="#${active.id}"],
+         a[href="#${encodeURIComponent(active.id)}"],
+         a[href$="${encodeURIComponent(active.id)}"]`
+      ) as HTMLAnchorElement | null
       : null
 
     if (newActiveLink) {
