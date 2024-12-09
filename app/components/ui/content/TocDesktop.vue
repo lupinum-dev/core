@@ -110,9 +110,6 @@ const Circle = h('div', { class: 'flex size-4 xl:text-xs items-center justify-ce
         Back to Top
       </UiButton>
     </div>
-    <div>
-      <UiUserTextConfig trigger-button="Settings" />
-    </div>
   </nav>
 </template>
 
