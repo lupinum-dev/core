@@ -12,7 +12,6 @@ interface TocItem {
 
 const props = defineProps<{ links: TocItem[], title?: string }>()
 
-console.log('props', props)
 
 const container = ref<HTMLElement | null>(null)
 const marker = ref<HTMLElement | null>(null)

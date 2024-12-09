@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { computed, inject, ref, watch, watchEffect } from 'vue'
 import { useSubMenu } from '~/composables/useSubMenu'
 import { NuxtLink } from '#components'
-import { useAppConfig } from '#imports'
 
 interface NavLink {
   label: string
@@ -20,23 +18,6 @@ const navLinks = ref<NavLink[]>(appConfig.navigation.items)
 
 const socials = ref<NavLink[]>(appConfig.socials)
 
-const route = useRoute()
-const activeRoute = computed(() => {
-  console.log('Current route path:', route.path)
-  console.log('Full route object:', route)
-  return route.path
-})
-
-watch(route, (newRoute) => {
-  console.log('Route changed:', {
-    path: newRoute.path,
-    fullPath: newRoute.fullPath,
-    name: newRoute.name,
-    params: newRoute.params,
-    query: newRoute.query
-  })
-}, { deep: true })
-
 const toggleHeaderExpansion = inject('toggleHeaderExpansion', () => {})
 
 const { openSubmenu } = useSubMenu()
@@ -52,7 +33,6 @@ function handleOpenSubmenu(href: string | undefined) {
 }
 
 function handleItemClick(showSubmenu: boolean | undefined, href: string | undefined) {
-  console.log('handleItemClick:', { showSubmenu, href })
   if (showSubmenu) {
     handleOpenSubmenu(href)
   }
@@ -61,9 +41,6 @@ function handleItemClick(showSubmenu: boolean | undefined, href: string | undefi
   }
 }
 
-watchEffect(() => {
-  console.log('Current navLinks:', navLinks.value)
-})
 
 </script>
 
