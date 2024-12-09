@@ -20,6 +20,20 @@ export function useActiveAnchor(
   const activeLink = ref<TocItem | null>(null)
   const flatLinks = computed(() => links.flatMap(link => [link, ...(link.children || [])]))
 
+  // Add debug function
+  const debugTocState = () => {
+    console.group('TOC Debug Info')
+    console.log('Available TOC IDs:', flatLinks.value.map(link => link?.id))
+    console.log('Current Active Link:', activeLink.value)
+    
+    // Check if elements exist for each ID
+    flatLinks.value.forEach(link => {
+      const element = document.getElementById(link?.id)
+      console.log(`Element for ID "${link?.id}":`, element ? 'Found' : 'Not Found')
+    })
+    console.groupEnd()
+  }
+
   /**
    * Determines the active link based on the current scroll position
    * and updates the marker position accordingly.
@@ -41,17 +55,27 @@ export function useActiveAnchor(
       active = flatLinks.value[flatLinks.value.length - 1]
     }
     else {
+      // Add debugging for scroll position
+      console.log('Current scroll position:', scrollY)
+      
       for (let i = flatLinks.value.length - 1; i >= 0; i--) {
         const link = flatLinks.value[i]
+        if (!link) continue
+        
         const element = document.getElementById(link.id)
-        if (element && element.offsetTop <= scrollY + 200) {
-          active = link
-          break
+        if (element) {
+          console.log(`Element "${link.id}" offsetTop:`, element.offsetTop)
+          if (element.offsetTop <= scrollY + 200) {
+            active = link
+            break
+          }
         }
       }
     }
 
     updateActiveLink(active)
+    // Debug after update
+    debugTocState()
   }
 
   /**
