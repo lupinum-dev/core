@@ -38,19 +38,6 @@ function scrollToTop() {
 
 onMounted(() => {
   nextTick(() => {
-    console.group('TocDesktop Mount Debug')
-    console.log('Provided links:', props.links)
-    console.log('Container element:', container.value)
-    console.log('Marker element:', marker.value)
-    
-    props.links.forEach(link => {
-      console.log(`Checking main link ID "${link.id}":`, !!document.getElementById(link.id))
-      link.children?.forEach(child => {
-        console.log(`Checking child link ID "${child.id}":`, !!document.getElementById(child.id))
-      })
-    })
-    console.groupEnd()
-
     initializeActiveLink()
     debouncedSetActiveLink()
   })
