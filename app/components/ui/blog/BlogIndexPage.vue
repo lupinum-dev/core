@@ -7,10 +7,12 @@ interface BlogPost {
   description: string
   date_published: string
   date_modified: string
-  category_blog: string[]
+  category_references: string[]
+  category_text: string
   highlight?: boolean
   readTime?: string
   hero_image?: string
+  video_id?: string
 }
 
 interface Props {
@@ -20,13 +22,15 @@ interface Props {
 
 const props = defineProps<Props>()
 
-// remove the first part of the _path e.g. /en/blog/ -> /blog/ 
-props.posts.forEach(post => {
-  post._path = post._path.split('/').slice(2).join('/')
-})
+const processedPosts = computed(() => 
+  props.posts.map(post => ({
+    ...post,
+    _path: post._path.split('/').slice(2).join('/')
+  }))
+)
 
-const mostRecentPost = computed(() => props.posts.find(post => post.highlight) || props.posts[0])
-const highlights = computed(() => props.posts.slice(0, 3))
+const mostRecentPost = computed(() => processedPosts.value[0])
+const highlights = computed(() => props.posts.filter(post => post.highlight))
 
 const { t } = useI18n({
   useScope: 'local',
@@ -37,6 +41,10 @@ const sectionTitles = computed(() => ({
   highlights: props.type === 'references' ? t('highlight_references') : t('highlight_posts'),
   recent: props.type === 'references' ? t('recent_references') : t('recent_posts'),
 }))
+
+const filteredPosts = computed(() => 
+  processedPosts.value.filter(post => post._path !== mostRecentPost.value?._path)
+)
 
 </script>
 
@@ -52,7 +60,7 @@ const sectionTitles = computed(() => ({
       </aside>
 
       <!-- Highlights -->
-      <aside>
+      <aside v-if="highlights.length > 0">
         <h2 class="mb-6 font-heading text-3xl font-bold text-foreground">
           {{ sectionTitles.highlights }}
         </h2>
@@ -72,7 +80,7 @@ const sectionTitles = computed(() => ({
         {{ sectionTitles.recent }}
       </h2>
       <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <UiBlogPostCard v-for="post in posts" :key="post._path" :post="post" />
+        <UiBlogPostCard v-for="post in filteredPosts" :key="post._path" :post="post" />
       </div>
     </div>
   </div>
@@ -83,15 +91,15 @@ en:
   latest_post: "Latest Post"
   latest_reference: "Latest Reference"
   highlight_posts: "Highlights"
-  highlight_references: "Featured References"
-  recent_posts: "Recent Posts"
-  recent_references: "Recent References"
+  highlight_references: "Highlights"
+  recent_posts: "Posts"
+  recent_references: "References"
 de:
   latest_post: "Neuester Beitrag"
   latest_reference: "Neueste Referenz"
   highlight_posts: "Highlights"
-  highlight_references: "Ausgewählte Referenzen"
-  recent_posts: "Aktuelle Beiträge"
-  recent_references: "Aktuelle Referenzen"
+  highlight_references: "Highlights"
+  recent_posts: "Beiträge"
+  recent_references: "Referenzen"
 </i18n>
   

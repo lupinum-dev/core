@@ -70,7 +70,7 @@ const appConfig = useAppConfig()
           <p class="font-heading text-lg text-card-foreground">
             {{ t('audit_description') }}
           </p>
-          <UiButton variant="default" class="rounded-full ">
+          <UiButton variant="default" class="rounded-full bg-lupinumTeal text-foreground dark:text-background">
             {{ t('get_started') }}
           </UiButton>
         </div>
@@ -93,7 +93,7 @@ const appConfig = useAppConfig()
       </div> -->
 
       <!-- Social Share -->
-      <div class="widget pb-16">
+      <!-- <div class="widget pb-16">
         <h4 class="mb-4 font-heading text-xl font-semibold text-foreground">
           {{ t('follow_us') }}
         </h4>
@@ -112,7 +112,7 @@ const appConfig = useAppConfig()
             />
           </NuxtLink>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

@@ -1,48 +1,23 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useBlogStore } from '~/stores/blog'
-import { useBlogPosts } from '~/composables/useBlogPosts'
-import type { BlogPost } from '~/types/blog'
-
-const blogStore = useBlogStore()
-const route = useRoute()
 const router = useRouter()
+const blogStore = useBlogPosts()
 
-const { blogPosts, categories } = useBlogPosts()
+// Initialize store if needed
+if (!blogStore.currentPosts.length) {
+  await blogStore.init()
+}
 
-const filteredPosts = computed(() => {
-  if (!blogPosts.value) return []
-  
-  return blogPosts.value.filter((post) => {
-    const categoryMatch = !blogStore.selectedCategory || 
-      post.category_blog.includes(blogStore.selectedCategory)
-    const searchMatch = post.title.toLowerCase().includes(blogStore.searchQuery.toLowerCase()) || 
-      post.description.toLowerCase().includes(blogStore.searchQuery.toLowerCase())
-    return categoryMatch && searchMatch
-  })
-})
-
-const isHome = computed(() => !blogStore.selectedCategory)
-
-const updateCategory = (category: string) => {
-  blogStore.setSelectedCategory(category)
+function updateCategory(category: string) {
+  blogStore.updateCategory(category)
   updateQueryParams()
 }
 
-const updateQueryParams = () => {
+function updateQueryParams() {
   const query: Record<string, string> = {}
-  if (blogStore.selectedCategory) {
+  if (blogStore.selectedCategory)
     query.category = blogStore.selectedCategory
-  }
   router.push({ query })
 }
-
-// Initialize the store with the route query
-onMounted(() => {
-  if (route.query.category) {
-    blogStore.setSelectedCategory(route.query.category as string)
-  }
-})
 </script>
 
 <template>
@@ -51,38 +26,41 @@ onMounted(() => {
       <UiBlogSideNav
         :selected-category="blogStore.selectedCategory"
         :search-query="blogStore.searchQuery"
-        :categories="categories || []"
-        :all-tags="[]"
+        :categories="blogStore.categories"
+        :all-tags="blogStore.categories"
         class="hidden lg:block"
         @update:selected-category="updateCategory"
-        @update:search-query="blogStore.setSearchQuery"
+        @update:search-query="blogStore.updateSearchQuery"
       />
 
       <div class="mx-auto mt-24 flex w-full max-w-7xl flex-col justify-between sm:px-6 lg:px-8">
-        <ClientOnly>
-          <template v-if="blogPosts">
-            <div v-if="isHome">
-              <UiBlogIndexPage :posts="filteredPosts" type="blog" />
-            </div>
-            <div v-else class="container mx-auto px-4 py-8">
-              <h2 class="mb-6 font-heading text-3xl text-foreground">
-                {{ blogStore.selectedCategory }} Posts
-              </h2>
-              <div class="mt-12">
-                <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                  <UiBlogPostCard 
-                    v-for="post in filteredPosts" 
-                    :key="post._path" 
-                    :post="post" 
-                  />
-                </div>
+        <div v-if="blogStore.isLoading" class="flex justify-center items-center min-h-[400px]">
+          <Icon name="lucide:loader" class="animate-spin" />
+        </div>
+
+        <div v-else-if="blogStore.error" class="text-center text-red-500 py-8">
+          {{ blogStore.error.message }}
+        </div>
+
+        <template v-else>
+          <div v-if="blogStore.isHome">
+            <UiBlogIndexPage :posts="blogStore.currentPosts" type="blog" />
+          </div>
+          <div v-else class="container mx-auto px-4 py-8">
+            <h2 class="mb-6 font-heading text-3xl text-foreground">
+              {{ blogStore.selectedCategory }} Posts
+            </h2>
+            <div class="mt-12">
+              <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <UiBlogPostCard 
+                  v-for="post in blogStore.filteredPosts" 
+                  :key="post._path" 
+                  :post="post" 
+                />
               </div>
             </div>
-          </template>
-          <div v-else class="flex justify-center py-12">
-            <UiLoading />
           </div>
-        </ClientOnly>
+        </template>
       </div>
     </div>
   </div>

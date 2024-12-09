@@ -35,9 +35,12 @@ defineProps<{
         {{ post.title }}
       </h3>
       <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
-        <ClientOnly>
-          <span>{{ new Date(post.date_published).toLocaleDateString() }}</span>
-        </ClientOnly>
+        <NuxtTime 
+            :datetime="post.date_published"
+            :month="'short'"
+            :year="'numeric'"
+            :locale="useNuxtApp().$i18n.locale.value"
+          />
         <!-- <span>{{ post.readTime || '5 min read' }}</span> -->
       </div>
     </div>
