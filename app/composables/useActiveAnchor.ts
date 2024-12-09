@@ -19,7 +19,11 @@ export function useActiveAnchor(
 ) {
   const activeLink = ref<TocItem | null>(null)
   const tocLinks = ref<TocItem[]>(links)
-  const flatLinks = computed(() => tocLinks.value.flatMap(link => [link, ...(link.children || [])]))
+  const flatLinks = computed(() => 
+    tocLinks.value
+      .flatMap(link => [link, ...(link.children || [])])
+      .filter(Boolean)
+  )
 
   watch(() => links, (newLinks) => {
     tocLinks.value = newLinks
@@ -96,11 +100,12 @@ export function useActiveAnchor(
     const { scrollY } = window
     let active: TocItem | undefined
 
-    for (let i = 0; i < flatLinks.value.length; i++) {
-      const link = flatLinks.value[i]
+    for (const link of flatLinks.value) {
+      if (!link) continue
       const element = document.getElementById(link.id)
       if (element && element.offsetTop > scrollY) {
-        active = flatLinks.value[Math.max(0, i - 1)]
+        const currentIndex = flatLinks.value.indexOf(link)
+        active = flatLinks.value[Math.max(0, currentIndex - 1)]
         break
       }
     }

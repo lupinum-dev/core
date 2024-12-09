@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, onUpdated, ref } from 'vue'
+import { nextTick, onMounted, onUnmounted, onUpdated, ref, watch } from 'vue'
 import { useActiveAnchor } from '~/composables/useActiveAnchor'
 import { useSharedTocState } from '~/composables/useSharedTocState'
 
@@ -8,6 +8,7 @@ interface TocItem {
   depth: number
   text: string
   children?: TocItem[]
+  target?: Ref<HTMLElement | null>
 }
 
 const props = defineProps<{ links: TocItem[], title?: string }>()
@@ -20,7 +21,13 @@ const marker = ref<HTMLElement | null>(null)
 const { setActiveLink, activeLink, initializeActiveLink } = useActiveAnchor(container, marker, props.links)
 const { setActiveLink: setSharedActiveLink, setTocItems } = useSharedTocState()
 
-setTocItems(props.links)
+watch(() => props.links, (newLinks) => {
+  setTocItems(newLinks)
+  nextTick(() => {
+    initializeActiveLink()
+    debouncedSetActiveLink()
+  })
+}, { immediate: true, deep: true })
 
 let rafId: number | null = null
 
@@ -38,17 +45,12 @@ function scrollToTop() {
 }
 
 onMounted(() => {
-  nextTick(() => {
-    initializeActiveLink()
-    debouncedSetActiveLink()
-  })
   window.addEventListener('scroll', debouncedSetActiveLink, { passive: true })
 })
 
 onUpdated(debouncedSetActiveLink)
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', debouncedSetActiveLink)
   if (rafId)
     cancelAnimationFrame(rafId)
 })

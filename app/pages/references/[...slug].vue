@@ -9,7 +9,7 @@ type TocLink = {
   text: string
   depth: number
   children?: TocLink[]
-  target: Ref<HTMLElement | null>
+  target?: Ref<HTMLElement | null>
 }
 
 // Refs
@@ -67,6 +67,19 @@ const handleVideoPause = (videoRef: VideoRef) => {
   videoRef.value.pause()
 }
 
+// Move the TOC initialization to a watch
+watch(() => page.value?.body?.toc?.links, (newLinks) => {
+  if (!newLinks) return
+  
+  nextTick(() => {
+    tocLinks.value = newLinks.map((link: any) => ({
+      ...link,
+      depth: link.depth || 1,
+      target: ref(document.getElementById(link.id))
+    }))
+  })
+}, { immediate: true })
+
 // Lifecycle hooks
 onMounted(async () => {
   // Load video components
@@ -74,13 +87,6 @@ onMounted(async () => {
     import('media-chrome'),
     import('hls-video-element')
   ])
-
-  // Set up TOC links
-  tocLinks.value = (page.value?.body?.toc?.links?.map((link: any) => ({
-    ...link,
-    depth: link.depth || 1,
-    target: ref(document.getElementById(link.id)),
-  })) ?? [])
 
   // Set up inView for video playback
   if (page.value?.video_id) {
