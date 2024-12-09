@@ -60,7 +60,7 @@ function openDialog(emojiIndex: number) {
     </div>
 
     <UiDialog v-model:open="isDialogOpen">
-      <UiDialogContent class="sm:max-w-xl">
+      <UiDialogContent class="sm:max-w-xl bg-svg dark:bg-svg-dark">
         <UiDialogHeader>
           <UiDialogTitle class="text-foreground">
             Provide Feedback
@@ -171,3 +171,15 @@ function openDialog(emojiIndex: number) {
     </UiDialog>
   </ClientOnly>
 </template>
+
+
+<i18n lang="yaml">
+  en:
+    feedback:
+      title: Provide Feedback
+      description: We appreciate your feedback. Thank you for sharing your thoughts with us.
+  de:
+    feedback:
+      title: Feedback geben
+      description: Wir schätzen Ihr Feedback. Wir danken Ihnen für Ihre Meinung.
+</i18n>

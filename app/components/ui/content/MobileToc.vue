@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useScroll } from '@vueuse/core'
-import type { UiContentTocDesktop } from '#build/components'
 
 const { y } = useScroll(window)
 const isScrolled = computed(() => y.value > 0)
@@ -19,6 +18,27 @@ watch(isScrolled, (newValue) => {
 })
 
 const { activeLink, tocItems } = useSharedTocState()
+
+// Find the parent heading when a child heading is active
+const activeParentHeading = computed(() => {
+  if (!activeLink.value) return null
+  console.log(activeLink.value)
+  
+  // First check if activeLink is already a parent (depth 2)
+  const parentHeading = tocItems.value.find(item => item.text === activeLink.value)
+  console.log(parentHeading)
+  if (parentHeading) return parentHeading.text
+
+  // If not, find the parent of the active child heading
+  for (const item of tocItems.value) {
+    if (item.children?.some(child => child.text === activeLink.value)) {
+      return item.text
+    }
+  }
+  
+  return null
+})
+
 const appConfig = useAppConfig()
 </script>
 
@@ -34,12 +54,12 @@ const appConfig = useAppConfig()
         <span
           class="font-heading-med max-w-[28ch] truncate text-xs transition-all duration-300"
         >
-          <template v-if="activeLink">
-            {{ activeLink }}
+          <template v-if="activeParentHeading">
+            {{ activeParentHeading }}
           </template>
           <div v-else class="flex items-center gap-2">
             On this page
-            <Icon name="heroicons:chevron-down" class=" size-4" />
+            <Icon name="heroicons:chevron-down" class="size-4" />
           </div>
         </span>
       </UiButton>

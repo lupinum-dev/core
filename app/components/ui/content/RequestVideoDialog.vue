@@ -1,4 +1,4 @@
-<script setup lang="ts">
+  <script setup lang="ts">
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
@@ -18,7 +18,7 @@ const formSchema = toTypedSchema(z.object({
 const { handleSubmit, resetForm, values } = useForm({
   validationSchema: formSchema,
 })
-
+  
 const onSubmit = handleSubmit((_values) => {
   isDialogOpen.value = false
   resetForm()
