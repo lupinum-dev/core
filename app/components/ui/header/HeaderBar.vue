@@ -11,7 +11,9 @@ const appConfig = useAppConfig()
 const { isVisible } = useAdBannerVisibility()
 
 const topStyle = computed(() => ({
-  top: isVisible.value ? 'var(--header-ad-height)' : '0',
+  top: isVisible.value ? 'var(--header-ad-height)' : '0px',
+  transform: isVisible.value ? 'translateY(0)' : 'translateY(0)',
+  marginTop: isVisible.value ? '0px' : 'calc(var(--header-ad-height) * -1)',
 }))
 
 const roundedClass = computed(() => {
@@ -35,7 +37,7 @@ const roundedClass = computed(() => {
 
 <template>
   <header :class="cn(
-    'isolate fixed w-dvw transition-all duration-200 ',
+    'isolate fixed w-dvw transition-all duration-200 ease-in-out will-change-transform',
     appConfig.header.variant === 'default' ? 'bg-background z-50 border-b' : 'z-30',
     $attrs,
   )" :style="topStyle">
