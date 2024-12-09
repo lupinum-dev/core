@@ -64,7 +64,7 @@ const { t } = useI18n({
     </div>
 
     <UiDialog v-model:open="isDialogOpen">
-      <UiDialogContent class="sm:max-w-xl bg-svg dark:bg-svg-dark">
+      <UiDialogContent class="sm:max-w-xl bg-svg dark:bg-svg-dark dark:ring-1 dark:ring-foreground/15">
         <UiDialogHeader>
           <UiDialogTitle class="text-foreground">
             {{ t('feedback_title') }}
@@ -127,6 +127,7 @@ const { t } = useI18n({
               </div>
               <UiFormControl>
                 <UiSwitch
+                  class="dark:ring-foreground/50 ring-1 data-[state=unchecked]:ring-border/50"
                   :checked="value"
                   @update:checked="handleChange"
                 />
