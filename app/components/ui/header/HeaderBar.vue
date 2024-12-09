@@ -80,7 +80,7 @@ const roundedClass = computed(() => {
               </UiSheetTrigger>
 
 
-              <UiSheetContent>
+              <UiSheetContent class=" p-0">
         
                       <SectionsMobileNav />
    
