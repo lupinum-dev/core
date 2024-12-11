@@ -7,6 +7,8 @@ interface Props {
   srcLight?: string
   icon?: string
   contentRoutes: string[]
+  iconLight?: string
+  iconDark?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -14,6 +16,8 @@ const props = withDefaults(defineProps<Props>(), {
   srcLight: '',
   icon: '',
   contentRoutes: () => ['/wiki', '/blog', '/references'],
+  iconLight: '',
+  iconDark: '',
 })
 
 const { y } = useScroll(window)
@@ -49,7 +53,7 @@ const isContentSite = computed(() => {
 
 provide('isContentSite', isContentSite)
 
-const showIcon = computed(() => isContentSite.value && !!props.icon)
+const showIcon = computed(() => isContentSite.value && (!!props.iconLight || !!props.iconDark))
 const showLogo = computed(() => !isContentSite.value)
 </script>
 
@@ -58,9 +62,10 @@ const showLogo = computed(() => !isContentSite.value)
     <ClientOnly>
       <Transition name="fade-slide" class="sm:hidden">
         <NuxtLink :to="localePath('/')" class="flex items-center">
-          <NuxtImg
+          <UiColorModeImage
            v-if="!isScrolled && isContentSite"
-            :src="props.icon"
+            :light="props.iconLight"
+            :dark="props.iconDark"
             alt="Logo Icon"
             class="h-7 sm:hidden"
             
@@ -82,8 +87,9 @@ const showLogo = computed(() => !isContentSite.value)
           alt="Logo"
           class="h-7"
         />
-        <NuxtImg
-          :src="props.icon"
+        <UiColorModeImage
+          :light="props.iconLight"
+          :dark="props.iconDark"
           alt="Logo Icon"
           class="hidden h-7"
         />
@@ -92,11 +98,12 @@ const showLogo = computed(() => !isContentSite.value)
 
       <template #fallback>
         <NuxtLink :to="localePath('/')" class="flex items-center">
-          <NuxtImg
+          <UiColorModeImage
             v-if="showIcon"
-            :src="icon"
+            :light="props.iconLight"
+          :dark="props.iconDark"
             alt="Logo Icon"
-            class="b h-7 sm:hidden"
+            class=" h-7 sm:hidden"
           />
           <UiColorModeImage
             v-if="showLogo"
