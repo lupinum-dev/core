@@ -5,6 +5,7 @@
 import type { Ref } from 'vue'
 import { computed, ref, watch } from 'vue'
 
+
 interface TocItem {
   id: string
   depth: number
@@ -17,6 +18,7 @@ export function useActiveAnchor(
   marker: Ref<HTMLElement | null>,
   links: TocItem[],
 ) {
+  const { setActiveLink: setSharedActiveLink } = useSharedTocState()
   const activeLink = ref<TocItem | null>(null)
   const tocLinks = ref<TocItem[]>(links)
   const flatLinks = computed(() => 
@@ -64,6 +66,7 @@ export function useActiveAnchor(
   const updateActiveLink = (active: TocItem | undefined) => {
     if (!active) {
       activeLink.value = null
+      setSharedActiveLink(null)
       return
     }
 
@@ -73,12 +76,14 @@ export function useActiveAnchor(
 
     if (newActiveLink) {
       activeLink.value = active
+      setSharedActiveLink(active.text)
       container.value?.querySelectorAll('a').forEach(a => a.classList.remove('active'))
       newActiveLink.classList.add('active')
       updateMarker(newActiveLink)
     }
     else {
       activeLink.value = null
+      setSharedActiveLink(null)
     }
   }
 

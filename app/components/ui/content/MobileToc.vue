@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useScroll } from '@vueuse/core'
+import { computed, ref, watch } from 'vue'
+
 
 const { y } = useScroll(window)
 const isScrolled = computed(() => y.value > 0)
@@ -11,8 +13,7 @@ watch(isScrolled, (newValue) => {
     setTimeout(() => {
       delayedIsScrolled.value = true
     }, 100)
-  }
-  else {
+  } else {
     delayedIsScrolled.value = false
   }
 })
@@ -22,11 +23,9 @@ const { activeLink, tocItems } = useSharedTocState()
 // Find the parent heading when a child heading is active
 const activeParentHeading = computed(() => {
   if (!activeLink.value) return null
-  console.log(activeLink.value)
-  
+
   // First check if activeLink is already a parent (depth 2)
   const parentHeading = tocItems.value.find(item => item.text === activeLink.value)
-  console.log(parentHeading)
   if (parentHeading) return parentHeading.text
 
   // If not, find the parent of the active child heading
@@ -35,7 +34,7 @@ const activeParentHeading = computed(() => {
       return item.text
     }
   }
-  
+
   return null
 })
 

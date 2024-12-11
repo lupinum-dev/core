@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, onUpdated, ref, watch } from 'vue'
-import { useActiveAnchor } from '~/composables/useActiveAnchor'
-import { useSharedTocState } from '~/composables/useSharedTocState'
+
 
 interface TocItem {
   id: string
@@ -13,13 +12,11 @@ interface TocItem {
 
 const props = defineProps<{ links: TocItem[], title?: string }>()
 
-
-
 const container = ref<HTMLElement | null>(null)
 const marker = ref<HTMLElement | null>(null)
 
 const { setActiveLink, activeLink, initializeActiveLink } = useActiveAnchor(container, marker, props.links)
-const { setActiveLink: setSharedActiveLink, setTocItems } = useSharedTocState()
+const { setTocItems } = useSharedTocState()
 
 watch(() => props.links, (newLinks) => {
   setTocItems(newLinks)
@@ -36,7 +33,6 @@ function debouncedSetActiveLink() {
     cancelAnimationFrame(rafId)
   rafId = requestAnimationFrame(() => {
     setActiveLink()
-    setSharedActiveLink(activeLink.value?.text ?? null)
   })
 }
 
