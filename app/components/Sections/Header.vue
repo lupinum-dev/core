@@ -48,7 +48,8 @@ const isContentSite = computed(() => {
           <UiHeaderLogo
             src-light="/logo_light.svg"
             src-dark="/logo_dark.svg"
-            icon="/logo_icon.svg"
+            icon-light="/icon_light.svg"
+            icon-dark="/icon_dark.svg"
             :content-routes="contentRoutes"
           />
 
