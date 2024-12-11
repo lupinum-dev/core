@@ -39,15 +39,18 @@ const updateIsScrolled = useDebounceFn(() => {
 watch(y, updateIsScrolled, { immediate: true })
 
 const route = useRoute()
+const localePath = useLocalePath()
 
-const isContentSite = computed(() => props.contentRoutes.some(path => route.path.startsWith(path)))
+const isContentSite = computed(() => {
+  return props.contentRoutes.some(path => 
+    route.path === localePath(path) || route.path.startsWith(localePath(path))
+  )
+})
 
 provide('isContentSite', isContentSite)
 
 const showIcon = computed(() => isContentSite.value && !!props.icon)
 const showLogo = computed(() => !isContentSite.value)
-
-const localePath = useLocalePath()
 </script>
 
 <template>

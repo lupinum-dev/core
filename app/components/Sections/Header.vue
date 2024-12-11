@@ -13,8 +13,14 @@ const isTabletScreen = computed(() => width.value < 1024)
 const appConfig = useAppConfig()
 const contentRoutes = appConfig.navigation.contentRoutes
 
-const isContentSite = computed(() => contentRoutes.some(path => useRoute().path.startsWith(path)))
+const route = useRoute()
+const localePath = useLocalePath()
 
+const isContentSite = computed(() => {
+  return contentRoutes.some(path => 
+    route.path === localePath(path) || route.path.startsWith(localePath(path))
+  )
+})
 
 </script>
 
