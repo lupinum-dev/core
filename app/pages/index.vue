@@ -266,6 +266,9 @@ const data = [
 </script>
 
 <template>
+
+
+  <div class="max-w-7xl mx-auto py-56" >
   <UiChartLineChart
     :data="data"
     index="year"
@@ -276,6 +279,7 @@ const data = [
         : ''
     }"
   />
+</div>
 
 
 </template>
